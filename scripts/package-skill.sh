@@ -74,6 +74,14 @@ package_for_claude_app() {
     
     echo -e "${BLUE}Packaging skill: $skill_name${NC}"
     
+    # Get git commit hash for versioning
+    local version=""
+    if git rev-parse --git-dir > /dev/null 2>&1; then
+        version="-$(git rev-parse --short HEAD)"
+    else
+        echo -e "${YELLOW}Warning: Not in a git repository. Skipping version in filename.${NC}"
+    fi
+    
     # Create output directory
     mkdir -p "$OUTPUT_DIR"
     
@@ -99,8 +107,8 @@ package_for_claude_app() {
     # Remove .DS_Store files
     find "$package_dir" -name '.DS_Store' -delete 2>/dev/null || true
     
-    # Create zip
-    local zip_file="$OUTPUT_DIR/${skill_name}.zip"
+    # Create zip with version in filename
+    local zip_file="$OUTPUT_DIR/${skill_name}${version}.zip"
     rm -f "$zip_file"
     (cd "$temp_dir" && zip -rq "$zip_file" "$skill_name")
     

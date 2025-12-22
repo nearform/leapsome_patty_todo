@@ -144,6 +144,6 @@ scripts/
 └── package-skill.sh              # Installation/packaging script
 
 dist/                             # Generated zips for Claude app (gitignored)
-├── brd-assistant.zip
-└── prd-assistant.zip
+├── brd-assistant-<commit-hash>.zip
+└── prd-assistant-<commit-hash>.zip
 ```
