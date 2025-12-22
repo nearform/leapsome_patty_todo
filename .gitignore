@@ -1,0 +1,11 @@
+# Generated packages for Claude app
+dist/
+
+# macOS
+.DS_Store
+
+# Editor
+*.swp
+*.swo
+*~
+
