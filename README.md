@@ -17,6 +17,19 @@ Creates Business Requirements Documents following Nearform standards.
 - `SKILL.md` — Main skill definition
 - `BRD-TEMPLATE.md` — Complete BRD structure
 
+### PRD Assistant
+
+**Location:** `.claude/skills/prd-assistant/`
+
+Creates Product Requirements Documents following Nearform standards. Defines WHAT to build based on the BRD.
+
+**Triggers:** Writing PRDs, defining features, specifying functional requirements, documenting user workflows, creating product specifications.
+
+**Files:**
+
+- `SKILL.md` — Main skill definition
+- `PRD-TEMPLATE.md` — Complete PRD structure
+
 ## Shared Resources
 
 **Location:** `.claude/resources/`
@@ -73,6 +86,7 @@ The `scripts/package-skill.sh` script handles both destinations:
 ```bash
 # Process a specific skill
 ./scripts/package-skill.sh brd-assistant
+./scripts/package-skill.sh prd-assistant
 
 # Process all skills
 ./scripts/package-skill.sh
@@ -119,13 +133,17 @@ Organisation owners on Team/Enterprise plans can also provision skills organisat
 ├── resources/                    # Shared across all skills
 │   └── TONE-OF-VOICE.md
 └── skills/
-    └── brd-assistant/
+    ├── brd-assistant/
+    │   ├── SKILL.md
+    │   └── BRD-TEMPLATE.md
+    └── prd-assistant/
         ├── SKILL.md
-        └── BRD-TEMPLATE.md
+        └── PRD-TEMPLATE.md
 
 scripts/
 └── package-skill.sh              # Installation/packaging script
 
 dist/                             # Generated zips for Claude app (gitignored)
-└── brd-assistant.zip
+├── brd-assistant.zip
+└── prd-assistant.zip
 ```
