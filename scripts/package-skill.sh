@@ -12,8 +12,8 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
-SKILLS_DIR="$PROJECT_ROOT/.claude/skills"
-RESOURCES_DIR="$PROJECT_ROOT/.claude/resources"
+SKILLS_DIR="$PROJECT_ROOT/skills"
+RESOURCES_DIR="$PROJECT_ROOT/resources"
 CLAUDE_CODE_SKILLS_DIR="$HOME/.claude/skills"
 CLAUDE_CODE_RESOURCES_DIR="$HOME/.claude/resources"
 OUTPUT_DIR="$PROJECT_ROOT/dist"
@@ -101,6 +101,7 @@ package_for_claude_app() {
         # Update references in SKILL.md to use local resources path
         if [[ -f "$package_dir/SKILL.md" ]]; then
             sed -i '' 's|\.\./\.\./resources/|resources/|g' "$package_dir/SKILL.md"
+            sed -i '' 's|\.\./resources/|resources/|g' "$package_dir/SKILL.md"
         fi
     fi
     

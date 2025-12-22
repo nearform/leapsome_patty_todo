@@ -1,12 +1,12 @@
 # Ignite - Claude Skills Collection
 
-A collection of custom Claude skills for Nearform projects, shareable via git and usable across Claude Code and Claude apps.
+A collection of custom Claude skills for Nearform Ignite projects, shareable via git and usable across Claude Code and Claude apps.
 
 ## Available Skills
 
 ### BRD Assistant
 
-**Location:** `.claude/skills/brd-assistant/`
+**Location:** `skills/brd-assistant/`
 
 Creates Business Requirements Documents following Nearform standards.
 
@@ -19,7 +19,7 @@ Creates Business Requirements Documents following Nearform standards.
 
 ### PRD Assistant
 
-**Location:** `.claude/skills/prd-assistant/`
+**Location:** `skills/prd-assistant/`
 
 Creates Product Requirements Documents following Nearform standards. Defines WHAT to build based on the BRD.
 
@@ -32,22 +32,13 @@ Creates Product Requirements Documents following Nearform standards. Defines WHA
 
 ## Shared Resources
 
-**Location:** `.claude/resources/`
+**Location:** `resources/`
 
 Resources available to all skills:
 
 - `TONE-OF-VOICE.md` — Nearform writing guidelines (UK English, human voice)
 
 ## Usage
-
-### Claude Code (automatic - project skills)
-
-Skills in `.claude/skills/` are automatically discovered when you run Claude Code in this repo.
-
-```bash
-# Just start Claude Code in the project
-claude
-```
 
 ### Claude Code (personal skills)
 
@@ -94,7 +85,7 @@ The `scripts/package-skill.sh` script handles both destinations:
 
 ## Adding New Skills
 
-1. Create a new folder: `.claude/skills/your-skill-name/`
+1. Create a new folder: `skills/your-skill-name/`
 2. Add `SKILL.md` with YAML frontmatter:
    ```yaml
    ---
@@ -113,7 +104,8 @@ This repo is designed for team collaboration:
 
 ```bash
 git pull
-claude   # Skills are immediately available
+./scripts/package-skill.sh
+# Choose option 1 to install to ~/.claude/skills/
 ```
 
 **Claude app:**
@@ -129,16 +121,16 @@ Organisation owners on Team/Enterprise plans can also provision skills organisat
 ## Structure
 
 ```
-.claude/
-├── resources/                    # Shared across all skills
-│   └── TONE-OF-VOICE.md
-└── skills/
-    ├── brd-assistant/
-    │   ├── SKILL.md
-    │   └── BRD-TEMPLATE.md
-    └── prd-assistant/
-        ├── SKILL.md
-        └── PRD-TEMPLATE.md
+resources/                        # Shared across all skills
+└── TONE-OF-VOICE.md
+
+skills/
+├── brd-assistant/
+│   ├── SKILL.md
+│   └── BRD-TEMPLATE.md
+└── prd-assistant/
+    ├── SKILL.md
+    └── PRD-TEMPLATE.md
 
 scripts/
 └── package-skill.sh              # Installation/packaging script
