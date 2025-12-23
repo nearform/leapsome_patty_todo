@@ -30,6 +30,19 @@ Creates Product Requirements Documents following Nearform standards. Defines WHA
 - `SKILL.md` — Main skill definition
 - `PRD-TEMPLATE.md` — Complete PRD structure
 
+### Service Blueprint Assistant
+
+**Location:** `skills/service-blueprint-assistant/`
+
+Generates Service Design Blueprints as CSV files for MIRO import. Visualises customer actions, frontstage and backstage processes, support systems, and physical evidence across the service journey.
+
+**Triggers:** Creating service blueprints, visualising customer journeys, mapping frontstage and backstage processes, identifying pain points, documenting service workflows.
+
+**Files:**
+
+- `SKILL.md` — Main skill definition
+- `BLUEPRINT-TEMPLATE.md` — Complete blueprint generation instructions
+
 ## Shared Resources
 
 **Location:** `resources/`
@@ -78,6 +91,7 @@ The `scripts/package-skill.sh` script handles both destinations:
 # Process a specific skill
 ./scripts/package-skill.sh brd-assistant
 ./scripts/package-skill.sh prd-assistant
+./scripts/package-skill.sh service-blueprint-assistant
 
 # Process all skills
 ./scripts/package-skill.sh
@@ -128,14 +142,18 @@ skills/
 ├── brd-assistant/
 │   ├── SKILL.md
 │   └── BRD-TEMPLATE.md
-└── prd-assistant/
+├── prd-assistant/
+│   ├── SKILL.md
+│   └── PRD-TEMPLATE.md
+└── service-blueprint-assistant/
     ├── SKILL.md
-    └── PRD-TEMPLATE.md
+    └── BLUEPRINT-TEMPLATE.md
 
 scripts/
 └── package-skill.sh              # Installation/packaging script
 
 dist/                             # Generated zips for Claude app (gitignored)
 ├── brd-assistant-<commit-hash>.zip
-└── prd-assistant-<commit-hash>.zip
+├── prd-assistant-<commit-hash>.zip
+└── service-blueprint-assistant-<commit-hash>.zip
 ```
