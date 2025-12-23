@@ -2,7 +2,7 @@
 
 ## Objective
 
-Generate a detailed Service Blueprint as a CSV file that can be directly imported into MIRO. The blueprint should visualise the relationship between customer actions, frontstage employee actions, backstage processes, support systems, and physical evidence across the entire service journey.
+Generate a detailed Service Blueprint as a CSV file that can be directly imported into MIRO. The blueprint should visualize the relationship between customer actions, frontstage employee actions, backstage processes, support systems, and physical evidence across the entire service journey.
 
 ## Instructions
 
@@ -98,9 +98,21 @@ Generate a CSV with this exact structure:
 
 **Moments of Truth**: Highlight critical customer touchpoints in CUSTOMER ACTIONS where quality is judged
 
-**Fail Points**: Emphasise in PAIN POINTS where service commonly breaks down
+**Fail Points**: Emphasize in PAIN POINTS where service commonly breaks down
 
 **Wait Points**: Note in TIME where customers experience delays
+
+### Quality Checks
+
+Before outputting, verify:
+
+- [ ] Phases cover the complete service from setup to completion/follow-up
+- [ ] Every phase has content in ALL swimlanes (even if minimal)
+- [ ] SUPPORT PROCESSES reference actual systems from project context
+- [ ] BACKSTAGE ACTIONS connect logically to FRONTSTAGE ACTIONS
+- [ ] PAIN POINTS are specific to each phase (not generic across all)
+- [ ] OPPORTUNITIES directly address corresponding PAIN POINTS
+- [ ] TIME entries are consistent in format throughout
 
 ## Required Project Context
 
