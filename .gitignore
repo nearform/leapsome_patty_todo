@@ -1,6 +1,13 @@
 # Generated packages for Claude app
 dist/
 
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
 # macOS
 .DS_Store
 

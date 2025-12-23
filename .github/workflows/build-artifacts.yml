@@ -33,14 +33,7 @@ jobs:
 
       - name: Generate HTML page
         run: |
-          python scripts/generate-html.py prompts dist dist/index.html
-
-      - name: Copy prompts to dist directory
-        run: |
-          if [ -d "prompts" ]; then
-            mkdir -p dist/prompts
-            cp -r prompts/* dist/prompts/ 2>/dev/null || true
-          fi
+          python scripts/generate-html.py dist/prompts dist dist/index.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

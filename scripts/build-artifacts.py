@@ -8,7 +8,7 @@ Usage:
 This script:
     1. Generates all prompts from all skills
     2. Packages all skills as zip files for Claude app
-    3. Outputs everything to dist/ and prompts/ directories
+    3. Outputs everything to dist/ directory (prompts in dist/prompts, zips in dist/)
 """
 
 import sys
