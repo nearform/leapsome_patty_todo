@@ -30,18 +30,20 @@ Creates Product Requirements Documents following Nearform standards. Defines WHA
 - `SKILL.md` — Main skill definition
 - `PRD-TEMPLATE.md` — Complete PRD structure
 
-### Service Blueprint Assistant
+### Workshop Facilitation Assistant
 
-**Location:** `skills/service-blueprint-assistant/`
+**Location:** `skills/workshop-facilitation-assistant/`
 
-Generates Service Design Blueprints as CSV files for MIRO import. Visualises customer actions, frontstage and backstage processes, support systems, and physical evidence across the service journey.
+Assists with workshop facilitation by intelligently generating Customer Journey Maps, Experience Maps, or Service Design Blueprints as CSV files for MIRO import. Automatically infers user intent to select the appropriate visualization artifact.
 
-**Triggers:** Creating service blueprints, visualising customer journeys, mapping frontstage and backstage processes, identifying pain points, documenting service workflows.
+**Triggers:** Facilitating workshops, creating journey maps, mapping experiences, documenting service workflows, visualizing customer journeys.
 
 **Files:**
 
-- `SKILL.md` — Main skill definition
-- `BLUEPRINT-TEMPLATE.md` — Complete blueprint generation instructions
+- `SKILL.md` — Main skill definition with intent inference logic
+- `CUSTOMER-JOURNEY-MAP-TEMPLATE.md` — Customer journey map generation instructions
+- `EXPERIENCE-MAP-TEMPLATE.md` — Experience map generation instructions
+- `SERVICE-DESIGN-BLUEPRINT-TEMPLATE.md` — Service design blueprint generation instructions
 
 ## Shared Resources
 
@@ -51,6 +53,40 @@ Resources available to all skills:
 
 - `TONE-OF-VOICE.md` — Nearform writing guidelines (UK English, human voice)
 
+## Prompts
+
+**Location:** `prompts/`
+
+Standalone prompt files for direct use in Claude conversations. These files are automatically generated from all skill templates when you run the packaging script.
+
+**Available prompts:**
+
+- `brd.md` — Create Business Requirements Documents
+- `prd.md` — Create Product Requirements Documents
+- `service-design-blueprint.md` — Generate service design blueprints
+- `customer-journey-map.md` — Generate customer journey maps
+- `experience-map.md` — Generate experience maps
+
+**Usage:** Reference these files directly in your Claude conversations:
+
+```
+Follow the instructions in prompts/brd.md
+```
+
+**Note:** These files are generated from skill templates. To update them, modify the corresponding template files in the skill directories and run the packaging script.
+
+### Generating Prompts
+
+The script provides an interactive menu to generate prompts:
+
+```bash
+./scripts/manage-skills.py
+# Choose "Generate prompts"
+# Select skill(s) or "All skills"
+```
+
+This will generate prompt files in the `prompts/` folder from the skill templates.
+
 ## Usage
 
 ### Claude Code (personal skills)
@@ -58,43 +94,41 @@ Resources available to all skills:
 To make skills available across all your Claude Code projects:
 
 ```bash
-./scripts/package-skill.sh brd-assistant
-# Choose option 1
+./scripts/manage-skills.py
+# Choose "Install skills" → "Claude Code"
+# Select skill(s) or "All skills"
 ```
 
-This copies the skill to `~/.claude/skills/` and shared resources to `~/.claude/resources/`.
+This copies the skill(s) to `~/.claude/skills/` and shared resources to `~/.claude/resources/`. Restart Claude Code to use the skill(s).
 
 ### Claude App (claude.ai / desktop)
 
 Skills for the Claude web and desktop app are stored on Anthropic's servers. To upload:
 
 ```bash
-./scripts/package-skill.sh brd-assistant
-# Choose option 2
+./scripts/manage-skills.py
+# Choose "Install skills" → "Claude app"
+# Select skill(s) or "All skills"
 ```
 
 Then:
 
 1. Go to **claude.ai → Settings → Capabilities → Skills**
-2. Upload the zip file from the `dist/` folder
+2. Upload the zip file(s) from the `dist/` folder
 
 ## Install Script
 
-The `scripts/package-skill.sh` script handles both destinations:
+The `scripts/manage-skills.py` script handles both destinations:
 
 | Option          | Destination         | How it works                          |
 | --------------- | ------------------- | ------------------------------------- |
 | 1 - Claude Code | `~/.claude/skills/` | Copies files locally                  |
 | 2 - Claude app  | `dist/*.zip`        | Creates self-contained zip for upload |
 
-```bash
-# Process a specific skill
-./scripts/package-skill.sh brd-assistant
-./scripts/package-skill.sh prd-assistant
-./scripts/package-skill.sh service-blueprint-assistant
+The script is fully interactive - simply run it and follow the prompts:
 
-# Process all skills
-./scripts/package-skill.sh
+```bash
+./scripts/manage-skills.py
 ```
 
 ## Adding New Skills
@@ -118,7 +152,7 @@ This repo is designed for team collaboration:
 
 ```bash
 git pull
-./scripts/package-skill.sh
+./scripts/manage-skills.py
 # Choose option 1 to install to ~/.claude/skills/
 ```
 
@@ -126,7 +160,7 @@ git pull
 Each team member runs the script once and uploads the zip:
 
 ```bash
-./scripts/package-skill.sh
+./scripts/manage-skills.py
 # Choose option 2, then upload via Settings → Capabilities → Skills
 ```
 
@@ -138,6 +172,13 @@ Organisation owners on Team/Enterprise plans can also provision skills organisat
 resources/                        # Shared across all skills
 └── TONE-OF-VOICE.md
 
+prompts/                          # Generated from all skill templates
+├── brd.md
+├── prd.md
+├── service-design-blueprint.md
+├── customer-journey-map.md
+└── experience-map.md
+
 skills/
 ├── brd-assistant/
 │   ├── SKILL.md
@@ -145,15 +186,17 @@ skills/
 ├── prd-assistant/
 │   ├── SKILL.md
 │   └── PRD-TEMPLATE.md
-└── service-blueprint-assistant/
+└── workshop-facilitation-assistant/
     ├── SKILL.md
-    └── BLUEPRINT-TEMPLATE.md
+    ├── CUSTOMER-JOURNEY-MAP-TEMPLATE.md
+    ├── EXPERIENCE-MAP-TEMPLATE.md
+    └── SERVICE-DESIGN-BLUEPRINT-TEMPLATE.md
 
 scripts/
-└── package-skill.sh              # Installation/packaging script
+└── manage-skills.py              # Skills management script
 
 dist/                             # Generated zips for Claude app (gitignored)
 ├── brd-assistant-<commit-hash>.zip
 ├── prd-assistant-<commit-hash>.zip
-└── service-blueprint-assistant-<commit-hash>.zip
+└── workshop-facilitation-assistant-<commit-hash>.zip
 ```
