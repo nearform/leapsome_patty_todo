@@ -1,0 +1,273 @@
+---
+description: "Apply when creating, editing, or refactoring React components. Covers Gluestack UI patterns, CVA (class-variance-authority) variants, forwardRef patterns, compound components, TypeScript interfaces, and integration with design tokens."
+alwaysApply: false
+---
+
+# Component Creation Rules
+
+## Design Mode Context
+
+- While in Design Mode/prototype, components must follow production-ready patterns
+- Code will be handed off to developers, so maintain best practices
+- Focus on UI components only (no backend integration patterns needed)
+- Keep component logic simple and frontend-focused
+- **Components use Gluestack UI patterns** for React Native compatibility
+
+## File Structure
+
+Components live in: `src/components/ui/[component-name]/index.tsx`
+
+```
+src/components/ui/
+├── button/
+│   └── index.tsx
+├── card/
+│   └── index.tsx
+├── gluestack/            # Gluestack-specific components
+│   ├── icon.tsx
+│   ├── image.tsx
+│   ├── link.tsx
+│   ├── modal.tsx
+│   ├── pressable.tsx
+│   ├── radio.tsx
+│   ├── skeleton.tsx
+│   ├── textarea.tsx
+│   └── index.ts
+└── index.ts              # Re-exports all components
+```
+
+## Component Pattern (Gluestack-Compatible)
+
+Use this pattern for all components. Components follow **Gluestack UI patterns** for future React Native compatibility.
+
+### Basic Component Pattern
+
+```tsx
+"use client";
+
+import React from "react";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
+
+const componentVariants = cva(
+  "base-classes-here",
+  {
+    variants: {
+      variant: {
+        default: "variant-classes",
+        // ... more variants
+      },
+      size: {
+        sm: "size-classes",
+        md: "size-classes",
+        lg: "size-classes",
+      },
+    },
+    compoundVariants: [
+      // Use for variant combinations
+      {
+        variant: "default",
+        size: "lg",
+        className: "compound-classes",
+      },
+    ],
+    defaultVariants: {
+      variant: "default",
+      size: "md",
+    },
+  }
+);
+
+export interface ComponentProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof componentVariants> {
+  // Additional props
+}
+
+const Component = React.forwardRef<HTMLDivElement, ComponentProps>(
+  ({ className, variant, size, ...props }, ref) => {
+    return (
+      <div
+        ref={ref}
+        className={cn(componentVariants({ variant, size }), className)}
+        {...props}
+      />
+    );
+  }
+);
+
+Component.displayName = "Component";
+
+export { Component, componentVariants };
+```
+
+### Compound Component Pattern (Gluestack Style)
+
+For complex components, use the compound component pattern:
+
+```tsx
+"use client";
+
+import React from "react";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
+
+// Main component variants
+const inputVariants = cva("base-classes", { variants: { ... } });
+
+// Main wrapper component
+const Input = React.forwardRef<HTMLDivElement, InputProps>(
+  ({ className, variant, size, isDisabled, children, ...props }, ref) => {
+    return (
+      <div
+        ref={ref}
+        data-disabled={isDisabled}
+        className={cn(inputVariants({ variant, size }), className)}
+        {...props}
+      >
+        {children}
+      </div>
+    );
+  }
+);
+
+// Sub-component for the actual input field
+const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>(
+  ({ className, ...props }, ref) => {
+    return (
+      <input
+        ref={ref}
+        className={cn("input-field-classes", className)}
+        {...props}
+      />
+    );
+  }
+);
+
+// Sub-component for icons/slots
+const InputSlot = React.forwardRef<HTMLDivElement, InputSlotProps>(
+  ({ className, children, ...props }, ref) => {
+    return (
+      <div ref={ref} className={cn("slot-classes", className)} {...props}>
+        {children}
+      </div>
+    );
+  }
+);
+
+// Set display names
+Input.displayName = "Input";
+InputField.displayName = "InputField";
+InputSlot.displayName = "InputSlot";
+
+// Attach sub-components for compound usage: <Input><Input.Field /></Input>
+const InputCompound = Object.assign(Input, {
+  Field: InputField,
+  Slot: InputSlot,
+});
+
+export { InputCompound as Input, InputField, InputSlot };
+```
+
+### Icon Component Usage
+
+Use the `Icon` component from `@/components/ui/gluestack` for all icons:
+
+```tsx
+import { Icon } from "@/components/ui/gluestack";
+import { Star, Heart, Search } from "lucide-react";
+
+// Basic usage
+<Icon as={Star} size="md" className="text-accent" />
+
+// In buttons
+<Button leftIcon={Star}>Favorite</Button>
+
+// Available sizes: xs, sm, md, lg, xl, 2xl
+```
+
+## Required Patterns
+
+1. **forwardRef**: Always use `React.forwardRef` for components accepting refs
+2. **displayName**: Always set `displayName` for forwarded ref components
+3. **VariantProps**: Use `VariantProps<typeof variants>` for type-safe variant props
+4. **cn() utility**: Use `cn()` from `@/lib/utils` for className merging
+5. **Compound variants**: Use for variant combinations that need special styling
+6. **Export both**: Export component AND variants (e.g., `Button, buttonVariants`)
+7. **Gluestack props**: Use `isDisabled`, `isChecked`, `isInvalid` (not `disabled`, `checked`, `invalid`)
+8. **Compound components**: For complex components, use sub-components (e.g., `Input.Field`, `Checkbox.Indicator`)
+
+## Journey Page Components
+
+Journey pages are NOT reusable components - they are **full custom pages**:
+
+### Location
+- Journey pages live in: `src/app/prototype/journeys/[journey]/[page]/page.tsx`
+
+### Pattern
+
+```tsx
+// src/app/prototype/journeys/onboarding/login/page.tsx
+'use client';
+
+import Link from 'next/link';
+import { Box, Button, Input, Heading } from '@/components/ui';
+
+export default function LoginPage() {
+  return (
+    <Box className="min-h-screen bg-bg-base">
+      <Heading>Login</Heading>
+      {/* Custom page content */}
+      <Link href="/prototype/journeys/onboarding/signup">
+        <Button>Sign Up</Button>
+      </Link>
+    </Box>
+  );
+}
+```
+
+### Key Differences from UI Components
+
+- Journey pages are **unique** - not reusable
+- Journey pages use **design system components** but are not design system components
+- Journey pages handle **navigation** via Next.js `Link`
+- Each page is **custom** with its own layout and content
+
+### When Creating Journey Pages
+
+- ✅ **DO**: Use design system components (`Box`, `VStack`, `Card`, etc.)
+- ✅ **DO**: Add `'use client';` at the top
+- ✅ **DO**: Use `Link` from `next/link` for navigation
+- ✅ **DO**: Create unique, custom content for each page
+- ❌ **DON'T**: Create generic/templated page components
+- ❌ **DON'T**: Create reusable "journey" components
+
+## Integration Requirements
+
+1. **Re-export**: Add component to `src/components/ui/index.ts` (for UI components only)
+2. **Showcase**: Add examples to the appropriate design system page:
+   - **Foundations** (`src/app/design-system/foundations/page.tsx`): For primitive/foundational components (icons, buttons, inputs, avatars, badges, cards, form controls, layout components, etc.)
+   - **Components** (`src/app/design-system/page.tsx`): For app-level/composite components (headers, footers, navigation, carousels, stories, modals, drawers, etc.)
+3. **Design tokens**: Use semantic colors via CSS variables (see design-system rules)
+4. **Gluestack patterns**: Follow established Gluestack component patterns for React Native compatibility
+
+## TypeScript Interfaces
+
+- Extend appropriate HTML element types: `React.HTMLAttributes<HTMLElement>`
+- Use `React.ButtonHTMLAttributes<HTMLButtonElement>` for buttons
+- Use `React.InputHTMLAttributes<HTMLInputElement>` for inputs
+
+## Gluestack Component Reference
+
+Components already migrated to Gluestack patterns:
+- **Layout**: Box, Center, HStack, VStack, Divider
+- **Typography**: Text, Heading
+- **Form**: Button, Input, Checkbox, Switch, Select, Radio, Textarea
+- **Feedback**: Alert, Badge, Progress, Spinner, Tooltip
+- **Data Display**: Avatar, Card
+- **Overlay**: Modal, Drawer
+- **Navigation**: Link
+- **Media**: Icon, Image
+- **Utility**: Pressable, Skeleton
+
+When creating new components, reference these existing implementations for patterns.

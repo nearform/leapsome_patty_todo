@@ -1,0 +1,418 @@
+@import "@liveblocks/react-ui/styles.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   LIGHT THEME (Default)
+   ============================================ */
+:root {
+  /* Background Colors */
+  --background-base: #FAFAFA;
+  --background-elevated: #FFFFFF;
+  --background-secondary: #F5F5F5;
+  --background-tertiary: #EEEEEE;
+
+  /* Border Colors */
+  --border-standard: #6B7280;  /* WCAG 3:1 for form inputs */
+  --border-subtle: #9CA3AF;
+  --border-decorative: #E0E0E0;  /* Non-essential container borders */
+
+  /* Text Colors */
+  --text-primary: #111827;
+  --text-body: #374151;
+  --text-secondary: #4B5563;
+  --text-tertiary: #9CA3AF;
+  --text-disabled: #E0E0E0;
+
+  /* Accent Colors (Dusk) */
+  --accent-primary: #3833B4;
+  --accent-light: #5041E1;
+  --accent-dark: #2A2687;
+  --accent-hover: #2A2687;
+
+  /* Success Colors */
+  --success-primary: #059669;
+  --success-light: #34D399;
+  --success-dark: #047857;
+  --success-background: #ECFDF5;
+
+  /* Info Colors */
+  --info-primary: #3B82F6;
+  --info-light: #60A5FA;
+  --info-dark: #2563EB;
+  --info-background: #EFF6FF;
+  --info-background-40: rgba(239, 246, 255, 0.4);
+
+  /* Warning Colors */
+  --warning-primary: #F59E0B;
+  --warning-light: #FBBF24;
+  --warning-dark: #D97706;
+  --warning-background: #FFFBEB;
+
+  /* Error Colors */
+  --error-primary: #EF4444;
+  --error-light: #F87171;
+  --error-dark: #DC2626;
+  --error-background: #FEF2F2;
+
+  /* Neutral Scale (for reference - these are static) */
+  --neutral-0: #FFFFFF;
+  --neutral-50: #FAFAFA;
+  --neutral-100: #F5F5F5;
+  --neutral-200: #EEEEEE;
+  --neutral-300: #E0E0E0;
+  --neutral-400: #9CA3AF;
+  --neutral-500: #6B7280;
+  --neutral-600: #4B5563;
+  --neutral-700: #374151;
+  --neutral-800: #1F2937;
+  --neutral-900: #111827;
+  --neutral-950: #0B0F19;
+
+  /* ========================================
+     Typography Tokens
+     ======================================== */
+
+  /* Font Family */
+  --font-family-primary: 'Spline Sans', system-ui, -apple-system, sans-serif;
+
+  /* Font Sizes */
+  --font-size-0: 6px;
+  --font-size-1: 8px;
+  --font-size-2: 10px;
+  --font-size-3: 11px;
+  --font-size-4: 12px;
+  --font-size-5: 14px;
+  --font-size-6: 16px;
+  --font-size-7: 18px;
+  --font-size-8: 20px;
+  --font-size-9: 24px;
+  --font-size-10: 28px;
+  --font-size-11: 32px;
+  --font-size-12: 36px;
+
+  /* Font Weights */
+  --font-weight-regular: 350;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Line Heights */
+  --line-height-0: 8px;
+  --line-height-1: 10px;
+  --line-height-2: 12px;
+  --line-height-3: 16px;
+  --line-height-4: 20px;
+  --line-height-5: 24px;
+  --line-height-6: 28px;
+  --line-height-7: 32px;
+  --line-height-8: 36px;
+  --line-height-9: 40px;
+
+  /* Letter Spacing */
+  --letter-spacing-tight-xl: -0.5px;
+  --letter-spacing-tight-lg: -0.4px;
+  --letter-spacing-tight-md: -0.3px;
+  --letter-spacing-tight-sm: -0.2px;
+  --letter-spacing-tight-xs: -0.1px;
+  --letter-spacing-normal: 0px;
+  --letter-spacing-loose-xs: 0.2px;
+  --letter-spacing-loose-sm: 0.3px;
+  --letter-spacing-loose-md: 0.4px;
+  --letter-spacing-loose-lg: 0.5px;
+  --letter-spacing-loose-xl: 1px;
+
+  /* ========================================
+     Radius Tokens
+     ======================================== */
+  --radius-none: 0px;
+  --radius-2xs: 2px;
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-3xl: 20px;
+  --radius-4xl: 24px;
+  --radius-full: 9999px;
+
+  /* ========================================
+     Spacing Tokens (4px base unit)
+     ======================================== */
+  --space-0: 0px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* Ring/Focus */
+  --ring-color: #3833B4;
+}
+
+/* ============================================
+   DARK THEME
+   ============================================ */
+.dark {
+  /* Background Colors */
+  --background-base: #0B0F19;
+  --background-elevated: #111827;
+  --background-secondary: #1F2937;
+  --background-tertiary: #374151;
+
+  /* Border Colors */
+  --border-standard: #6B7280;  /* WCAG 3:1 for form inputs */
+  --border-subtle: #4B5563;
+  --border-decorative: #374151;  /* Non-essential container borders */
+
+  /* Text Colors */
+  --text-primary: #FAFAFA;
+  --text-body: #EEEEEE;
+  --text-secondary: #E0E0E0;
+  --text-tertiary: #6B7280;
+  --text-disabled: #4B5563;
+
+  /* Accent Colors (Dusk) */
+  --accent-primary: #7367E7;
+  --accent-light: #968DED;
+  --accent-dark: #5041E1;
+  --accent-hover: #968DED;
+
+  /* Success Colors */
+  --success-primary: #34D399;
+  --success-light: #6EE7B7;
+  --success-dark: #10B981;
+  --success-background: #064E3B;
+
+  /* Info Colors */
+  --info-primary: #60A5FA;
+  --info-light: #93C5FD;
+  --info-dark: #3B82F6;
+  --info-background: #1E3A8A;
+  --info-background-40: rgba(30, 58, 138, 0.4);
+
+  /* Warning Colors */
+  --warning-primary: #FBBF24;
+  --warning-light: #FCD34D;
+  --warning-dark: #F59E0B;
+  --warning-background: #78350F;
+
+  /* Error Colors */
+  --error-primary: #F87171;
+  --error-light: #FCA5A5;
+  --error-dark: #EF4444;
+  --error-background: #7F1D1D;
+
+  /* Ring/Focus */
+  --ring-color: #7367E7;
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+* {
+  border-color: var(--border-standard);
+}
+
+html {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--background-base);
+  color: var(--text-body);
+  font-family: var(--font-spline-sans), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   FOCUS STYLES
+   ============================================ */
+.focus-ring {
+  @apply outline-none ring-2 ring-offset-2;
+  ring-color: var(--ring-color);
+}
+
+/* ============================================
+   TRANSITIONS
+   ============================================ */
+.transition-base {
+  @apply transition-all duration-200 ease-in-out;
+}
+
+.transition-theme {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-secondary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-tertiary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Hide scrollbar while maintaining scroll functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+/* ============================================
+   SELECTION
+   ============================================ */
+::selection {
+  background-color: var(--accent-primary);
+  color: white;
+}
+
+/* ============================================
+   TENNIS BALL BOUNCE ANIMATION
+   ============================================ */
+@keyframes bounce-vertical {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(20px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce-scale {
+  0% {
+    transform: scaleY(1);
+  }
+  45% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0.8);
+  }
+  55% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes bounce-combined {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(20px) rotate(180deg);
+  }
+  100% {
+    transform: translateY(0) rotate(360deg);
+  }
+}
+
+.animate-bounce-tennis {
+  animation: bounce-combined 1.2s cubic-bezier(0.33, 0, 0.67, 1) infinite;
+}
+
+/* ============================================
+   LIVE PULSE ANIMATION
+   ============================================ */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.12);
+    opacity: 0;
+  }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* ============================================
+   ONBOARDING ANIMATIONS
+   ============================================ */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in-up {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: fade-in-up 1000ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in {
+  opacity: 0;
+  animation: fade-in 900ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-delay-100 {
+  animation-delay: 200ms;
+}
+
+.animate-delay-200 {
+  animation-delay: 400ms;
+}
+
+.animate-delay-300 {
+  animation-delay: 600ms;
+}
+
+.animate-delay-400 {
+  animation-delay: 800ms;
+}

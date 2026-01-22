@@ -1,0 +1,204 @@
+{
+  "tournaments": [
+    {
+      "id": "australian-open",
+      "name": "Australian Open",
+      "surface": "Hard",
+      "location": "Melbourne",
+      "tour": "both",
+      "category": "grand-slam"
+    },
+    {
+      "id": "roland-garros",
+      "name": "Roland-Garros",
+      "surface": "Clay",
+      "location": "Paris",
+      "tour": "both",
+      "category": "grand-slam"
+    },
+    {
+      "id": "wimbledon",
+      "name": "Wimbledon",
+      "surface": "Grass",
+      "location": "London",
+      "tour": "both",
+      "category": "grand-slam"
+    },
+    {
+      "id": "us-open",
+      "name": "US Open",
+      "surface": "Hard",
+      "location": "New York",
+      "tour": "both",
+      "category": "grand-slam"
+    },
+    {
+      "id": "atp-indian-wells",
+      "name": "Indian Wells",
+      "surface": "Hard",
+      "location": "Indian Wells",
+      "tour": "atp",
+      "category": "masters"
+    },
+    {
+      "id": "atp-miami",
+      "name": "Miami Open",
+      "surface": "Hard",
+      "location": "Miami",
+      "tour": "atp",
+      "category": "masters"
+    },
+    {
+      "id": "atp-monte-carlo",
+      "name": "Monte-Carlo Masters",
+      "surface": "Clay",
+      "location": "Monte Carlo",
+      "tour": "atp",
+      "category": "masters"
+    },
+    {
+      "id": "atp-madrid",
+      "name": "Madrid Open",
+      "surface": "Clay",
+      "location": "Madrid",
+      "tour": "atp",
+      "category": "masters"
+    },
+    {
+      "id": "atp-rome",
+      "name": "Italian Open",
+      "surface": "Clay",
+      "location": "Rome",
+      "tour": "atp",
+      "category": "masters"
+    },
+    {
+      "id": "atp-canada",
+      "name": "Canadian Open",
+      "surface": "Hard",
+      "location": "Toronto/Montreal",
+      "tour": "atp",
+      "category": "masters"
+    },
+    {
+      "id": "atp-cincinnati",
+      "name": "Cincinnati Open",
+      "surface": "Hard",
+      "location": "Cincinnati",
+      "tour": "atp",
+      "category": "masters"
+    },
+    {
+      "id": "atp-shanghai",
+      "name": "Shanghai Masters",
+      "surface": "Hard",
+      "location": "Shanghai",
+      "tour": "atp",
+      "category": "masters"
+    },
+    {
+      "id": "atp-paris",
+      "name": "Paris Masters",
+      "surface": "Hard",
+      "location": "Paris",
+      "tour": "atp",
+      "category": "masters"
+    },
+    {
+      "id": "atp-finals",
+      "name": "ATP Finals",
+      "surface": "Hard",
+      "location": "Turin",
+      "tour": "atp",
+      "category": "finals"
+    },
+    {
+      "id": "wta-indian-wells",
+      "name": "Indian Wells",
+      "surface": "Hard",
+      "location": "Indian Wells",
+      "tour": "wta",
+      "category": "1000"
+    },
+    {
+      "id": "wta-miami",
+      "name": "Miami Open",
+      "surface": "Hard",
+      "location": "Miami",
+      "tour": "wta",
+      "category": "1000"
+    },
+    {
+      "id": "wta-dubai",
+      "name": "Dubai Championships",
+      "surface": "Hard",
+      "location": "Dubai",
+      "tour": "wta",
+      "category": "1000"
+    },
+    {
+      "id": "wta-qatar",
+      "name": "Qatar Open",
+      "surface": "Hard",
+      "location": "Doha",
+      "tour": "wta",
+      "category": "1000"
+    },
+    {
+      "id": "wta-madrid",
+      "name": "Madrid Open",
+      "surface": "Clay",
+      "location": "Madrid",
+      "tour": "wta",
+      "category": "1000"
+    },
+    {
+      "id": "wta-rome",
+      "name": "Italian Open",
+      "surface": "Clay",
+      "location": "Rome",
+      "tour": "wta",
+      "category": "1000"
+    },
+    {
+      "id": "wta-canada",
+      "name": "Canadian Open",
+      "surface": "Hard",
+      "location": "Toronto/Montreal",
+      "tour": "wta",
+      "category": "1000"
+    },
+    {
+      "id": "wta-cincinnati",
+      "name": "Cincinnati Open",
+      "surface": "Hard",
+      "location": "Cincinnati",
+      "tour": "wta",
+      "category": "1000"
+    },
+    {
+      "id": "wta-beijing",
+      "name": "China Open",
+      "surface": "Hard",
+      "location": "Beijing",
+      "tour": "wta",
+      "category": "1000"
+    },
+    {
+      "id": "wta-guadalajara",
+      "name": "Guadalajara Open",
+      "surface": "Hard",
+      "location": "Guadalajara",
+      "tour": "wta",
+      "category": "1000"
+    },
+    {
+      "id": "wta-finals",
+      "name": "WTA Finals",
+      "surface": "Hard",
+      "location": "Riyadh",
+      "tour": "wta",
+      "category": "finals"
+    }
+  ]
+}
