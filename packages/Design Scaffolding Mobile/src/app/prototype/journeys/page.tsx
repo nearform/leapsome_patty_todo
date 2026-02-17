@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, Plus, MousePointerClick, SquareCheckBig } from 'lucide-react';
-import { Box, VStack, HStack, Heading, Text, Button, Card, CardHeader, CardTitle, CardDescription, CardContent, Badge, Divider } from '@/components/ui';
+import { Box, VStack, HStack, Heading, Text, Button, Card, CardHeader, CardTitle, CardDescription, CardContent, Badge, Divider } from '@/components/prototype-ui';
 import { getAllJourneys, getJourneysByStatus } from '@/lib/data/journeys-registry';
 
 export default function JourneysIndexPage() {
@@ -37,14 +37,14 @@ export default function JourneysIndexPage() {
                   </Heading>
                 </HStack>
                 <HStack space="sm" className="items-center">
-                  <Link href="/prototype/whiteboard">
+                  <Link href="/canvas">
                     <Button 
                       variant="outline"
                       action="primary"
                       leftIcon={<MousePointerClick className="w-4 h-4" />}
                       className="rounded-full"
                     >
-                      Whiteboard
+                      Canvas
                     </Button>
                   </Link>
                   <Link href="/prototype/journeys">

@@ -1,0 +1,156 @@
+---
+description: "ALWAYS APPLY. After every session that modifies files, you MUST update cursor-updates.md as a final step. Also applies when creating or updating components, features, or project documentation — auto-generate component docs (props, variants, examples), update README.md for new features, and ensure component showcase is current."
+alwaysApply: true
+---
+
+# Documentation Rules
+
+## Auto-Generated Component Docs
+
+When creating or updating components, generate documentation:
+
+### What to Document
+
+1. **Props interface** - All available props with types
+2. **Variants** - Available variants and their values
+3. **Usage examples** - Basic and advanced usage
+4. **Gluestack patterns** - Compound component usage if applicable
+5. **Accessibility notes** - Required ARIA attributes
+
+### Documentation Format
+
+```tsx
+/**
+ * Button component with multiple variants and sizes.
+ * Follows Gluestack UI patterns for React Native compatibility.
+ *
+ * @example
+ * ```tsx
+ * <Button action="primary" size="lg" leftIcon={Star}>
+ *   Click Me
+ * </Button>
+ * ```
+ *
+ * @param variant - Visual style: "solid" | "outline" | "link"
+ * @param action - Action type: "primary" | "secondary"
+ * @param size - Button size: "xs" | "sm" | "md" | "lg" | "xl"
+ * @param leftIcon - Lucide icon component to display on the left
+ */
+```
+
+## Designer Documentation
+
+**For designers (non-engineers):** Reference `docs/start-here.md` for:
+- **Cursor-first workflow**: Using prompts to build pages and components
+- **Creating components**: From Figma links or PNG images
+- **Creating journeys**: Folder structure and metadata
+- **Creating pages**: Using design system components
+- **Available resources**: Data files, images, icons
+- **Troubleshooting**: Common issues and how to prompt for fixes
+
+The Start Here guide is designed for a **prompt-based workflow** where designers describe what they want in natural language and Cursor AI handles the implementation.
+
+## cursor-updates.md — MANDATORY
+
+**CRITICAL: After EVERY session where files are created, modified, or deleted, you MUST update `cursor-updates.md` before finishing.** This is not optional. Treat it as the final step of every task, just like saving a file.
+
+### When to Update
+- After creating, modifying, or deleting any component, page, journey, config, or token
+- After refactoring, renaming, or restructuring files
+- After fixing bugs or changing behavior
+- If the only changes were conversational (no file edits), skip the update
+
+### Format
+Add entries under today's date heading (`## YYYY-MM-DD`). If a heading for today already exists, append to it — do not create a duplicate date heading.
+
+```markdown
+## 2024-01-15
+
+### Short Descriptive Title
+- Brief description of what changed and why
+- List affected components/files if helpful
+```
+
+### Rules
+- Be concise but specific — someone reading the log should understand what changed without opening every file
+- Group related changes under a single heading
+- Use tables for bulk changes across many files
+- Do NOT skip this step
+
+## README.md Maintenance
+
+Update README when:
+
+- Adding new components (update Components section)
+- Adding new features
+- Changing project structure
+- Updating dependencies significantly
+
+**Note:** For journey-related changes, no README update needed if only creating journey folders. README changes needed for major structural updates.
+
+### README Sections to Update
+
+1. **Components** - List all available components
+2. **Usage Examples** - Show how to use new components
+3. **Design Tokens** - Document any new tokens
+
+## Component Showcase
+
+Update the appropriate design system page when adding new UI components:
+
+### Foundations Page (`src/app/design-system/foundations/page.tsx`)
+For primitive/foundational components:
+- Icons, typography, form controls, avatars, badges, cards, layout components
+
+### Components Page (`src/app/design-system/page.tsx`)
+For app-level/composite components:
+- Headers, footers, carousels, modals, drawers, navigation
+
+### What to Demonstrate
+1. Import the new component
+2. Add a section demonstrating:
+   - All variants
+   - All sizes
+   - Interactive states
+   - Compound component usage (if applicable)
+
+## Component Exports
+
+Ensure all UI components are exported in `src/components/prototype-ui/index.ts`:
+
+```ts
+// Add new exports
+export { NewComponent, newComponentVariants } from "./new-component";
+export type { NewComponentProps } from "./new-component";
+
+// For compound components, export sub-components too
+export { Input, InputField, InputSlot } from "./input";
+```
+
+## Journey Documentation
+
+Journey-specific documentation:
+
+### `_journey.ts` Files
+Each journey has its own metadata file documenting:
+- Journey title and description
+- Status
+- List of pages with paths
+
+### Journey Registry
+`src/lib/data/journeys-registry.ts` serves as documentation of all available journeys.
+
+## Reference Documentation
+
+- **Designer Guide**: `docs/start-here.md` - Comprehensive guide for designers
+- **Figma tokens**: `docs/figma-color-tokens.md` - Color system reference
+- **Type definitions**: `src/lib/types/journey.ts` - Journey type documentation
+
+Keep documentation in sync with actual implementation.
+
+## Documentation Quality
+
+- Keep docs concise but complete
+- Include code examples that work
+- Document edge cases and gotchas
+- Update docs when behavior changes

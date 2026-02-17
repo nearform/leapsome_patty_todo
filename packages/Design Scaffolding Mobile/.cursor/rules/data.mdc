@@ -1,0 +1,187 @@
+---
+description: "Apply when handling data, creating data structures, or working with JSON files. Static JSON files only (no APIs, databases, or backend calls), type-safe JSON with TypeScript interfaces, file organization by domain, and simple prototype-focused schemas."
+alwaysApply: false
+---
+
+# Data Handling Rules
+
+## Design Mode Constraints
+
+This is a **prototype in Design Mode**. Keep data handling simple and frontend-only.
+
+### What This Means
+
+- **Static data only**: All data comes from static TypeScript files
+- **No APIs**: No backend API calls
+- **No databases**: No database connections
+- **No mocking**: Don't mock APIs or databases - use real static data
+
+## Data Files
+
+### Location
+
+Store data files in `src/lib/data/`:
+
+```
+src/lib/data/
+├── journeys-registry.ts  # Journey registry (imports from journey folders)
+└── sprints.ts            # Sprint data (optional)
+```
+
+### Type Definitions
+
+Store types in `src/lib/types/`:
+
+```
+src/lib/types/
+└── journey.ts            # Journey type definitions
+```
+
+## Journey Data Structure
+
+### Types (`src/lib/types/journey.ts`)
+
+```typescript
+export interface JourneyPage {
+  id: string;
+  name: string;
+  path: string;
+  description?: string;
+}
+
+export interface JourneyConfig {
+  id: string;
+  title: string;
+  description: string;
+  status: 'in-progress' | 'draft' | 'completed';
+  pages: JourneyPage[];
+}
+```
+
+### Journey Metadata Files
+
+Each journey folder contains its own `_journey.ts`:
+
+```typescript
+// src/app/prototype/journeys/onboarding/_journey.ts
+import type { JourneyConfig } from '@/lib/types/journey';
+
+export const journey: JourneyConfig = {
+  id: 'onboarding',
+  title: 'Onboarding Flow',
+  description: 'New user registration and setup',
+  status: 'in-progress',
+  pages: [
+    { id: 'login', name: 'Login', path: '/prototype/journeys/onboarding/login' },
+    { id: 'signup', name: 'Sign Up', path: '/prototype/journeys/onboarding/signup' },
+  ],
+};
+```
+
+### Journey Registry
+
+Central registry imports all journeys:
+
+```typescript
+// src/lib/data/journeys-registry.ts
+import type { JourneyConfig } from '@/lib/types/journey';
+import { journey as banking } from '@/app/prototype/journeys/banking/_journey';
+import { journey as checkoutFlow } from '@/app/prototype/journeys/checkout-flow/_journey';
+
+export const journeys: JourneyConfig[] = [
+  banking,
+  checkoutFlow,
+];
+
+export function getJourney(id: string): JourneyConfig | undefined {
+  return journeys.find(j => j.id === id);
+}
+
+export function getAllJourneys(): JourneyConfig[] {
+  return journeys;
+}
+
+export function getAllJourneyIds(): string[] {
+  return journeys.map(j => j.id);
+}
+
+export function getJourneysByStatus(status: JourneyConfig['status']): JourneyConfig[] {
+  return journeys.filter(j => j.status === status);
+}
+```
+
+## Usage in Components
+
+```tsx
+// Import from registry
+import { getAllJourneys, getJourney } from "@/lib/data/journeys-registry";
+
+function JourneyList() {
+  const journeys = getAllJourneys();
+  
+  return (
+    <div>
+      {journeys.map((journey) => (
+        <div key={journey.id}>{journey.title}</div>
+      ))}
+    </div>
+  );
+}
+```
+
+## Type Safety
+
+- Always use TypeScript interfaces
+- Import types from `@/lib/types/journey`
+- Use helper functions from registry
+
+## Static Data Files (Non-Journey)
+
+For other static data (products, users, etc.):
+
+### Location
+- `src/lib/data/` for TypeScript data files
+- `public/data/` for JSON files needing public access
+
+### Structure
+
+```typescript
+// src/lib/data/products.ts
+export interface Product {
+  id: string;
+  name: string;
+  category: string;
+  price: number;
+}
+
+export const products: Product[] = [
+  { id: '1', name: 'Product Name', category: 'Electronics', price: 99.99 },
+];
+
+export function getProduct(id: string): Product | undefined {
+  return products.find(p => p.id === id);
+}
+
+export function getAllProducts(): Product[] {
+  return products;
+}
+```
+
+## Best Practices
+
+1. **Type everything** - All data must have TypeScript interfaces
+2. **Use helper functions** - Don't access data directly
+3. **Keep schemas simple** - Prototype-focused, not production database
+4. **Direct imports** - Reference data files directly
+5. **Descriptive IDs** - Use meaningful kebab-case IDs
+6. **One source of truth** - Don't duplicate data
+
+## What NOT to Do
+
+- Don't create mock API functions
+- Don't simulate network delays
+- Don't build fake backend patterns
+- Don't over-engineer data structures
+- Don't create complex data relationships
+- Don't duplicate data in multiple places
+- Don't hardcode data in components

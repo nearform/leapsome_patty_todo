@@ -7,7 +7,7 @@ import {
   Heading,
   Text,
   Button,
-} from "@/components/ui";
+} from "@/components/prototype-ui";
 import { ArrowLeft, ArrowRight, MousePointerClick, SquareCheckBig } from "lucide-react";
 import Link from "next/link";
 import QRCode from "react-qr-code";
@@ -32,7 +32,7 @@ export default function PrototypePage() {
         <Box className="absolute inset-0 bg-gradient-to-br from-success/5 via-transparent to-accent/5" />
         <Box className="relative py-6 lg:py-8 px-4 lg:px-8 max-w-[1800px] mx-auto">
           <VStack space="xl" className="max-w-full">
-            {/* Title Section with Back Button and Whiteboard Link */}
+            {/* Title Section with Back Button and Canvas Link */}
             <VStack space="md" className="w-full">
               <HStack space="md" className="items-center justify-between w-full">
                 <HStack space="md" className="items-center">
@@ -51,14 +51,14 @@ export default function PrototypePage() {
                   </Heading>
                 </HStack>
                 <HStack space="sm" className="items-center">
-                  <Link href="/whiteboard">
+                <Link href="/canvas">
                     <Button 
                       variant="outline"
                       action="primary"
                       leftIcon={<MousePointerClick className="w-4 h-4" />}
                       className="rounded-full"
                     >
-                      Whiteboard
+                      Canvas
                     </Button>
                   </Link>
                   <Link href="/prototype/journeys">

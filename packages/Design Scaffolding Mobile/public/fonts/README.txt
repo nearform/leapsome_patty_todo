@@ -1,22 +1,28 @@
-Spline Sans Variable Font
-=========================
+Inter Variable Font
+===================
 
-This download contains Spline Sans as both a variable font and static fonts.
+This download contains Inter as both variable fonts and static fonts.
 
-Spline Sans is a variable font with this axis:
-  wght
+Inter is a variable font with these axes:
+  opsz  Optical Size
+  wght  Weight
 
-This means all the styles are contained in a single file:
-  SplineSans-VariableFont_wght.ttf
+This means all the styles are contained in these files:
+  Inter-VariableFont_opsz,wght.ttf
+  Inter-Italic-VariableFont_opsz,wght.ttf
 
 If your app fully supports variable fonts, you can now pick intermediate styles
-that aren’t available as static fonts. Not all apps support variable fonts, and
-in those cases you can use the static font files for Spline Sans:
-  static/SplineSans-Light.ttf
-  static/SplineSans-Regular.ttf
-  static/SplineSans-Medium.ttf
-  static/SplineSans-SemiBold.ttf
-  static/SplineSans-Bold.ttf
+that aren't available as static fonts. Not all apps support variable fonts, and
+in those cases you can use the static font files for Inter:
+  static/Inter-Thin.ttf
+  static/Inter-ExtraLight.ttf
+  static/Inter-Light.ttf
+  static/Inter-Regular.ttf
+  static/Inter-Medium.ttf
+  static/Inter-SemiBold.ttf
+  static/Inter-Bold.ttf
+  static/Inter-ExtraBold.ttf
+  static/Inter-Black.ttf
 
 Get started
 -----------

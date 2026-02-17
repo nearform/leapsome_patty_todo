@@ -26,6 +26,8 @@ export function CommentPin({ thread, onResolve }: CommentPinProps) {
         top: metadata.y,
         transform: "translate(-50%, -100%)",
       }}
+      onKeyDown={(e) => e.stopPropagation()}
+      onKeyUp={(e) => e.stopPropagation()}
     >
       {/* Pin Icon */}
       <button

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from "@headlessui/react";
 import { X, Copy, Check } from "lucide-react";
-import { Box, HStack, Text, VStack } from "@/components/ui";
+import { Box, HStack, Text, VStack } from "@/components/prototype-ui";
 
 interface DSTokensDrawerProps {
   open: boolean;
@@ -151,7 +151,7 @@ export function DSTokensDrawer({ open, onClose }: DSTokensDrawerProps) {
                       <tr className="bg-bg-secondary">
                         <td colSpan={4} className="py-2 px-3 font-semibold text-text-primary text-xs">Typography - Font Weights</td>
                       </tr>
-                      <TokenRowText label="Regular" variable="--font-weight-regular" value="350" />
+                      <TokenRowText label="Regular" variable="--font-weight-regular" value="400" />
                       <TokenRowText label="Medium" variable="--font-weight-medium" value="500" />
                       <TokenRowText label="Semibold" variable="--font-weight-semibold" value="600" />
                       <TokenRowText label="Bold" variable="--font-weight-bold" value="700" />

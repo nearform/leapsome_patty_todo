@@ -1,0 +1,416 @@
+---
+description: "Apply when creating, editing, or working with user journeys or prototypes. Covers static journey folder structure, _journey.ts metadata files, page creation, and journey registry. Journeys are folders with individual page subfolders - NOT dynamic routes."
+alwaysApply: false
+---
+
+# Journey/Prototype Workflow Rules
+
+## Core Principle
+
+**Journeys are FOLDERS, not dynamic routes.**
+
+Each journey is a folder containing:
+1. `_journey.ts` - Journey metadata
+2. `page.tsx` - Journey overview page
+3. Page subfolders with `page.tsx` files
+
+## File Structure
+
+### Journey Location
+```
+src/app/prototype/journeys/
+├── onboarding/                    # Journey folder (id = 'onboarding')
+│   ├── _journey.ts               # Metadata file
+│   ├── page.tsx                  # Journey overview
+│   ├── login/
+│   │   └── page.tsx              # Custom login page
+│   ├── signup/
+│   │   └── page.tsx              # Custom signup page
+│   └── welcome/
+│       └── page.tsx              # Custom welcome page
+│
+├── checkout-flow/                 # Another journey
+│   ├── _journey.ts
+│   ├── page.tsx
+│   └── ...
+│
+└── page.tsx                       # All journeys index
+```
+
+### Registry Location
+- **File**: `src/lib/data/journeys-registry.ts`
+- **Purpose**: Imports all journeys for overview/canvas views
+
+### Type Definitions
+- **File**: `src/lib/types/journey.ts`
+- **Contains**: `JourneyConfig`, `JourneyPage` interfaces
+
+## Journey Metadata File (`_journey.ts`)
+
+Each journey folder MUST have a `_journey.ts` file:
+
+```typescript
+import type { JourneyConfig } from '@/lib/types/journey';
+
+export const journey: JourneyConfig = {
+  id: 'onboarding',              // Must match folder name
+  title: 'Onboarding Flow',      // Display name
+  description: 'Description',    // Brief description
+  status: 'in-progress',         // 'in-progress' | 'draft' | 'completed'
+  pages: [
+    { 
+      id: 'login', 
+      name: 'Login', 
+      path: '/prototype/journeys/onboarding/login',
+      description: 'User login page'
+    },
+    { 
+      id: 'signup', 
+      name: 'Sign Up', 
+      path: '/prototype/journeys/onboarding/signup'
+    },
+  ],
+};
+```
+
+### Required Fields
+- `id` - Unique identifier (kebab-case, matches folder name)
+- `title` - Display name for the journey
+- `description` - Brief description
+- `status` - Current status: `'in-progress'` | `'draft'` | `'completed'`
+- `pages` - Array of page references
+
+### Page Object Fields
+- `id` - Page identifier (matches subfolder name)
+- `name` - Display name
+- `path` - Full URL path to the page
+- `description` - Optional description
+
+## Creating a Journey
+
+### Steps
+
+1. **Create folder**: `src/app/prototype/journeys/[journey-name]/`
+2. **Create `_journey.ts`**: Define journey metadata
+3. **Create `page.tsx`**: Journey overview page with QR codes (see Individual Journey structure below)
+4. **Create page folders**: `[journey-name]/[page-name]/page.tsx`
+5. **Register journey**: Add import to `journeys-registry.ts`
+
+### Journey Overview Page Structure
+
+The journey overview page (`page.tsx`) should follow this structure:
+
+```typescript
+'use client';
+
+import Link from 'next/link';
+import { ArrowLeft, MousePointerClick, SquareCheckBig } from 'lucide-react';
+import { Box, VStack, HStack, Heading, Text, Button } from '@/components/prototype-ui';
+import { journey } from './_journey';
+import QRCode from 'react-qr-code';
+import { useEffect, useState } from 'react';
+
+export default function JourneyPage() {
+  const [baseUrl, setBaseUrl] = useState("https://main.d2bprmygt7j0ws.amplifyapp.com");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setBaseUrl(window.location.origin);
+    }
+  }, []);
+
+  return (
+    <Box className="min-h-screen bg-bg-base transition-colors">
+      {/* Hero Section */}
+      <Box className="relative overflow-hidden">
+        <Box className="absolute inset-0 bg-gradient-to-br from-success/5 via-transparent to-accent/5" />
+        <Box className="relative py-6 lg:py-8 px-4 lg:px-8 max-w-[1800px] mx-auto">
+          <VStack space="xl" className="max-w-full">
+            {/* Header with Back Button and Navigation */}
+            <VStack space="md" className="w-full">
+              <HStack space="md" className="items-center justify-between w-full">
+                <HStack space="md" className="items-center">
+                  <Link href="/prototype">
+                    <Button 
+                      variant="solid"
+                      action="primary"
+                      size="sm"
+                      className="rounded-full w-8 h-8 p-0"
+                    >
+                      <ArrowLeft className="w-4 h-4 text-white" />
+                    </Button>
+                  </Link>
+                  <Heading as="h1" size="5xl" className="text-accent">
+                    {journey.title}
+                  </Heading>
+                </HStack>
+                 <HStack space="sm" className="items-center">
+                  <Link href="/canvas">
+                    <Button 
+                      variant="outline"
+                      action="primary"
+                      leftIcon={<MousePointerClick className="w-4 h-4" />}
+                      className="rounded-full"
+                     >
+                     Canvas
+                    </Button>
+                  </Link>
+                  <Link href="/prototype/journeys">
+                    <Button 
+                      variant="outline"
+                      action="primary"
+                      leftIcon={<SquareCheckBig className="w-4 h-4" />}
+                      className="rounded-full"
+                    >
+                      Status
+                    </Button>
+                  </Link>
+                </HStack>
+              </HStack>
+              <Box className="w-full h-px bg-border-decorative" />
+            </VStack>
+
+            {/* Description Text */}
+            <Text size="lg" muted className="w-full">
+              Explore interactive pages in this journey. Each page forms part of a complete user flow. 
+              Scan the QR codes with your mobile device to view pages on mobile, or click the boxes to navigate directly to each page.
+            </Text>
+
+            {/* QR Code Grid */}
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-6 w-full mt-8">
+              {journey.pages.map((page) => {
+                const fullUrl = `${baseUrl}${page.path}`;
+                return (
+                  <Link key={page.id} href={page.path}>
+                    <VStack space="sm" className="items-center group cursor-pointer transition-transform hover:-translate-y-1 duration-200">
+                      <Box className="w-full aspect-square p-6 bg-bg-primary border border-gray-300 rounded-lg hover:border-accent hover:shadow-lg transition-all flex items-center justify-center">
+                        <QRCode
+                          value={fullUrl}
+                          size={128}
+                          level="M"
+                          className="w-full h-full"
+                        />
+                      </Box>
+                      <Text size="sm" className="text-center text-text-secondary group-hover:text-accent transition-colors font-medium">
+                        {page.name}
+                      </Text>
+                    </VStack>
+                  </Link>
+                );
+              })}
+            </div>
+          </VStack>
+        </Box>
+      </Box>
+    </Box>
+  );
+}
+```
+
+### QR Code Implementation
+
+- **Dependency**: `react-qr-code` package (already in package.json)
+- **URL Generation**: Uses `window.location.origin` with fallback to deployed URL
+- **Purpose**: Enable mobile testing by scanning QR codes
+- **Layout**: Responsive grid that adapts to screen size
+
+### Rules
+
+- ✅ **DO**: Use kebab-case folder names: `onboarding`, `checkout-flow`
+- ✅ **DO**: Create `_journey.ts` with proper metadata
+- ✅ **DO**: Register journey in `journeys-registry.ts`
+- ✅ **DO**: Update `pages` array when adding/removing pages
+- ❌ **DON'T**: Use dynamic routes (`[journeyId]`)
+- ❌ **DON'T**: Forget to register the journey
+- ❌ **DON'T**: Hardcode journey data elsewhere
+
+## Creating Pages
+
+### Page Structure
+
+Each page is a **full custom React page**:
+
+```typescript
+// src/app/prototype/journeys/onboarding/login/page.tsx
+'use client';
+
+import Link from 'next/link';
+import { Box, Button, Input, Heading } from '@/components/prototype-ui';
+
+export default function LoginPage() {
+  return (
+    <Box className="min-h-screen bg-bg-base p-8">
+      <Heading>Login</Heading>
+      <Input placeholder="Email" />
+      
+      {/* Links to other pages - designer controls these */}
+      <Link href="/prototype/journeys/onboarding/signup">
+        <Button>Create Account</Button>
+      </Link>
+      <Link href="/prototype/journeys/onboarding/welcome">
+        <Button>Login</Button>
+      </Link>
+    </Box>
+  );
+}
+```
+
+### Key Concepts
+
+- Pages are **fully interactive** with real navigation
+- Pages can link to **any other page** (not just next/previous)
+- Pages use **design system components**
+- Each page is **unique and custom** (not templated)
+
+### Rules
+
+- ✅ **DO**: Start with `'use client';`
+- ✅ **DO**: Use design system components
+- ✅ **DO**: Add links to other pages using Next.js `Link`
+- ✅ **DO**: Use `href` paths that match actual page locations
+- ❌ **DON'T**: Use dynamic routing patterns
+- ❌ **DON'T**: Create templated/generic page components
+
+## Journey Registry
+
+### File: `src/lib/data/journeys-registry.ts`
+
+```typescript
+import type { JourneyConfig } from '@/lib/types/journey';
+import { journey as onboarding } from '@/app/prototype/journeys/onboarding/_journey';
+import { journey as checkoutFlow } from '@/app/prototype/journeys/checkout-flow/_journey';
+
+export const journeys: JourneyConfig[] = [
+  onboarding,
+  checkoutFlow,
+];
+
+export function getJourney(id: string): JourneyConfig | undefined {
+  return journeys.find(j => j.id === id);
+}
+
+export function getAllJourneys(): JourneyConfig[] {
+  return journeys;
+}
+```
+
+### When to Update Registry
+
+- Add journey: Import and add to `journeys` array
+- Remove journey: Remove import and array entry
+
+## Status Values
+
+- `'in-progress'` - Actively being worked on (Badge: "Active")
+- `'draft'` - In planning phase (Badge: "Draft")
+- `'completed'` - Finished (Badge: "Completed")
+
+## ID Format
+
+### Rules
+
+- ✅ **Use kebab-case**: `onboarding`, `checkout-flow`, `user-profile`
+- ✅ **Match folder name**: ID must equal folder name
+- ✅ **Be descriptive**: `user-profile` over `journey-04`
+- ❌ **DON'T**: Use spaces or special characters
+- ❌ **DON'T**: Use camelCase or PascalCase
+
+## Overview Pages
+
+### All Journeys Index
+- **Location**: `/prototype/journeys`
+- **File**: `src/app/prototype/journeys/page.tsx`
+- **Uses**: `getAllJourneys()` from registry
+- **Features**: 
+  - Hero section with gradient background
+  - Header with back button, "All Journeys" title, and navigation buttons (Canvas, Status)
+  - Divider line below header
+  - Description text explaining journey statuses (Active, Draft, Completed)
+  - Quick stats cards showing counts by status
+  - Card-based grid of all journeys with status badges
+
+### Canvas View
+- **Location**: `/canvas`
+- **File**: `src/app/canvas/page.tsx`
+- **Uses**: `getAllJourneys()` from registry
+- **Features**: 
+  - Interactive canvas with zoom controls
+  - All journeys and pages displayed in a grid layout
+  - Live collaboration features (cursors, comments)
+  - Click any page to navigate to it
+
+### Individual Journey
+- **Location**: `/prototype/journeys/[journey-name]`
+- **File**: `src/app/prototype/journeys/[journey-name]/page.tsx`
+- **Uses**: Local `_journey.ts` import
+- **Features**:
+  - Hero section with gradient background (`bg-gradient-to-br from-success/5 via-transparent to-accent/5`)
+  - Header with:
+    - Left: Back button (rounded, primary) linking to `/prototype/journeys` + Journey title (size 5xl, accent color)
+    - Right: Navigation buttons (Canvas, Status) matching prototype page style
+    - Divider line below header (`bg-border-decorative`)
+  - Description text explaining QR code usage
+  - QR code grid for all pages in the journey:
+    - Responsive grid: `grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7`
+    - Each page shows a QR code in a box with hover effects
+    - Page name displayed below QR code
+    - Clickable link to the actual page
+    - QR codes use current origin for URL generation (with fallback to deployed URL)
+
+## What NOT to Do
+
+### Common Mistakes
+
+1. **Using dynamic routes**
+   - ❌ `src/app/prototype/journeys/[journeyId]/page.tsx`
+   - ✅ Individual journey folders
+
+2. **Forgetting registration**
+   - ❌ Journey folder exists but not in registry
+   - ✅ Always add to `journeys-registry.ts`
+
+3. **Mismatched IDs**
+   - ❌ Folder `onboarding/` but ID `onboarding-flow`
+   - ✅ Folder and ID must match
+
+4. **Wrong page paths**
+   - ❌ `path: '/journeys/onboarding/login'`
+   - ✅ `path: '/prototype/journeys/onboarding/login'`
+
+5. **Dynamic/templated pages**
+   - ❌ Generic `ScreenPage` component for all pages
+   - ✅ Each page is custom with unique content
+
+## Designer Workflow
+
+1. **Plan journey**: Define pages and flow
+2. **Create folder**: `src/app/prototype/journeys/[name]/`
+3. **Create metadata**: `_journey.ts` with empty pages array
+4. **Create pages**: Add subfolders with `page.tsx` files
+5. **Update metadata**: Add pages to `pages` array
+6. **Register**: Add to `journeys-registry.ts`
+7. **Test**: Visit pages and verify navigation
+
+## React Native Conversion
+
+This static folder structure supports React Native conversion:
+
+- **Pages**: Convert React pages to React Native screens
+- **Navigation**: Replace `Link` with React Navigation
+- **Components**: Convert design system components
+- **Data**: Same `_journey.ts` metadata structure
+
+When converting:
+- Keep journey folder structure concept
+- Use React Navigation stacks per journey
+- Register screens from journey metadata
+
+## Summary
+
+- **Journeys = Folders**: Not dynamic routes
+- **Pages = Custom**: Each page is unique
+- **Registry**: Central list of all journeys
+- **Navigation**: Designer controls all links
+- **Metadata**: `_journey.ts` defines journey info
+
+**Workflow:** Create folder → Add `_journey.ts` → Create pages → Register → Done!

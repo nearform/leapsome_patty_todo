@@ -24,6 +24,8 @@ export function CommentComposer({ x, y, onClose, onSubmit }: CommentComposerProp
         top: y,
         transform: "translate(-50%, 0)",
       }}
+      onKeyDown={(e) => e.stopPropagation()}
+      onKeyUp={(e) => e.stopPropagation()}
     >
       <div 
         className={cn(

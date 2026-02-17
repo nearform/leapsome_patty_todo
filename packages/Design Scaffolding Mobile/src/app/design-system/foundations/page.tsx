@@ -6,7 +6,6 @@ import {
   Divider,
   HStack,
   VStack,
-  Heading,
   Text,
   Button,
   Input,
@@ -17,8 +16,8 @@ import {
   AlertTitle,
   AlertDescription,
   Spinner,
-  TennisBallLoader,
-  BouncingTennisBallLoader,
+  Skeleton,
+  SkeletonText,
   Badge,
   Card,
   CardHeader,
@@ -29,7 +28,6 @@ import {
   AvatarFallback,
   AvatarGroup,
   AvatarBadge,
-  AvatarFlagBadge,
   Icon,
   RadioGroup,
   Radio,
@@ -41,21 +39,20 @@ import {
   LinkText,
   Checkbox,
   Switch,
-  Modal,
-  ModalBackdrop,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  ModalCloseButton,
-  Drawer,
-  DrawerBackdrop,
-  DrawerContent,
-  DrawerHeader,
-  DrawerBody,
-  DrawerCloseButton,
-} from "@/components/ui";
-import { DSHeader as Header } from "@/components/ds-docs";
+  Select,
+  SelectItem,
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+  TooltipText,
+  Fab,
+  Grid,
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/prototype-ui";
+import { DSHeader as Header } from "@/components/designsystem-ui";
 import { useState } from "react";
 import { 
   Mail, 
@@ -92,7 +89,7 @@ const icons = [
   { name: "bell", icon: Bell, label: "Alert" },
   { name: "play", icon: Play, label: "Video" },
   { name: "history", icon: History, label: "Recap" },
-  { name: "users", icon: Users, label: "Head to Head" },
+  { name: "users", icon: Users, label: "Team" },
   { name: "volume-2", icon: Volume2, label: "Audio" },
   { name: "message-circle", icon: MessageCircle, label: "Ask" },
   { name: "globe", icon: Globe, label: "Globe" },
@@ -100,18 +97,6 @@ const icons = [
   { name: "eye-off", icon: EyeOff, label: "Hide" },
   { name: "moon", icon: Moon, label: "Dark Mode" },
   { name: "star", icon: Star, label: "Star" },
-];
-
-// Country flags data - Top 8 tennis countries
-const countryFlags = [
-  { code: "it", label: "Italy" },
-  { code: "es", label: "Spain" },
-  { code: "de", label: "Germany" },
-  { code: "us", label: "United States" },
-  { code: "gb", label: "Great Britain" },
-  { code: "rs", label: "Serbia" },
-  { code: "au", label: "Australia" },
-  { code: "ru", label: "Russia" },
 ];
 
 // Copy button component for icons
@@ -148,9 +133,6 @@ export default function FoundationsPage() {
   const [selectedRadio, setSelectedRadio] = useState("option1");
   const [isChecked, setIsChecked] = useState(false);
   const [isSwitched, setIsSwitched] = useState(true);
-  const [showModal, setShowModal] = useState(false);
-  const [showDrawer, setShowDrawer] = useState(false);
-
   const handleLoadingDemo = () => {
     setIsLoading(true);
     setTimeout(() => setIsLoading(false), 2000);
@@ -162,7 +144,7 @@ export default function FoundationsPage() {
       <Header />
 
       {/* Content Grid - Bento Box Layout */}
-      <Box className="max-w-[1800px] mx-auto px-4 lg:px-8 py-12">
+      <Box className="w-full mx-auto px-4 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {/* Color Palette - Large feature card: 2 cols, 2 rows on desktop */}
           <div className="relative md:col-span-2 lg:col-span-2 lg:row-span-2">
@@ -178,7 +160,7 @@ export default function FoundationsPage() {
                 <Box>
                   <Text weight="semibold" className="mb-1">Neutral Scale</Text>
                   <Text size="xs" muted className="mb-3">Raw grey tones from neutral-0 to neutral-950</Text>
-                  <div className="flex h-16 rounded-lg overflow-hidden border border-border-decorative">
+                  <div className="flex h-16 rounded-md overflow-hidden border border-border-decorative">
                     {[
                       { name: "0", color: "#FFFFFF" },
                       { name: "50", color: "#FAFAFA" },
@@ -216,7 +198,7 @@ export default function FoundationsPage() {
                       { name: "Tertiary", class: "bg-bg-tertiary" },
                     ].map(({ name, class: className }) => (
                       <VStack key={name} space="xs" className="items-center">
-                        <div className={`w-16 h-16 rounded-lg border border-border-standard ${className}`} />
+                        <div className={`w-16 h-16 rounded-md border border-border-standard ${className}`} />
                         <Text size="xs" weight="medium">{name}</Text>
                       </VStack>
                     ))}
@@ -236,7 +218,7 @@ export default function FoundationsPage() {
                       { name: "Disabled", class: "text-text-disabled" },
                     ].map(({ name, class: className }) => (
                       <VStack key={name} space="xs" className="items-center">
-                        <div className="w-16 h-16 rounded-lg border border-border-decorative flex items-center justify-center bg-bg-elevated">
+                        <div className="w-16 h-16 rounded-md border border-border-decorative flex items-center justify-center bg-bg-elevated">
                           <span className={`text-xl font-semibold ${className}`}>Aa</span>
                         </div>
                         <Text size="xs" weight="medium">{name}</Text>
@@ -255,7 +237,7 @@ export default function FoundationsPage() {
                       { name: "Subtle", class: "border-border-subtle" },
                     ].map(({ name, class: className }) => (
                       <VStack key={name} space="xs" className="items-center">
-                        <div className={`w-16 h-16 rounded-lg border-2 ${className} bg-bg-elevated`} />
+                        <div className={`w-16 h-16 rounded-md border-2 ${className} bg-bg-elevated`} />
                         <Text size="xs" weight="medium">{name}</Text>
                       </VStack>
                     ))}
@@ -274,7 +256,7 @@ export default function FoundationsPage() {
                       { name: "Hover", class: "bg-accent-hover" },
                     ].map(({ name, class: className }) => (
                       <VStack key={name} space="xs" className="items-center">
-                        <div className={`w-16 h-16 rounded-lg ${className}`} />
+                        <div className={`w-16 h-16 rounded-md ${className}`} />
                         <Text size="xs" weight="medium">{name}</Text>
                       </VStack>
                     ))}
@@ -291,19 +273,19 @@ export default function FoundationsPage() {
                       <Text size="xs" weight="medium" className="text-success">Success</Text>
                       <div className="flex gap-1">
                         <VStack space="xs" className="items-center">
-                          <div className="w-12 h-10 rounded-sm bg-success-bg border border-border-decorative" />
+                          <div className="w-12 h-10 rounded-xs bg-success-bg border border-border-decorative" />
                           <Text size="xs" muted>BG</Text>
                         </VStack>
                         <VStack space="xs" className="items-center">
-                          <div className="w-12 h-10 rounded-sm bg-success-light" />
+                          <div className="w-12 h-10 rounded-xs bg-success-light" />
                           <Text size="xs" muted>Light</Text>
                         </VStack>
                         <VStack space="xs" className="items-center">
-                          <div className="w-12 h-10 rounded-sm bg-success" />
+                          <div className="w-12 h-10 rounded-xs bg-success" />
                           <Text size="xs" muted>Primary</Text>
                         </VStack>
                         <VStack space="xs" className="items-center">
-                          <div className="w-12 h-10 rounded-sm bg-success-dark" />
+                          <div className="w-12 h-10 rounded-xs bg-success-dark" />
                           <Text size="xs" muted>Dark</Text>
                         </VStack>
                       </div>
@@ -314,19 +296,19 @@ export default function FoundationsPage() {
                       <Text size="xs" weight="medium" className="text-info">Info</Text>
                       <div className="flex gap-1">
                         <VStack space="xs" className="items-center">
-                          <div className="w-12 h-10 rounded-sm bg-info-bg border border-border-decorative" />
+                          <div className="w-12 h-10 rounded-xs bg-info-bg border border-border-decorative" />
                           <Text size="xs" muted>BG</Text>
                         </VStack>
                         <VStack space="xs" className="items-center">
-                          <div className="w-12 h-10 rounded-sm bg-info-light" />
+                          <div className="w-12 h-10 rounded-xs bg-info-light" />
                           <Text size="xs" muted>Light</Text>
                         </VStack>
                         <VStack space="xs" className="items-center">
-                          <div className="w-12 h-10 rounded-sm bg-info" />
+                          <div className="w-12 h-10 rounded-xs bg-info" />
                           <Text size="xs" muted>Primary</Text>
                         </VStack>
                         <VStack space="xs" className="items-center">
-                          <div className="w-12 h-10 rounded-sm bg-info-dark" />
+                          <div className="w-12 h-10 rounded-xs bg-info-dark" />
                           <Text size="xs" muted>Dark</Text>
                         </VStack>
                       </div>
@@ -337,19 +319,19 @@ export default function FoundationsPage() {
                       <Text size="xs" weight="medium" className="text-warning">Warning</Text>
                       <div className="flex gap-1">
                         <VStack space="xs" className="items-center">
-                          <div className="w-12 h-10 rounded-sm bg-warning-bg border border-border-decorative" />
+                          <div className="w-12 h-10 rounded-xs bg-warning-bg border border-border-decorative" />
                           <Text size="xs" muted>BG</Text>
                         </VStack>
                         <VStack space="xs" className="items-center">
-                          <div className="w-12 h-10 rounded-sm bg-warning-light" />
+                          <div className="w-12 h-10 rounded-xs bg-warning-light" />
                           <Text size="xs" muted>Light</Text>
                         </VStack>
                         <VStack space="xs" className="items-center">
-                          <div className="w-12 h-10 rounded-sm bg-warning" />
+                          <div className="w-12 h-10 rounded-xs bg-warning" />
                           <Text size="xs" muted>Primary</Text>
                         </VStack>
                         <VStack space="xs" className="items-center">
-                          <div className="w-12 h-10 rounded-sm bg-warning-dark" />
+                          <div className="w-12 h-10 rounded-xs bg-warning-dark" />
                           <Text size="xs" muted>Dark</Text>
                         </VStack>
                       </div>
@@ -360,19 +342,19 @@ export default function FoundationsPage() {
                       <Text size="xs" weight="medium" className="text-error">Error</Text>
                       <div className="flex gap-1">
                         <VStack space="xs" className="items-center">
-                          <div className="w-12 h-10 rounded-sm bg-error-bg border border-border-decorative" />
+                          <div className="w-12 h-10 rounded-xs bg-error-bg border border-border-decorative" />
                           <Text size="xs" muted>BG</Text>
                         </VStack>
                         <VStack space="xs" className="items-center">
-                          <div className="w-12 h-10 rounded-sm bg-error-light" />
+                          <div className="w-12 h-10 rounded-xs bg-error-light" />
                           <Text size="xs" muted>Light</Text>
                         </VStack>
                         <VStack space="xs" className="items-center">
-                          <div className="w-12 h-10 rounded-sm bg-error" />
+                          <div className="w-12 h-10 rounded-xs bg-error" />
                           <Text size="xs" muted>Primary</Text>
                         </VStack>
                         <VStack space="xs" className="items-center">
-                          <div className="w-12 h-10 rounded-sm bg-error-dark" />
+                          <div className="w-12 h-10 rounded-xs bg-error-dark" />
                           <Text size="xs" muted>Dark</Text>
                         </VStack>
                       </div>
@@ -391,7 +373,7 @@ export default function FoundationsPage() {
             <Card variant="ghost" size="lg" className="relative h-full rounded-lg lg:rounded-tr-[calc(2rem+1px)] overflow-hidden">
             <CardHeader>
               <CardTitle>Typography</CardTitle>
-              <CardDescription>Font scales from Figma design tokens - Spline Sans</CardDescription>
+              <CardDescription>Font scales from Figma design tokens - Inter</CardDescription>
             </CardHeader>
             <CardContent>
               <VStack space="xl">
@@ -427,7 +409,7 @@ export default function FoundationsPage() {
                   <Text weight="semibold" className="mb-4">Font Weights</Text>
                   <VStack space="md">
                     {[
-                      { name: "Regular", weight: "350", class: "font-normal" },
+                      { name: "Regular", weight: "400", class: "font-normal" },
                       { name: "Medium", weight: "500", class: "font-medium" },
                       { name: "Semibold", weight: "600", class: "font-semibold" },
                       { name: "Bold", weight: "700", class: "font-bold" },
@@ -480,43 +462,12 @@ export default function FoundationsPage() {
                   <Text weight="semibold" className="mb-3">Lucide Icons (24px, stroke-width 1.25)</Text>
                   <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
                     {icons.map(({ name, icon: Icon, label }) => (
-                      <div key={name} className="flex flex-col items-center gap-2 p-3 rounded-lg hover:bg-bg-secondary transition-colors">
+                      <div key={name} className="flex flex-col items-center gap-2 p-3 rounded-md hover:bg-bg-secondary transition-colors">
                         <Icon className="w-6 h-6" strokeWidth={1.25} />
                         <Text size="xs" className="text-text-tertiary text-center">{label}</Text>
                         <HStack space="xs" className="items-center">
                           <code className="text-xs text-text-tertiary font-mono">{name}</code>
                           <CopyButton text={name} />
-                        </HStack>
-                      </div>
-                    ))}
-                  </div>
-                </Box>
-
-                {/* Country Flags */}
-                <Box>
-                  <HStack className="mb-3 items-center justify-between">
-                    <Text weight="semibold">Country Flags (24px)</Text>
-                    <a 
-                      href="https://github.com/HatScripts/circle-flags" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="text-xs text-accent hover:text-accent-hover transition-colors"
-                    >
-                      circle-flags →
-                    </a>
-                  </HStack>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
-                    {countryFlags.map(({ code, label }) => (
-                      <div key={code} className="flex flex-col items-center gap-2 p-3 rounded-lg hover:bg-bg-secondary transition-colors">
-                        <img 
-                          src={`https://hatscripts.github.io/circle-flags/flags/${code}.svg`}
-                          alt={`${label} flag`}
-                          className="w-6 h-6"
-                        />
-                        <Text size="xs" className="text-text-tertiary text-center">{label}</Text>
-                        <HStack space="xs" className="items-center">
-                          <code className="text-xs text-text-tertiary font-mono">{code}</code>
-                          <CopyButton text={code} />
                         </HStack>
                       </div>
                     ))}
@@ -704,6 +655,66 @@ export default function FoundationsPage() {
                     </Link>
                   </VStack>
                 </Box>
+
+                {/* Select Component */}
+                <Box>
+                  <Text weight="semibold" className="mb-3">Select Component</Text>
+                  <VStack space="sm">
+                    <Select placeholder="Choose account type">
+                      <SelectItem value="everyday" label="Everyday account" />
+                      <SelectItem value="savings" label="Savings account" />
+                      <SelectItem value="business" label="Business account" />
+                    </Select>
+                    <Text size="xs" muted>
+                      Semantic select with variants, disabled and invalid states.
+                    </Text>
+                  </VStack>
+                </Box>
+
+                {/* Tooltip Component */}
+                <Box>
+                  <Text weight="semibold" className="mb-3">Tooltip</Text>
+                  <Center className="w-full">
+                    <Tooltip placement="top">
+                      <TooltipTrigger>
+                        <Button size="sm" variant="outline">
+                          Hover for help
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <TooltipText>Use tooltips for brief inline guidance.</TooltipText>
+                      </TooltipContent>
+                    </Tooltip>
+                  </Center>
+                </Box>
+
+                {/* Accordion Component */}
+                <Box className="md:col-span-2 lg:col-span-3">
+                  <Text weight="semibold" className="mb-3">Accordion</Text>
+                  <Text size="sm" muted className="mb-4">
+                    Expandable sections for progressive disclosure of content.
+                  </Text>
+                  <Accordion type="single" defaultValue="faq-1">
+                    <AccordionItem value="faq-1">
+                      <AccordionTrigger>What is a design system?</AccordionTrigger>
+                      <AccordionContent>
+                        A design system is a collection of reusable components, guided by clear standards, that can be assembled to build any number of applications.
+                      </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="faq-2">
+                      <AccordionTrigger>Can I swap this library?</AccordionTrigger>
+                      <AccordionContent>
+                        Yes! Every component in prototype-ui follows a GlueStack-compatible API but is implemented with CVA + Tailwind, making it easy to swap to another design system.
+                      </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="faq-3">
+                      <AccordionTrigger>How do I theme these components?</AccordionTrigger>
+                      <AccordionContent>
+                        Components use CSS variables exposed via the theme provider. Switch between light, dark, and custom themes using the theme toggle in the top nav.
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+                </Box>
               </div>
             </CardContent>
           </Card>
@@ -719,7 +730,7 @@ export default function FoundationsPage() {
               <CardDescription>Button variants, actions, and sizes for different use cases</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
                 {/* Button Variants - Solid */}
                 <Box>
                   <Text weight="semibold" className="mb-3">Solid Buttons</Text>
@@ -784,6 +795,32 @@ export default function FoundationsPage() {
                     <Button isDisabled>Disabled</Button>
                   </VStack>
                 </Box>
+
+                {/* Floating Action Button */}
+                <Box>
+                  <Text weight="semibold" className="mb-3">Floating Action Button</Text>
+                  <Text size="sm" muted className="mb-4">
+                    High-emphasis button for primary creation flows.
+                  </Text>
+                  <HStack space="md" className="items-end flex-wrap">
+                    <VStack space="xs" className="items-center">
+                      <Fab size="sm" aria-label="Add item" />
+                      <Text size="xs" muted>sm</Text>
+                    </VStack>
+                    <VStack space="xs" className="items-center">
+                      <Fab size="md" aria-label="Add item" />
+                      <Text size="xs" muted>md</Text>
+                    </VStack>
+                    <VStack space="xs" className="items-center">
+                      <Fab size="lg" aria-label="Add item" />
+                      <Text size="xs" muted>lg</Text>
+                    </VStack>
+                    <VStack space="xs" className="items-center">
+                      <Fab size="md" colorScheme="secondary" aria-label="Add item" />
+                      <Text size="xs" muted>secondary</Text>
+                    </VStack>
+                  </HStack>
+                </Box>
               </div>
             </CardContent>
           </Card>
@@ -841,7 +878,7 @@ export default function FoundationsPage() {
             <CardContent>
               <VStack space="lg">
                 <Box>
-                  <Text weight="semibold" className="mb-3">Spinner Sizes & Tennis Ball Loaders</Text>
+                  <Text weight="semibold" className="mb-3">Spinner Sizes</Text>
                   <HStack space="lg" className="items-end flex-wrap">
                     <VStack space="xs" className="items-center">
                       <Spinner size="sm" />
@@ -859,26 +896,26 @@ export default function FoundationsPage() {
                       <Spinner size="xl" />
                       <Text size="xs" muted>xl</Text>
                     </VStack>
-                    <Box className="w-px h-8 bg-border-subtle mx-2" />
-                    <VStack space="xs" className="items-center">
-                      <TennisBallLoader size="md" />
-                      <Text size="xs" muted className="mt-5">Spinning</Text>
-                    </VStack>
-                    <VStack space="xs" className="items-center">
-                      <BouncingTennisBallLoader size="md" />
-                      <Text size="xs" muted className="mt-5">Bouncing</Text>
-                    </VStack>
                   </HStack>
                 </Box>
 
                 <Box>
-                  <Text weight="semibold" className="mb-3">Button Loading State</Text>
-                  <Button 
-                    isLoading={isLoading} 
-                    onClick={handleLoadingDemo}
-                  >
-                    {isLoading ? "Loading..." : "Click to Demo"}
-                  </Button>
+                  <Text weight="semibold" className="mb-3">Skeleton</Text>
+                  <Text size="sm" muted className="mb-4">
+                    Loading state placeholders with various shapes.
+                  </Text>
+                  <Box className="rounded-md p-6 bg-bg-base">
+                    <VStack space="md">
+                      <HStack space="md" className="items-center">
+                        <Skeleton variant="circular" className="w-12 h-12" />
+                        <VStack space="sm" className="flex-1">
+                          <Skeleton variant="rounded" className="h-4 w-3/4" />
+                          <Skeleton variant="rounded" className="h-3 w-1/2" />
+                        </VStack>
+                      </HStack>
+                      <SkeletonText numberOfLines={3} />
+                    </VStack>
+                  </Box>
                 </Box>
               </VStack>
             </CardContent>
@@ -918,82 +955,6 @@ export default function FoundationsPage() {
               </VStack>
             </CardContent>
           </Card>
-            <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 dark:ring-white/10" />
-          </div>
-
-          {/* Overlays & Modals - Standard card: 1 col */}
-          <div className="relative lg:col-span-1">
-            <div className="absolute inset-px rounded-lg bg-bg-elevated" />
-            <Card variant="ghost" size="lg" className="relative h-full rounded-lg overflow-hidden">
-              <CardHeader>
-                <CardTitle>Overlays & Modals</CardTitle>
-                <CardDescription>Dialog and drawer components</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <VStack space="xl">
-                  {/* Modal Component */}
-                  <Box>
-                    <Text weight="semibold" className="mb-3">Modal</Text>
-                    <Text size="sm" muted className="mb-4">
-                      Overlay dialog with backdrop, header, body, and footer sections.
-                    </Text>
-                    <Box className="rounded-lg p-6 bg-bg-base">
-                      <Button onClick={() => setShowModal(true)}>Open Modal</Button>
-                    </Box>
-                  </Box>
-
-                  {/* Modal */}
-                  <Modal isOpen={showModal} onClose={() => setShowModal(false)} size="md">
-                    <ModalBackdrop />
-                    <ModalContent>
-                      <ModalHeader>
-                        <Heading size="lg">Modal Title</Heading>
-                        <ModalCloseButton />
-                      </ModalHeader>
-                      <ModalBody>
-                        <Text>This is the modal content. You can put any content here including forms, text, or other components.</Text>
-                      </ModalBody>
-                      <ModalFooter>
-                        <Button variant="outline" action="secondary" onClick={() => setShowModal(false)}>Cancel</Button>
-                        <Button onClick={() => setShowModal(false)}>Confirm</Button>
-                      </ModalFooter>
-                    </ModalContent>
-                  </Modal>
-
-                  <Divider />
-
-                  {/* Drawer Component */}
-                  <Box>
-                    <Text weight="semibold" className="mb-3">Drawer</Text>
-                    <Text size="sm" muted className="mb-4">
-                      Side panel that slides in from the edge of the screen.
-                    </Text>
-                    <Box className="rounded-lg p-6 bg-bg-base">
-                      <Button onClick={() => setShowDrawer(true)}>Open Drawer</Button>
-                    </Box>
-                  </Box>
-
-                  {/* Drawer */}
-                  <Drawer isOpen={showDrawer} onClose={() => setShowDrawer(false)} anchor="left">
-                    <DrawerBackdrop />
-                    <DrawerContent>
-                      <DrawerHeader>
-                        <Heading size="lg">Menu</Heading>
-                        <DrawerCloseButton />
-                      </DrawerHeader>
-                      <DrawerBody>
-                        <VStack space="md">
-                          <Button variant="link" action="secondary" className="justify-start">Home</Button>
-                          <Button variant="link" action="secondary" className="justify-start">Profile</Button>
-                          <Button variant="link" action="secondary" className="justify-start">Settings</Button>
-                          <Button variant="link" action="secondary" className="justify-start">Help</Button>
-                        </VStack>
-                      </DrawerBody>
-                    </DrawerContent>
-                  </Drawer>
-                </VStack>
-              </CardContent>
-            </Card>
             <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 dark:ring-white/10" />
           </div>
 
@@ -1061,47 +1022,6 @@ export default function FoundationsPage() {
                         <AvatarBadge status="offline" />
                       </Avatar>
                       <Text size="xs" className="text-text-tertiary">Offline</Text>
-                    </VStack>
-                  </HStack>
-                </Box>
-
-                <Box>
-                  <Text weight="semibold" className="mb-3">Avatar with Country Flag</Text>
-                  <HStack space="md" className="items-end">
-                    <VStack space="xs" className="items-center">
-                      <Avatar size="sm">
-                        <AvatarFallback>JS</AvatarFallback>
-                        <AvatarFlagBadge countryCode="it" />
-                      </Avatar>
-                      <Text size="xs" className="text-text-tertiary">sm</Text>
-                    </VStack>
-                    <VStack space="xs" className="items-center">
-                      <Avatar size="md">
-                        <AvatarFallback>CA</AvatarFallback>
-                        <AvatarFlagBadge countryCode="es" />
-                      </Avatar>
-                      <Text size="xs" className="text-text-tertiary">md</Text>
-                    </VStack>
-                    <VStack space="xs" className="items-center">
-                      <Avatar size="lg">
-                        <AvatarFallback>ND</AvatarFallback>
-                        <AvatarFlagBadge countryCode="rs" />
-                      </Avatar>
-                      <Text size="xs" className="text-text-tertiary">lg</Text>
-                    </VStack>
-                    <VStack space="xs" className="items-center">
-                      <Avatar size="xl">
-                        <AvatarFallback>AS</AvatarFallback>
-                        <AvatarFlagBadge countryCode="us" />
-                      </Avatar>
-                      <Text size="xs" className="text-text-tertiary">xl</Text>
-                    </VStack>
-                    <VStack space="xs" className="items-center">
-                      <Avatar size="2xl">
-                        <AvatarFallback>IG</AvatarFallback>
-                        <AvatarFlagBadge countryCode="pl" />
-                      </Avatar>
-                      <Text size="xs" className="text-text-tertiary">2xl</Text>
                     </VStack>
                   </HStack>
                 </Box>
@@ -1232,13 +1152,15 @@ export default function FoundationsPage() {
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 w-full">
                     {[
                       { name: "none", value: "0px", radius: "rounded-none" },
-                      { name: "xs", value: "2px", radius: "rounded-xs" },
-                      { name: "sm", value: "4px", radius: "rounded-sm" },
-                      { name: "md", value: "6px", radius: "rounded-md" },
-                      { name: "lg", value: "8px", radius: "rounded-lg" },
+                      { name: "2xs", value: "2px", radius: "rounded-2xs" },
+                      { name: "xs", value: "4px", radius: "rounded-xs" },
+                      { name: "sm", value: "6px", radius: "rounded-sm" },
+                      { name: "md", value: "8px", radius: "rounded-md" },
+                      { name: "lg", value: "10px", radius: "rounded-lg" },
                       { name: "xl", value: "12px", radius: "rounded-xl" },
                       { name: "2xl", value: "16px", radius: "rounded-2xl" },
-                      { name: "3xl", value: "24px", radius: "rounded-3xl" },
+                      { name: "3xl", value: "20px", radius: "rounded-3xl" },
+                      { name: "4xl", value: "24px", radius: "rounded-4xl" },
                       { name: "full", value: "9999px", radius: "rounded-full" },
                     ].map(({ name, value, radius }) => (
                       <VStack key={name} space="xs" className="items-center">
@@ -1257,6 +1179,36 @@ export default function FoundationsPage() {
             <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 dark:ring-white/10 lg:rounded-br-[2rem]" />
           </div>
 
+          {/* Grid Layout - Full width card: 3 cols */}
+          <div className="relative md:col-span-2 lg:col-span-3">
+            <div className="absolute inset-px rounded-lg bg-bg-elevated" />
+            <Card variant="ghost" size="lg" className="relative h-full rounded-lg overflow-hidden">
+              <CardHeader>
+                <CardTitle>Grid Layout</CardTitle>
+                <CardDescription>Responsive CSS grid component for arranging content</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Grid columns={3} gap={3} className="bg-bg-base rounded-md p-3">
+                  {["Accounts", "Cards", "Insights", "Goals", "Budgets", "Transfers"].map(
+                    (label) => (
+                      <Box
+                        key={label}
+                        className="rounded-md border border-border-subtle bg-bg-elevated px-3 py-2"
+                      >
+                        <Text size="sm" weight="medium">
+                          {label}
+                        </Text>
+                        <Text size="xs" muted>
+                          Section
+                        </Text>
+                      </Box>
+                    )
+                  )}
+                </Grid>
+              </CardContent>
+            </Card>
+            <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 dark:ring-white/10" />
+          </div>
 
         </div>
       </Box>

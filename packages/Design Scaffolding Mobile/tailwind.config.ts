@@ -103,9 +103,9 @@ const config: Config = {
         ring: "var(--ring-color)",
       },
       fontFamily: {
-        sans: ["var(--font-spline-sans)", "system-ui", "-apple-system", "sans-serif"],
-        heading: ["var(--font-spline-sans)", "system-ui", "-apple-system", "sans-serif"],
-        body: ["var(--font-spline-sans)", "system-ui", "-apple-system", "sans-serif"],
+        sans: ["var(--font-inter)", "system-ui", "-apple-system", "sans-serif"],
+        heading: ["var(--font-inter)", "system-ui", "-apple-system", "sans-serif"],
+        body: ["var(--font-inter)", "system-ui", "-apple-system", "sans-serif"],
         mono: ["ui-monospace", "SFMono-Regular", "monospace"],
       },
       // Font Sizes from Figma Typography Tokens
@@ -146,8 +146,8 @@ const config: Config = {
       // Font Weights from Figma Typography Tokens
       fontWeight: {
         light: "300",
-        regular: "350",
-        normal: "350",
+        regular: "400",
+        normal: "400",
         medium: "500",
         semibold: "600",
         bold: "700",

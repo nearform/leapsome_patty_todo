@@ -11,16 +11,16 @@
  */
 
 import type { JourneyConfig } from '@/lib/types/journey';
+import { journey as banking } from '@/app/prototype/journeys/banking/_journey';
 import { journey as onboarding } from '@/app/prototype/journeys/onboarding/_journey';
-import { journey as homepageContent } from '@/app/prototype/journeys/homepage-content/_journey';
 
 /**
  * All registered journeys
  * Add new journey imports here
  */
 export const journeys: JourneyConfig[] = [
+  banking,
   onboarding,
-  homepageContent,
 ];
 
 /**

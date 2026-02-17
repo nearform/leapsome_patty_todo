@@ -11,9 +11,9 @@ const COLORS = [
 ];
 
 const NAMES = [
-  "Anonymous Ace", "Tennis Tiger", "Rally Runner", "Net Ninja", 
-  "Court Champion", "Serve Star", "Volley Victor", "Baseline Boss",
-  "Match Maven", "Smash Sultan", "Drop Shot Duke", "Lob Legend",
+  "Creative Cat", "Design Dragon", "Pixel Pioneer", "Layout Legend", 
+  "Style Sage", "Component Crafter", "UI Unicorn", "Proto Panda",
+  "Wireframe Wizard", "Mockup Maven", "Sketch Star", "Flow Fox",
 ];
 
 function getRandomColor() {

@@ -76,7 +76,7 @@
      ======================================== */
 
   /* Font Family */
-  --font-family-primary: 'Spline Sans', system-ui, -apple-system, sans-serif;
+  --font-family-primary: 'Inter', system-ui, -apple-system, sans-serif;
 
   /* Font Sizes */
   --font-size-0: 6px;
@@ -94,7 +94,7 @@
   --font-size-12: 36px;
 
   /* Font Weights */
-  --font-weight-regular: 350;
+  --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
@@ -236,7 +236,7 @@ html.dark {
 body {
   background-color: var(--background-base);
   color: var(--text-body);
-  font-family: var(--font-spline-sans), system-ui, -apple-system, sans-serif;
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

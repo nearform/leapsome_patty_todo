@@ -1,8 +1,10 @@
 # Start Here: Designer Guide
 
-> **Welcome to the Design System & Prototype Workspace!**
+> **Welcome to the Design System & Prototype Scaffold!**
 
 This guide is designed for **designers** working with Cursor AI. You don't need to write code - you'll use natural language prompts to build pages and journeys, and the AI agent will handle all the implementation.
+
+**Note:** This scaffold comes with a sample banking journey to demonstrate the workflow. You can delete it and create your own journeys for your project.
 
 ---
 
@@ -12,7 +14,7 @@ This is a **design system and prototype workspace** that allows you to:
 
 - 🎨 Browse design system components, foundations, and tokens
 - 🚀 Create and manage user journey prototypes
-- 📱 View all journeys in a whiteboard-style interface
+- 📱 View all journeys in a canvas-style interface
 - 🎯 Build interactive prototypes for sprints
 
 **Everything is built through conversation with Cursor AI** - you describe what you want, and the agent builds it.
@@ -23,7 +25,7 @@ This is a **design system and prototype workspace** that allows you to:
 
 The project has three main sections:
 
-### 1. Whiteboard (`/whiteboard`)
+### 1. Canvas (`/canvas`)
 A Miro-style canvas showing all journeys and their pages at a glance. This is your **starting point** for navigation and overview.
 
 ### 2. Prototype (`/prototype`)
@@ -50,9 +52,9 @@ Start the development server and open it in the browser
 
 Or run `npm run dev` from Cursor's built-in terminal, then open `http://localhost:3000` in your browser.
 
-### Step 2: Open the Whiteboard
+### Step 2: Open the Canvas
 
-Navigate to `/whiteboard` in your browser. This gives you an overview of all journeys and pages. From here, you can:
+Navigate to `/canvas` in your browser. This gives you an overview of all journeys and pages. From here, you can:
 - See all existing journeys
 - Click through to individual pages
 - Access the Design System from the navigation
@@ -253,6 +255,23 @@ Pre-built UI elements from the design system. Browse them at `/design-system` an
 
 ---
 
+## How the Component Library Works (Swap-friendly)
+
+This project uses a **wrapper layer** so you can swap the underlying UI library later (e.g. GlueStack → Google’s design system) without rewriting every page.
+
+- **Single import surface**: Pages and journeys import UI from `@/components/prototype-ui` (the “design system API”), *not* directly from third‑party libraries.
+- **GlueStack‑compatible API**: Components in `prototype-ui` follow GlueStack naming and props (`variant`, `action`, `size`, `isDisabled`, etc.) but are implemented with Tailwind + CVA under the hood.
+- **Swappable implementation**: To change the design system later, you keep the same imports and props and only swap the internals of `prototype-ui`:
+  - Re‑implement these components using a different library, **or**
+  - Point the barrel file to another component library that exposes the same API.
+
+When you ask Cursor to build or update pages, you should:
+
+- **Refer to components by design‑system name** (e.g. `Button`, `Tabs`, `AppHeader`, `Grid`, `ScrollView`, `Table`, `Fab`).
+- **Avoid asking for direct third‑party imports** (e.g. “import from `@gluestack-ui/...`”) so the swap‑friendly layer stays intact.
+
+---
+
 ## Available Resources
 
 ### Data Files
@@ -282,7 +301,7 @@ The project uses semantic color tokens that automatically adapt to light/dark mo
 | Technology | What It Does | Designer Relevance |
 |------------|--------------|-------------------|
 | **Lucide Icons** | Icon library | Browse at [lucide.dev](https://lucide.dev) - use icon names in prompts |
-| **Spline Sans** | Primary typeface | The app's main font family |
+| **Inter** | Primary typeface | The app's main font family |
 | **Tailwind CSS** | Styling system | You don't need to know this - just describe what you want |
 | **Circle Flags** | Country flag icons | Used for nationality indicators |
 | **Gluestack UI** | Component library | React Native compatible - enables future mobile app |
@@ -350,7 +369,7 @@ Make the list page mobile-friendly:
 
 | View | URL | Purpose |
 |------|-----|---------|
-| Whiteboard | `/whiteboard` | Overview of all journeys and pages |
+| Canvas | `/canvas` | Overview of all journeys and pages |
 | All Journeys | `/prototype/journeys` | List of all journeys with status |
 | Journey Detail | `/prototype/journeys/[name]` | Single journey overview |
 | Page | `/prototype/journeys/[journey]/[page]` | Interactive page |
@@ -369,7 +388,7 @@ Make the list page mobile-friendly:
 
 4. **Iterate** - Start with a basic version and refine with follow-up prompts
 
-5. **Check the Whiteboard** - Verify your changes appear correctly in the overview
+5. **Check the Canvas** - Verify your changes appear correctly in the overview
 
 6. **Describe Interactions** - Mention where buttons should link, what happens on click, etc.
 
@@ -377,8 +396,8 @@ Make the list page mobile-friendly:
 
 ## Troubleshooting
 
-### Page Not Showing in Whiteboard?
-Ask Cursor: "The [page-name] page isn't showing in the whiteboard. Can you check if it's registered in the journey config?"
+### Page Not Showing in Canvas?
+Ask Cursor: "The [page-name] page isn't showing in the canvas. Can you check if it's registered in the journey config?"
 
 ### Component Not Working?
 Ask Cursor: "The [component] on [page] isn't displaying correctly. Can you check the props and fix any issues?"
@@ -399,7 +418,7 @@ Ask Cursor: "Revert the last changes to [file/page]" or use Git to restore previ
 
 **To modify a page:** Describe what you want to change and where
 
-**To view your work:** Check the whiteboard at `/whiteboard`
+**To view your work:** Check the canvas at `/canvas`
 
 **To browse components:** Open `/design-system` and `/design-system/foundations`
 

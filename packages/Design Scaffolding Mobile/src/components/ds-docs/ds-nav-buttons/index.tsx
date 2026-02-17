@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BookOpen, Layers, Component } from "lucide-react";
-import { Tooltip, TooltipTrigger, TooltipContent, TooltipText } from "@/components/ui";
+import { Tooltip, TooltipTrigger, TooltipContent, TooltipText } from "@/components/prototype-ui";
 import { cn } from "@/lib/utils";
 
 interface DSNavButtonsProps {
