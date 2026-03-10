@@ -12,7 +12,6 @@
 
 import type { JourneyConfig } from '@/lib/types/journey';
 import { journey as banking } from '@/app/prototype/journeys/banking/_journey';
-import { journey as onboarding } from '@/app/prototype/journeys/onboarding/_journey';
 
 /**
  * All registered journeys
@@ -20,7 +19,6 @@ import { journey as onboarding } from '@/app/prototype/journeys/onboarding/_jour
  */
 export const journeys: JourneyConfig[] = [
   banking,
-  onboarding,
 ];
 
 /**

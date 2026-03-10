@@ -247,96 +247,6 @@ export const journeys: JourneyConfig[] = [
 
 ---
 
-### 6. Configure Liveblocks (Collaborative Canvas)
-
-The canvas feature uses [Liveblocks](https://liveblocks.io/docs) for real-time collaboration including live cursors, presence indicators, and pinned comments. To set up your own Liveblocks project:
-
-#### Step 1: Create a Liveblocks Account
-
-1. Go to [liveblocks.io](https://liveblocks.io) and sign up for a free account
-2. Create a new project in the Liveblocks dashboard
-
-#### Step 2: Get Your API Keys
-
-1. In your Liveblocks project dashboard, navigate to **API keys**
-2. Copy your **Public key** (starts with `pk_`)
-3. For production, you'll also need your **Secret key** (starts with `sk_`)
-
-#### Step 3: Update the API Key
-
-Replace the placeholder API key in `src/components/liveblocks/LiveblocksProvider.tsx`:
-
-```tsx
-export function LiveblocksProvider({ children }: LiveblocksProviderProps) {
-  return (
-    <Provider 
-      publicApiKey="pk_your_public_key_here"  // Replace with your key
-      // ... rest of config
-    >
-      {children}
-    </Provider>
-  );
-}
-```
-
-**For production**, use environment variables instead:
-
-1. Create a `.env.local` file:
-   ```
-   NEXT_PUBLIC_LIVEBLOCKS_PUBLIC_KEY=pk_your_public_key
-   ```
-
-2. Update the provider:
-   ```tsx
-   publicApiKey={process.env.NEXT_PUBLIC_LIVEBLOCKS_PUBLIC_KEY!}
-   ```
-
-#### Step 4: Configure Room Permissions (Optional)
-
-By default, the canvas uses a public room. For team-based access control:
-
-1. In Liveblocks dashboard, go to **Rooms** settings
-2. Set up **Room permissions** based on your needs:
-   - **Public**: Anyone with the link can access
-   - **Private**: Only authenticated users can access
-   - **Custom**: Define your own permission logic
-
-3. For private rooms, implement authentication in your app:
-   ```tsx
-   // Example: Server-side authentication endpoint
-   // See: https://liveblocks.io/docs/authentication
-   ```
-
-#### Step 5: Customize User Presence
-
-The current setup generates random anonymous user names. To integrate with your auth system:
-
-1. Update `src/components/liveblocks/LiveblocksProvider.tsx`:
-   ```tsx
-   resolveUsers={async ({ userIds }) => {
-     // Fetch real user data from your backend/auth system
-     const users = await fetchUsersFromYourAPI(userIds);
-     return users.map(user => ({
-       name: user.name,
-       avatar: user.avatarUrl,
-       color: user.preferredColor,
-     }));
-   }}
-   ```
-
-#### Liveblocks Features Used
-
-| Feature | Location | Purpose |
-|---------|----------|---------|
-| Live Cursors | `/canvas` | See collaborators' cursor positions |
-| Presence | `/canvas` | Show who's online with avatars |
-| Comments | `/canvas` | Pin comments at specific locations |
-| Threads | `/canvas` | Organize comment discussions |
-
-For more details, see the [Liveblocks documentation](https://liveblocks.io/docs).
-
----
-
 ## Folder Structure
 
 ```
@@ -348,11 +258,10 @@ src/
 │   ├── design-system/        # Design system showcase
 │   ├── prototype/            # Prototype section
 │   │   └── journeys/         # User journeys
-│   └── canvas/               # Collaborative canvas
+│   └── canvas/               # Canvas view of all journeys
 ├── components/
 │   ├── ui/                   # Reusable UI components
 │   ├── designsystem-ui/      # Design system documentation components
-│   └── liveblocks/           # Collaboration features
 └── lib/
     ├── data/                 # Data files (JSON, registry)
     ├── types/                # TypeScript types
@@ -375,4 +284,3 @@ src/
 - Check `docs/start-here.md` for a designer-focused guide
 - Browse the component source code in `src/components/prototype-ui/`
 - Reference the Gluestack UI documentation for component patterns
-- [Liveblocks Documentation](https://liveblocks.io/docs) for collaboration features

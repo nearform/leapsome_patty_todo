@@ -4,7 +4,7 @@ import { useRef, useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import { 
   ZoomIn, ZoomOut, Maximize, Home, Sun, Moon, Monitor, 
-  ArrowRight, ExternalLink, MessageCircle, X, SwatchBook,
+  ArrowRight, ExternalLink, X, SwatchBook,
   MousePointer2, Hand, Smartphone, Tablet 
 } from "lucide-react";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
@@ -12,19 +12,6 @@ import type { ReactZoomPanPinchRef } from "react-zoom-pan-pinch";
 import { getAllJourneys } from "@/lib/data/journeys-registry";
 import { useTheme } from "@/providers/theme-provider";
 import { cn } from "@/lib/utils";
-import { useThreads, useEditThreadMetadata } from "@liveblocks/react/suspense";
-
-// Liveblocks components
-import { 
-  CanvasRoom, 
-  Cursors, 
-  useCursorTracking,
-  CommentPin,
-  CommentComposer,
-  useCommentMode,
-  CommentsSidebar,
-  PresenceAvatars,
-} from "@/components/liveblocks";
 
 // Frame dimensions - default height fallback (width is now controlled by device mode)
 const FRAME_HEIGHT = 812; // Mobile height (iPhone X/11/12/13)
@@ -52,11 +39,7 @@ const INITIAL_PAN_X = 180;
 const INITIAL_PAN_Y = 80;
 
 export default function CanvasPage() {
-  return (
-    <CanvasRoom>
-      <CanvasContent />
-    </CanvasRoom>
-  );
+  return <CanvasContent />;
 }
 
 function CanvasContent() {
@@ -80,8 +63,6 @@ function CanvasContent() {
     positionY: INITIAL_PAN_Y,
   });
   
-  // Sidebar state
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isDesignSystemPanelOpen, setIsDesignSystemPanelOpen] = useState(false);
   
   // Keyboard navigation state
@@ -89,19 +70,6 @@ function CanvasContent() {
   
   const canvasRef = useRef<HTMLDivElement>(null);
   const transformRef = useRef<ReactZoomPanPinchRef | null>(null);
-
-  // Liveblocks hooks
-  const { threads } = useThreads();
-  const editThreadMetadata = useEditThreadMetadata();
-  const { handlePointerMove, handlePointerLeave } = useCursorTracking(canvasRef);
-  const { 
-    isCommentMode, 
-    pendingComment, 
-    startCommentMode, 
-    cancelCommentMode, 
-    handleCanvasClick: onCommentClick, 
-    clearPendingComment 
-  } = useCommentMode();
 
   // Auto-reset view when device mode changes
   const isInitialMount = useRef(true);
@@ -119,20 +87,17 @@ function CanvasContent() {
   }, [deviceMode]);
 
   // Helper: check if an event target is an editable element (input, textarea, contenteditable, etc.)
-  // Also checks for Liveblocks comment UI containers to avoid intercepting keystrokes in Composers/Threads
   const isEditableElement = (target: EventTarget | null): boolean => {
     if (!target || !(target instanceof HTMLElement)) return false;
     return (
       target instanceof HTMLInputElement ||
       target instanceof HTMLTextAreaElement ||
       target.isContentEditable ||
-      target.getAttribute("role") === "textbox" ||
-      !!target.closest(".lb-root, .lb-composer, .lb-thread")
+      target.getAttribute("role") === "textbox"
     );
   };
 
-  // Derived: is panning currently enabled? (never pan in comment mode)
-  const isPanEnabled = (activeTool === "pan" || spacePressed) && !isCommentMode;
+  const isPanEnabled = activeTool === "pan" || spacePressed;
 
   // Zoom handlers (use library ref with animation)
   const handleZoomIn = useCallback(() => {
@@ -188,30 +153,6 @@ function CanvasContent() {
     ref.setTransform(targetPanX, targetPanY, currentScale, 300);
   }, [journeys, transformState.scale, frameWidth]);
 
-  // Canvas click handler for comments
-  const handleCanvasClick = (e: React.MouseEvent) => {
-    // Don't place comments when panning
-    if (isPanEnabled) return;
-
-    if (isCommentMode && (e.target === e.currentTarget || (e.target as HTMLElement).closest('[data-canvas]'))) {
-      const rect = canvasRef.current?.getBoundingClientRect();
-      if (rect) {
-        // Get click position relative to the transformed canvas
-        const x = (e.clientX - rect.left - transformState.positionX) / transformState.scale;
-        const y = (e.clientY - rect.top - transformState.positionY) / transformState.scale;
-        onCommentClick(x, y);
-      }
-    }
-  };
-
-  // Handle resolving threads
-  const handleResolveThread = (threadId: string) => {
-    editThreadMetadata({
-      threadId,
-      metadata: { resolved: true },
-    });
-  };
-
   // Space key listener for temporary pan mode
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -240,18 +181,11 @@ function CanvasContent() {
     };
   }, []);
 
-  // Keyboard shortcuts: Escape, Arrow keys, V/H tool shortcuts
+  // Keyboard shortcuts: Arrow keys, V/H tool shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       // Don't interfere with editable elements (inputs, textareas, contenteditable, etc.)
       if (isEditableElement(e.target)) {
-        return;
-      }
-
-      // Cancel comment mode on Escape
-      if (e.key === "Escape") {
-        cancelCommentMode();
-        clearPendingComment();
         return;
       }
 
@@ -328,7 +262,7 @@ function CanvasContent() {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [cancelCommentMode, clearPendingComment, focusedPosition, journeys, panToFrame]);
+  }, [focusedPosition, journeys, panToFrame]);
 
   // Theme cycling
   const cycleTheme = () => {
@@ -339,20 +273,12 @@ function CanvasContent() {
 
   const ThemeIcon = themePreference === "light" ? Sun : themePreference === "dark" ? Moon : Monitor;
 
-  // Filter threads to show only unresolved ones as pins
-  const visibleThreads = threads.filter(
-    (thread) => !(thread.metadata as { resolved?: boolean }).resolved
-  );
-
-  // Determine cursor style
   const getCursorClass = () => {
-    if (isCommentMode) return "cursor-crosshair";
     if (isPanEnabled) return "cursor-grab";
     return "cursor-default";
   };
 
-  // Whether iframes should be interactive
-  const iframesInteractive = transformState.scale >= 0.8 && activeTool === "select" && !spacePressed && !isCommentMode;
+  const iframesInteractive = transformState.scale >= 0.8 && activeTool === "select" && !spacePressed;
 
   return (
     <div className="h-screen w-screen overflow-hidden bg-bg-base relative">
@@ -418,14 +344,6 @@ function CanvasContent() {
             )}
           </div>
 
-          {/* Comment Mode Toggle */}
-          <ToolbarButton 
-            icon={isCommentMode ? X : MessageCircle}
-            onClick={isCommentMode ? cancelCommentMode : startCommentMode}
-            tooltip={isCommentMode ? "Cancel Comment" : "Add Comment"}
-            active={isCommentMode}
-          />
-
           {/* Theme Toggle */}
           <div className="relative">
             <ToolbarButton
@@ -490,26 +408,6 @@ function CanvasContent() {
         </div>
       </div>
 
-      {/* Top Right - Presence & Sidebar Toggle */}
-      <div className="fixed right-4 top-4 z-50 flex items-center gap-3 panningDisabled wheelDisabled">
-        <PresenceAvatars />
-        
-        <button
-          onClick={() => setIsSidebarOpen(true)}
-          className={cn(
-            "flex items-center gap-2 px-3 py-2 rounded-lg",
-            "bg-bg-elevated border border-border-standard shadow-lg",
-            "hover:bg-bg-secondary transition-colors",
-            "text-text-secondary hover:text-text-primary"
-          )}
-        >
-          <MessageCircle className="w-4 h-4" />
-          <span className="text-sm font-medium">
-            {threads.length > 0 ? threads.length : ""}
-          </span>
-        </button>
-      </div>
-
       {/* Canvas Area with TransformWrapper */}
       <TransformWrapper
         initialScale={INITIAL_SCALE}
@@ -555,36 +453,11 @@ function CanvasContent() {
             backgroundSize: "20px 20px",
             backgroundPosition: `${transformState.positionX % 20}px ${transformState.positionY % 20}px`,
           }}
-          onClick={handleCanvasClick}
-          onPointerMove={handlePointerMove}
-          onPointerLeave={handlePointerLeave}
         >
-          {/* Live Cursors */}
-          <Cursors />
-
-          {/* Transformable Content */}
           <TransformComponent
             wrapperStyle={{ width: "100%", height: "100%", overflow: "visible" }}
             contentStyle={{ position: "absolute", left: 0, top: 0 }}
           >
-            {/* Comment Pins */}
-            {visibleThreads.map((thread) => (
-              <CommentPin 
-                key={thread.id} 
-                thread={thread}
-                onResolve={handleResolveThread}
-              />
-            ))}
-
-            {/* Pending Comment Composer */}
-            {pendingComment && (
-              <CommentComposer
-                x={pendingComment.x}
-                y={pendingComment.y}
-                onClose={clearPendingComment}
-              />
-            )}
-
             {/* Journey Flows */}
             <div className="flex flex-col gap-32 p-8">
               {journeys.map((journey) => (
@@ -719,12 +592,6 @@ function CanvasContent() {
         </div>
       </TransformWrapper>
 
-      {/* Comments Sidebar */}
-      <CommentsSidebar 
-        isOpen={isSidebarOpen} 
-        onClose={() => setIsSidebarOpen(false)} 
-      />
-
       {/* Design System Panel */}
       <DesignSystemPanel 
         isOpen={isDesignSystemPanelOpen} 
@@ -733,10 +600,7 @@ function CanvasContent() {
       
       {/* Help Text */}
       <div className="fixed bottom-4 right-4 text-xs text-text-tertiary bg-bg-elevated/90 px-3 py-2 rounded-lg backdrop-blur-sm border border-border-subtle z-50 panningDisabled wheelDisabled">
-        {isCommentMode 
-          ? "Click anywhere to add a comment • Press Esc to cancel"
-          : `V Select • H Pan • Space+Drag to pan • Scroll to zoom • Arrow keys to navigate • ${transformState.scale >= 0.8 && activeTool === 'select' ? 'Interact with screens' : 'Select mode at 80%+ to interact'}`
-        }
+        {`V Select • H Pan • Space+Drag to pan • Scroll to zoom • Arrow keys to navigate • ${transformState.scale >= 0.8 && activeTool === "select" ? "Interact with screens" : "Select mode at 80%+ to interact"}`}
       </div>
     </div>
   );

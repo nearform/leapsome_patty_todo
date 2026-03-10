@@ -1,202 +1,226 @@
-# Ignite - Claude Skills Collection
+# Design System & Prototype Scaffold
 
-A collection of custom Claude skills for Nearform Ignite projects, shareable via git and usable across Claude Code and Claude apps.
+> A flexible design system and prototyping workspace ready to customize for your project.
 
-## Available Skills
+## What is This?
 
-### BRD Assistant
+This is a comprehensive **design system scaffold** and interactive prototyping workspace. It provides a complete foundation that designers and developers can clone and customize for any project. The scaffold includes:
 
-**Location:** `skills/brd-assistant/`
+1. **Design System** - A complete library of reusable UI components, design tokens, and patterns
+2. **Prototype Workspace** - An interactive environment for building and presenting user journey prototypes
+3. **Canvas** - A zoomable canvas for viewing all journeys and screens in one place
 
-Creates Business Requirements Documents following Nearform standards.
+Built with Next.js 16 and React 19, this scaffold provides everything needed to design and prototype applications.
 
-**Triggers:** Writing BRDs, defining business requirements, analysing user personas, identifying strategic risks, documenting project scope.
+## Features
 
-**Files:**
+### Design System
+- **Comprehensive Component Library** - Pre-built, accessible React components
+- **Dark & Light Mode** - Full theme support with automatic color adaptation
+- **Design Tokens** - Semantic colors, typography scales, spacing, and radii
+- **Mobile-First** - Responsive components optimized for mobile experiences
+- **Accessible** - WCAG compliant components and patterns
+- **TypeScript** - Full type safety and excellent developer experience
 
-- `SKILL.md` — Main skill definition
-- `BRD-TEMPLATE.md` — Complete BRD structure
+### Prototyping
+- **Journey-Based Structure** - Organize prototypes into user journeys
+- **Interactive Pages** - Fully functional React pages with working navigation
+- **Canvas View** - Zoomable canvas showing all journeys and screens
+- **Customizable Frames** - Support for different screen heights per page
 
-### PRD Assistant
+## Quick Start
 
-**Location:** `skills/prd-assistant/`
+### Prerequisites
 
-Creates Product Requirements Documents following Nearform standards. Defines WHAT to build based on the BRD.
+- Node.js 18+
+- npm, yarn, pnpm, or bun
 
-**Triggers:** Writing PRDs, defining features, specifying functional requirements, documenting user workflows, creating product specifications.
-
-**Files:**
-
-- `SKILL.md` — Main skill definition
-- `PRD-TEMPLATE.md` — Complete PRD structure
-
-### Workshop Facilitation Assistant
-
-**Location:** `skills/workshop-facilitation-assistant/`
-
-Assists with workshop facilitation by intelligently generating Customer Journey Maps, Experience Maps, or Service Design Blueprints as CSV files for MIRO import. Automatically infers user intent to select the appropriate visualization artifact.
-
-**Triggers:** Facilitating workshops, creating journey maps, mapping experiences, documenting service workflows, visualizing customer journeys.
-
-**Files:**
-
-- `SKILL.md` — Main skill definition with intent inference logic
-- `CUSTOMER-JOURNEY-MAP-TEMPLATE.md` — Customer journey map generation instructions
-- `EXPERIENCE-MAP-TEMPLATE.md` — Experience map generation instructions
-- `SERVICE-DESIGN-BLUEPRINT-TEMPLATE.md` — Service design blueprint generation instructions
-
-## Shared Resources
-
-**Location:** `resources/`
-
-Resources available to all skills:
-
-- `TONE-OF-VOICE.md` — Nearform writing guidelines (UK English, human voice)
-
-## Prompts
-
-**Location:** `prompts/`
-
-Standalone prompt files for direct use in Claude conversations. These files are automatically generated from all skill templates when you run the packaging script.
-
-**Available prompts:**
-
-- `brd.md` — Create Business Requirements Documents
-- `prd.md` — Create Product Requirements Documents
-- `service-design-blueprint.md` — Generate service design blueprints
-- `customer-journey-map.md` — Generate customer journey maps
-- `experience-map.md` — Generate experience maps
-
-**Usage:** Reference these files directly in your Claude conversations:
-
-```
-Follow the instructions in prompts/brd.md
-```
-
-**Note:** These files are generated from skill templates. To update them, modify the corresponding template files in the skill directories and run the packaging script.
-
-### Generating Prompts
-
-The script provides an interactive menu to generate prompts:
+### Installation
 
 ```bash
-./scripts/manage-skills.py
-# Choose "Generate prompts"
-# Select skill(s) or "All skills"
+# Clone the repository
+git clone https://github.com/nearform/ignite.git my-project
+cd my-project/packages/Design\ Scaffolding\ Mobile
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
 ```
 
-This will generate prompt files in the `prompts/` folder from the skill templates.
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-## Usage
+## Navigation
 
-### Claude Code (personal skills)
+| Route | Description |
+|-------|-------------|
+| `/` | Homepage with navigation to Design System and Prototype |
+| `/design-system` | Component showcase and design token documentation |
+| `/design-system/foundations` | Colors, typography, icons, and form components |
+| `/prototype` | Prototype workspace landing page |
+| `/prototype/journeys` | All registered user journeys |
+| `/canvas` | Canvas view of all journeys |
 
-To make skills available across all your Claude Code projects:
+## Project Structure
 
-```bash
-./scripts/manage-skills.py
-# Choose "Install skills" → "Claude Code"
-# Select skill(s) or "All skills"
+```
+src/
+├── app/
+│   ├── design-system/       # Design system showcase
+│   │   └── foundations/     # Colors, typography, icons
+│   ├── prototype/
+│   │   └── journeys/        # User journey prototypes
+│   │       └── banking/     # Sample banking journey
+│   ├── canvas/              # Canvas view of all journeys
+│   ├── globals.css          # Global styles and CSS variables
+│   └── layout.tsx           # Root layout with theme provider
+│
+├── components/
+│   ├── designsystem-ui/     # Design system documentation components
+│   └── ui/                  # Design system components
+│       ├── button/
+│       ├── card/
+│       ├── input/
+│       ├── tabs/
+│       └── ...              # Additional components
+│
+└── lib/
+    ├── data/
+    │   ├── journeys-registry.ts  # Journey registration
+    │   └── banking.json          # Sample data
+    ├── types/
+    │   └── journey.ts       # Journey type definitions
+    └── utils.ts             # Utility functions
 ```
 
-This copies the skill(s) to `~/.claude/skills/` and shared resources to `~/.claude/resources/`. Restart Claude Code to use the skill(s).
+## Components
 
-### Claude App (claude.ai / desktop)
+### Layout Components
+- **Box** - Flexible container component
+- **Stack** - Flexbox layouts (HStack/VStack)
+- **Center** - Centering utility
+- **Divider** - Visual separator
+- **Card** - Container with header, content, and footer
 
-Skills for the Claude web and desktop app are stored on Anthropic's servers. To upload:
+### Form Components
+- **Button** - Multiple variants, sizes, and states
+- **Input** - Form inputs with validation states
+- **Checkbox** - Checkbox with label
+- **Switch** - Toggle switch
+- **Select** - Dropdown select
 
-```bash
-./scripts/manage-skills.py
-# Choose "Install skills" → "Claude app"
-# Select skill(s) or "All skills"
-```
+### Display Components
+- **Badge** - Status indicators and labels
+- **Avatar** - User images with badges
+- **Heading** - Typography headings
+- **Text** - Typography text
+- **Tabs** - Tab navigation
 
-Then:
+### Feedback Components
+- **Alert** - Feedback messages
+- **Spinner** - Loading spinner
+- **Progress** - Progress indicators
+- **Skeleton** - Loading placeholders
 
-1. Go to **claude.ai → Settings → Capabilities → Skills**
-2. Upload the zip file(s) from the `dist/` folder
+### Overlay Components
+- **Modal** - Dialog overlays
+- **Drawer** - Side panel navigation
+- **Tooltip** - Hover tooltips
 
-## Install Script
+## Customization
 
-The `scripts/manage-skills.py` script handles both destinations:
+See [docs/installation.md](./docs/installation.md) for detailed customization instructions:
 
-| Option          | Destination         | How it works                          |
-| --------------- | ------------------- | ------------------------------------- |
-| 1 - Claude Code | `~/.claude/skills/` | Copies files locally                  |
-| 2 - Claude app  | `dist/*.zip`        | Creates self-contained zip for upload |
+- **Logo Replacement** - How to add your brand logo
+- **Design Tokens** - Customizing colors, typography, spacing
+- **Custom Components** - Adding new components
+- **Creating Journeys** - Building user journey prototypes
 
-The script is fully interactive - simply run it and follow the prompts:
+## Creating Journeys
 
-```bash
-./scripts/manage-skills.py
-```
+Journeys are collections of related prototype pages. To create a new journey:
 
-## Adding New Skills
-
-1. Create a new folder: `skills/your-skill-name/`
-2. Add `SKILL.md` with YAML frontmatter:
-   ```yaml
-   ---
-   name: your-skill-name
-   description: What it does and when to use it.
-   ---
+1. **Create the journey folder:**
    ```
-3. Add supporting files as needed
-4. Reference shared resources: `[TONE-OF-VOICE.md](../../resources/TONE-OF-VOICE.md)`
+   src/app/prototype/journeys/my-journey/
+   ```
 
-## Team Sharing
+2. **Add journey metadata** (`_journey.ts`):
+   ```typescript
+   import type { JourneyConfig } from '@/lib/types/journey';
 
-This repo is designed for team collaboration:
+   export const journey: JourneyConfig = {
+     id: 'my-journey',
+     title: 'My Journey',
+     description: 'Description of the journey',
+     status: 'in-progress', // 'draft' | 'in-progress' | 'completed'
+     pages: [
+       { 
+         id: 'page-one', 
+         name: 'Page One', 
+         path: '/prototype/journeys/my-journey/page-one',
+       },
+     ],
+   };
+   ```
 
-**Claude Code:**
+3. **Register the journey** in `src/lib/data/journeys-registry.ts`
+
+4. **Create page folders** with `page.tsx` files for each screen
+
+For detailed instructions, see [docs/start-here.md](./docs/start-here.md).
+
+## Design Tokens
+
+### Colors
+Semantic color system with light/dark theme support:
+- **Backgrounds**: `bg-base`, `bg-elevated`, `bg-secondary`, `bg-tertiary`
+- **Text**: `text-primary`, `text-body`, `text-secondary`, `text-tertiary`
+- **Borders**: `border-standard`, `border-subtle`, `border-decorative`
+- **Accent**: `accent`, `accent-light`, `accent-dark`
+- **Status**: `success`, `info`, `warning`, `error`
+
+### Typography
+- **Font**: Inter (Variable)
+- **Sizes**: 6px to 36px scale
+- **Weights**: Light (300) to Bold (700)
+
+### Spacing
+4px base unit system: `space-1` (4px) to `space-24` (96px)
+
+### Border Radius
+`radius-none` (0px) to `radius-full` (9999px)
+
+## Tech Stack
+
+- **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
+- **UI Library**: [React 19](https://react.dev/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Utilities**: class-variance-authority, tailwind-merge, clsx
+
+## Scripts
 
 ```bash
-git pull
-./scripts/manage-skills.py
-# Choose option 1 to install to ~/.claude/skills/
+npm run dev      # Start development server
+npm run build    # Build for production
+npm run start    # Start production server
+npm run lint     # Run ESLint
 ```
 
-**Claude app:**
-Each team member runs the script once and uploads the zip:
+## Documentation
 
-```bash
-./scripts/manage-skills.py
-# Choose option 2, then upload via Settings → Capabilities → Skills
-```
+- **Designer Guide**: [docs/start-here.md](./docs/start-here.md) - Non-technical guide for designers
+- **Installation Guide**: [docs/installation.md](./docs/installation.md) - Customization instructions
+- **Next.js Docs**: [nextjs.org/docs](https://nextjs.org/docs)
+- **Tailwind CSS Docs**: [tailwindcss.com/docs](https://tailwindcss.com/docs)
 
-Organisation owners on Team/Enterprise plans can also provision skills organisation-wide.
+## Contributing
 
-## Structure
-
-```
-resources/                        # Shared across all skills
-└── TONE-OF-VOICE.md
-
-prompts/                          # Generated from all skill templates
-├── brd.md
-├── prd.md
-├── service-design-blueprint.md
-├── customer-journey-map.md
-└── experience-map.md
-
-skills/
-├── brd-assistant/
-│   ├── SKILL.md
-│   └── BRD-TEMPLATE.md
-├── prd-assistant/
-│   ├── SKILL.md
-│   └── PRD-TEMPLATE.md
-└── workshop-facilitation-assistant/
-    ├── SKILL.md
-    ├── CUSTOMER-JOURNEY-MAP-TEMPLATE.md
-    ├── EXPERIENCE-MAP-TEMPLATE.md
-    └── SERVICE-DESIGN-BLUEPRINT-TEMPLATE.md
-
-scripts/
-└── manage-skills.py              # Skills management script
-
-dist/                             # Generated zips for Claude app (gitignored)
-├── brd-assistant-<commit-hash>.zip
-├── prd-assistant-<commit-hash>.zip
-└── workshop-facilitation-assistant-<commit-hash>.zip
-```
+1. Follow existing component patterns and naming conventions
+2. Use design tokens from the established system
+3. Ensure accessibility standards are met
+4. Add new components to the design system showcase
+5. Update documentation as needed

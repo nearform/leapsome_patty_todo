@@ -11,3 +11,7 @@ Changelog of changes made during development sessions.
 - Extracted skill into `.cursor/skills/nf-workshop-facilitation-assistant/service-blueprint-miro/` (README.md, SKILL.md, references/, service-blueprint-miro.skill).
 - No merge conflicts; local layout unchanged.
 
+### Merge branches and push main
+- Committed local restructure (root .cursor, docs, package at root; removed packages/Design Scaffolding Mobile).
+- Merged origin/main and remote feature branches into main; pushed main to origin.
+
