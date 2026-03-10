@@ -18,3 +18,6 @@ Changelog of changes made during development sessions.
 ### Remove duplicate service-blueprint-miro (old path)
 - Deleted `skills/workshop-facilitation-assistant/service-blueprint-miro/`; canonical location is `.cursor/skills/nf-workshop-facilitation-assistant/service-blueprint-miro/`.
 
+### README: add migration plan documentation
+- Linked [docs/migration-plan.md](docs/migration-plan.md) in Documentation section and under Customization (design system replacement).
+

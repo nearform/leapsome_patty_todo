@@ -137,6 +137,8 @@ See [docs/installation.md](./docs/installation.md) for detailed customization in
 - **Custom Components** - Adding new components
 - **Creating Journeys** - Building user journey prototypes
 
+To **replace the design system** with a different UI library (e.g. Material UI, Radix UI), follow the phased guide in [docs/migration-plan.md](./docs/migration-plan.md).
+
 ## Creating Journeys
 
 Journeys are collections of related prototype pages. To create a new journey:
@@ -214,6 +216,7 @@ npm run lint     # Run ESLint
 
 - **Designer Guide**: [docs/start-here.md](./docs/start-here.md) - Non-technical guide for designers
 - **Installation Guide**: [docs/installation.md](./docs/installation.md) - Customization instructions
+- **Migration Plan**: [docs/migration-plan.md](./docs/migration-plan.md) - Step-by-step guide for migrating the design system (e.g. swapping the current UI library for another); includes discovery, component mapping, phased steps, and verification
 - **Next.js Docs**: [nextjs.org/docs](https://nextjs.org/docs)
 - **Tailwind CSS Docs**: [tailwindcss.com/docs](https://tailwindcss.com/docs)
 
