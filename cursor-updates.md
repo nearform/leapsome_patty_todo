@@ -15,3 +15,6 @@ Changelog of changes made during development sessions.
 - Committed local restructure (root .cursor, docs, package at root; removed packages/Design Scaffolding Mobile).
 - Merged origin/main and remote feature branches into main; pushed main to origin.
 
+### Remove duplicate service-blueprint-miro (old path)
+- Deleted `skills/workshop-facilitation-assistant/service-blueprint-miro/`; canonical location is `.cursor/skills/nf-workshop-facilitation-assistant/service-blueprint-miro/`.
+
