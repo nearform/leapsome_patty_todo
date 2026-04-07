@@ -11,8 +11,10 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/prototype-ui";
-import { ArrowRight, SwatchBook, MonitorSmartphone, MousePointerClick } from "lucide-react";
+import { ArrowRight, SwatchBook, MonitorSmartphone, MousePointerClick, Smartphone, Monitor } from "lucide-react";
 import Link from "next/link";
+import { DEFAULT_DEVICE_MODE, DEVICE_PRESETS } from "@/lib/config/device-mode";
+import { cn } from "@/lib/utils";
 
 export default function Home() {
   return (
@@ -98,6 +100,47 @@ export default function Home() {
                 </Card>
               </Link>
             </div>
+
+            {/* Global Variables Panel */}
+            <Box className="w-full mt-4 border border-border-decorative rounded-xl p-6">
+              <VStack space="md">
+                <HStack space="sm" className="items-center">
+                  <Text size="xs" className="text-text-secondary uppercase tracking-widest font-bold">
+                    Global Variables
+                  </Text>
+                </HStack>
+                <Box className="w-full h-px bg-border-decorative" />
+
+                <HStack className="items-center justify-between">
+                  <HStack space="md" className="items-center">
+                    <Text size="sm" className="text-text-primary font-mono font-semibold">DEVICE_MODE</Text>
+                    <Text size="xs" className="text-text-secondary">
+                      — set in <span className="font-mono">src/lib/config/device-mode.ts</span>
+                    </Text>
+                  </HStack>
+
+                  {/* Read-only pill toggle */}
+                  <HStack className="items-center bg-bg-secondary rounded-full p-1 border border-border-decorative">
+                    {(["mobile", "desktop"] as const).map((mode) => {
+                      const isActive = DEFAULT_DEVICE_MODE === mode;
+                      const Icon = mode === "mobile" ? Smartphone : Monitor;
+                      return (
+                        <HStack key={mode} space="xs" className={cn(
+                          "items-center px-3 py-1.5 rounded-full transition-colors",
+                          isActive ? "bg-accent text-white" : "text-text-secondary"
+                        )}>
+                          <Icon className="w-3.5 h-3.5" />
+                          <Text size="xs" className={cn("font-medium capitalize",
+                            isActive ? "text-white" : "text-text-secondary")}>
+                            {DEVICE_PRESETS[mode].label}
+                          </Text>
+                        </HStack>
+                      );
+                    })}
+                  </HStack>
+                </HStack>
+              </VStack>
+            </Box>
           </VStack>
         </Box>
       </Box>

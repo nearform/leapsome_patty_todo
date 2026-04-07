@@ -98,7 +98,7 @@ export default function JourneysIndexPage() {
           {/* Journeys Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {journeys.map((journey) => (
-              <Link key={journey.id} href={`/prototype/journeys/${journey.id}`}>
+              <Link key={journey.id} href={journey.pages[0]?.path ?? "/prototype"}>
                 <Card variant="outline" className="h-full hover:border-accent hover:shadow-lg transition-all cursor-pointer">
                   <CardHeader>
                     <HStack space="md" className="items-start justify-between">
