@@ -1,0 +1,30 @@
+{
+  "generated": "2026-05-11T14:13:49.416Z",
+  "mode": "mobile",
+  "viewport": {
+    "width": 375,
+    "height": 812
+  },
+  "screens": {
+    "banking/login": {
+      "journeyId": "banking",
+      "pageId": "login",
+      "name": "Login",
+      "path": "/prototype/journeys/banking/login",
+      "latest": "latest.png",
+      "history": [
+        "2026-05-11T14-13-49.png"
+      ]
+    },
+    "banking/dashboard": {
+      "journeyId": "banking",
+      "pageId": "dashboard",
+      "name": "Dashboard",
+      "path": "/prototype/journeys/banking/dashboard",
+      "latest": "latest.png",
+      "history": [
+        "2026-05-11T14-13-49.png"
+      ]
+    }
+  }
+}

@@ -6,6 +6,11 @@ Changelog of changes made during development sessions.
 
 ## 2026-05-11
 
+### Prototype hydration fix + screenshot refresh
+- Fixed an SSR/CSR hydration mismatch in `src/app/prototype/page.tsx`: the dev-only "Refresh Screenshots" button gated on `typeof window !== "undefined" && window.location.hostname === "localhost"`, which evaluates to `false` on the server and `true` in the browser, causing the next sibling (`<Link href="/canvas">`) to swap places between SSR and hydration. Replaced with a `useState` + `useEffect` pair so `isDev` only flips on after mount.
+- Centred the QR-code overlay on the prototype journey cards (`justify-start` → `justify-center`) — designer tweak.
+- Re-captured `public/screenshots/banking/login/latest.png` and `public/screenshots/banking/dashboard/latest.png` with the new Nearform branding via `npm run screenshots`, and committed the refreshed `public/screenshots/manifest.json`.
+
 ### Nearform brand redesign of the design system
 - Rewired the Tailwind tokens around the Nearform brand: added a full `nf.*` palette (Midnight, Green, Purple, Blue, Grey with shades) in `tailwind.config.ts`, plus `text-on-accent` and `decorative-accent` semantic colors.
 - Squared the radius scale: every named alias (`xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, `4xl`) now resolves to `0px`. Only `rounded-full` keeps a value, so circular controls (avatars, switch tracks/thumbs, slider thumbs, progress bars, FAB) still render correctly.

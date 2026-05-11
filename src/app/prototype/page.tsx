@@ -162,7 +162,7 @@ function ScreenCard({ page, journeyId, manifest, baseUrl }: ScreenCardProps) {
           )}
 
           {/* QR overlay — covers full card with solid white */}
-          <div className="absolute inset-0 flex items-center justify-start p-6 bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+          <div className="absolute inset-0 flex items-center justify-center p-6 bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
             <QRCode
               value={fullUrl}
               size={160}
@@ -243,7 +243,10 @@ export default function PrototypePage() {
     }
   }
 
-  const isDev = typeof window !== "undefined" && window.location.hostname === "localhost";
+  const [isDev, setIsDev] = useState(false);
+  useEffect(() => {
+    setIsDev(window.location.hostname === "localhost");
+  }, []);
 
   return (
     <Box className="min-h-screen bg-bg-base transition-colors">
