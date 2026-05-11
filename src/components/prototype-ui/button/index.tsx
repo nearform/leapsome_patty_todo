@@ -15,12 +15,14 @@ import type { LucideIcon } from "lucide-react";
  * - size: xs | sm | md | lg | xl
  */
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg-base disabled:pointer-events-none disabled:opacity-40",
+  // Square corners (no rounded class), generous padding, brand-blue focus ring
+  // with a 4px offset for clear visibility on every surface.
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-bg-base disabled:pointer-events-none disabled:opacity-40",
   {
     variants: {
       variant: {
         solid: "",
-        outline: "border bg-transparent",
+        outline: "border-2 bg-transparent",
         link: "underline-offset-4 hover:underline bg-transparent px-0",
       },
       action: {
@@ -30,12 +32,13 @@ const buttonVariants = cva(
         negative: "",
         default: "bg-transparent",
       },
+      // Sizes meet 44x44 minimum tap-target at md+. xs/sm remain for dense UI.
       size: {
-        xs: "h-8 px-3.5 text-xs",
-        sm: "h-9 px-4 text-sm",
-        md: "h-10 px-5 text-base",
-        lg: "h-11 px-6 text-lg",
-        xl: "h-12 px-7 text-xl",
+        xs: "h-10 px-4 text-xs",
+        sm: "h-11 px-5 text-sm",
+        md: "h-12 px-6 text-base",
+        lg: "h-14 px-7 text-lg",
+        xl: "h-16 px-8 text-xl",
       },
       isFullWidth: {
         true: "w-full",
@@ -45,11 +48,13 @@ const buttonVariants = cva(
       },
     },
     compoundVariants: [
-      // Solid variants
+      // Solid variants — text-on-accent flips per surface so primary CTAs are
+      // always brand-correct: white text on Midnight (light), Midnight text on
+      // Green (dark), and inverted again inside .surface-inverse sections.
       {
         variant: "solid",
         action: "primary",
-        className: "bg-accent text-white hover:bg-accent-hover active:bg-accent-dark",
+        className: "bg-accent text-text-on-accent hover:bg-accent-hover active:bg-accent-dark",
       },
       {
         variant: "solid",
@@ -59,7 +64,7 @@ const buttonVariants = cva(
       {
         variant: "solid",
         action: "positive",
-        className: "bg-success text-white hover:bg-success-dark active:bg-success-dark",
+        className: "bg-success text-text-on-accent hover:bg-success-dark active:bg-success-dark",
       },
       {
         variant: "solid",
@@ -70,12 +75,12 @@ const buttonVariants = cva(
       {
         variant: "outline",
         action: "primary",
-        className: "border-accent text-accent hover:bg-info-bg active:bg-info-bg",
+        className: "border-accent text-accent hover:bg-bg-secondary active:bg-bg-tertiary",
       },
       {
         variant: "outline",
         action: "secondary",
-        className: "border-border-standard text-text-secondary hover:bg-info-bg active:bg-info-bg dark:border-white dark:text-white",
+        className: "border-border-standard text-text-primary hover:bg-bg-secondary active:bg-bg-tertiary",
       },
       {
         variant: "outline",
@@ -87,11 +92,11 @@ const buttonVariants = cva(
         action: "negative",
         className: "border-error text-error hover:bg-error-bg active:bg-error-bg",
       },
-      // Link variants
+      // Link variants — use brand Blue for inline links per Nearform brand
       {
         variant: "link",
         action: "primary",
-        className: "text-accent hover:text-accent-hover",
+        className: "text-info hover:text-info-dark",
       },
       {
         variant: "link",

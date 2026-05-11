@@ -15,11 +15,12 @@ Built with Next.js 16 and React 19, this scaffold provides everything needed to 
 ## Features
 
 ### Design System
-- **Comprehensive Component Library** - Pre-built, accessible React components
-- **Dark & Light Mode** - Full theme support with automatic color adaptation
-- **Design Tokens** - Semantic colors, typography scales, spacing, and radii
-- **Mobile-First** - Responsive components optimized for mobile experiences
-- **Accessible** - WCAG compliant components and patterns
+- **Nearform brand-wired** - Midnight + Green primary palette, Inter for everything, Bitter reserved for callouts; full `nf.*` palette available in Tailwind
+- **Surface-aware accents** - Default CTAs are Midnight-on-white (light) or Green-on-Midnight (dark); wrap any band in `<div className="surface-inverse">` to flip the local surface and watch every nested CTA, badge, border, and focus ring re-pair correctly
+- **Square by default** - Buttons, cards, inputs, modals, tabs, badges and the rest render with 0 radius; only inherently circular controls (avatars, switch tracks, slider thumbs, progress bars, FAB) stay round
+- **Accessibility-first sizing** - 44×44 minimum tap targets at default size, 4px focus-ring offset across components, brand Blue focus rings on light surfaces and Green on dark
+- **WCAG-safe pairings** - White-on-Green and Green-on-white text combinations are impossible to produce by accident; the `text-on-accent` token always resolves to the contrast-passing color for the active surface
+- **Dark & Light Mode** - Light theme is white-with-Midnight, dark theme is Midnight-with-white; Green stays the same in both as the brand glint
 - **TypeScript** - Full type safety and excellent developer experience
 
 ### Prototyping

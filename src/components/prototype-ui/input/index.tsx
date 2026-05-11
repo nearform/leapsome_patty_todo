@@ -18,11 +18,12 @@ const inputContainerVariants = cva(
         underlined: "rounded-none border-0 border-b",
         rounded: "border-border-standard rounded-full",
       },
+      // Heights bumped for accessibility (md hits 44px tap target).
       size: {
-        sm: "h-9",
-        md: "h-10",
-        lg: "h-11",
-        xl: "h-12",
+        sm: "h-10",
+        md: "h-12",
+        lg: "h-14",
+        xl: "h-16",
       },
       isInvalid: {
         true: "border-error data-[focus=true]:border-error data-[focus=true]:ring-error",
@@ -245,19 +246,19 @@ export interface LegacyInputProps
 }
 
 const inputVariants = cva(
-  "flex w-full rounded-sm border bg-bg-elevated px-3 py-2 text-md text-text-body ring-offset-bg-base file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-text-tertiary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-bg-secondary disabled:text-text-disabled disabled:border-border-subtle transition-colors",
+  "flex w-full border bg-bg-elevated px-4 py-3 text-md text-text-body ring-offset-bg-base file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-text-tertiary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 disabled:cursor-not-allowed disabled:bg-bg-secondary disabled:text-text-disabled disabled:border-border-subtle transition-colors",
   {
     variants: {
       variant: {
         outline: "border-border-standard",
-        underlined: "rounded-none border-0 border-b border-border-standard",
+        underlined: "border-0 border-b border-border-standard",
         rounded: "border-border-standard rounded-full",
       },
       size: {
-        sm: "h-9 text-sm px-2",
-        md: "h-10 text-base px-3",
-        lg: "h-11 text-lg px-4",
-        xl: "h-12 text-xl px-5",
+        sm: "h-10 text-sm px-3",
+        md: "h-12 text-base px-4",
+        lg: "h-14 text-lg px-5",
+        xl: "h-16 text-xl px-6",
       },
       isInvalid: {
         true: "border-error focus-visible:ring-error",

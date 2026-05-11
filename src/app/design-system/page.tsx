@@ -100,6 +100,32 @@ export default function ComponentsPage() {
       {/* Header */}
       <Header />
 
+      {/* Brand hero band - demonstrates the surface-inverse pattern.
+          In light mode this band renders as a Midnight hero with a Green
+          primary CTA; in dark mode it renders as a white hero with a
+          Midnight primary CTA. The components inside don't change. */}
+      <div className="surface-inverse w-full">
+        <Box className="w-full mx-auto px-4 lg:px-8 py-16 max-w-6xl">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+            <div className="max-w-2xl">
+              <span className="inline-block w-12 h-1 bg-decorative-accent mb-6" />
+              <h1 className="font-bitter text-4xl md:text-5xl text-text-primary leading-tight mb-4">
+                Engineered <span className="text-decorative-accent">differently_</span>
+              </h1>
+              <p className="text-text-body text-lg max-w-xl">
+                A Nearform-branded design system. Square corners, generous tap
+                targets, and surface-aware accents that always pair accessibly
+                with whatever they sit on.
+              </p>
+            </div>
+            <div className="flex gap-3">
+              <Button size="lg">Primary action</Button>
+              <Button size="lg" variant="outline" action="secondary">Secondary</Button>
+            </div>
+          </div>
+        </Box>
+      </div>
+
       {/* Components Showcase - Bento Box Layout */}
       <Box className="w-full mx-auto px-4 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -150,7 +176,7 @@ export default function ComponentsPage() {
                         <Text size="sm" weight="medium" className="mb-2 text-text-secondary">Horizontal ScrollView</Text>
                         <ScrollView
                           horizontal
-                          className="rounded-full bg-bg-base px-2 py-2 flex gap-2"
+                          className="bg-bg-base px-2 py-2 flex gap-2 border border-border-decorative"
                         >
                           {["All", "Upcoming", "Completed", "Flagged", "Archived"].map((filter) => (
                             <Button

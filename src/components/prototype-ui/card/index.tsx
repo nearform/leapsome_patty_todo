@@ -5,7 +5,8 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const cardVariants = cva(
-  "rounded-md border border-border-decorative text-text-primary transition-colors",
+  // Square corners + generous padding per Nearform brand.
+  "border border-border-decorative text-text-primary transition-colors",
   {
     variants: {
       variant: {
@@ -15,9 +16,9 @@ const cardVariants = cva(
         filled: "bg-bg-secondary border-transparent",
       },
       size: {
-        sm: "p-3",
-        md: "p-4",
-        lg: "p-6",
+        sm: "p-4",
+        md: "p-6",
+        lg: "p-8",
       },
     },
     defaultVariants: {

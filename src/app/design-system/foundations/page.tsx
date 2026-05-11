@@ -148,43 +148,99 @@ export default function FoundationsPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {/* Color Palette - Large feature card: 2 cols, 2 rows on desktop */}
           <div className="relative md:col-span-2 lg:col-span-2 lg:row-span-2">
-            <div className="absolute inset-px rounded-lg bg-bg-elevated lg:rounded-l-[2rem]" />
-            <Card variant="ghost" size="lg" className="relative h-full rounded-lg lg:rounded-l-[calc(2rem+1px)] overflow-hidden">
+            <div className="absolute inset-px bg-bg-elevated" />
+            <Card variant="ghost" size="lg" className="relative h-full overflow-hidden">
             <CardHeader>
-              <CardTitle>Color Palette</CardTitle>
-              <CardDescription>Semantic color tokens that adapt to light/dark mode</CardDescription>
+              <CardTitle>Nearform brand palette</CardTitle>
+              <CardDescription>
+                Midnight + Green is the predominant pairing; Purple and Blue
+                are accents reserved for diagrams and inline links.
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <VStack space="xl">
-                {/* Neutral Scale */}
-                <Box>
-                  <Text weight="semibold" className="mb-1">Neutral Scale</Text>
-                  <Text size="xs" muted className="mb-3">Raw grey tones from neutral-0 to neutral-950</Text>
-                  <div className="flex h-16 rounded-md overflow-hidden border border-border-decorative">
-                    {[
-                      { name: "0", color: "#FFFFFF" },
-                      { name: "50", color: "#FAFAFA" },
-                      { name: "100", color: "#F5F5F5" },
-                      { name: "200", color: "#EEEEEE" },
-                      { name: "300", color: "#E0E0E0" },
-                      { name: "400", color: "#9CA3AF" },
-                      { name: "500", color: "#6B7280" },
-                      { name: "600", color: "#4B5563" },
-                      { name: "700", color: "#374151" },
-                      { name: "800", color: "#1F2937" },
-                      { name: "900", color: "#111827" },
-                      { name: "950", color: "#0B0F19" },
-                    ].map(({ name, color }) => (
-                      <div 
-                        key={name}
-                        className="flex-1 flex items-end justify-center pb-1"
-                        style={{ backgroundColor: color }}
-                      >
-                        <Text size="xs" className={parseInt(name) >= 500 ? "text-white" : "text-neutral-700"}>{name}</Text>
-                      </div>
-                    ))}
-                  </div>
-                </Box>
+                {/* Brand Shade Scales */}
+                {[
+                  {
+                    name: "Midnight",
+                    desc: "Primary text, dark hero backgrounds, light-mode CTAs",
+                    shades: [
+                      { name: "10", color: "#F4F8FA" },
+                      { name: "30", color: "#97A1B8" },
+                      { name: "50", color: "#526288" },
+                      { name: "80", color: "#0C3D60" },
+                      { name: "Base", color: "#000E38" },
+                    ],
+                  },
+                  {
+                    name: "Green",
+                    desc: "Decorative accents, table headers, dark-mode CTAs (always paired with Midnight text)",
+                    shades: [
+                      { name: "10", color: "#E5FCF5" },
+                      { name: "30", color: "#B2F7E1" },
+                      { name: "50", color: "#78EEC5" },
+                      { name: "80", color: "#33EAAE" },
+                      { name: "Base", color: "#00E5A4" },
+                    ],
+                  },
+                  {
+                    name: "Purple",
+                    desc: "Diagram and infographic accent only",
+                    shades: [
+                      { name: "10", color: "#F3EDFF" },
+                      { name: "30", color: "#DCCAFF" },
+                      { name: "50", color: "#C4A7FF" },
+                      { name: "80", color: "#A173FF" },
+                      { name: "Base", color: "#8950FF" },
+                    ],
+                  },
+                  {
+                    name: "Blue",
+                    desc: "Inline links, focus rings, supporting diagrams",
+                    shades: [
+                      { name: "10", color: "#E8F0FF" },
+                      { name: "30", color: "#B9D3FF" },
+                      { name: "50", color: "#8AB5FF" },
+                      { name: "80", color: "#4589FF" },
+                      { name: "Base", color: "#166BFF" },
+                    ],
+                  },
+                  {
+                    name: "Grey",
+                    desc: "Borders, table dividers, neutral surfaces",
+                    shades: [
+                      { name: "10", color: "#EAEBED" },
+                      { name: "30", color: "#D9D9D9" },
+                      { name: "80", color: "#454551" },
+                    ],
+                  },
+                ].map(({ name, desc, shades }) => (
+                  <Box key={name}>
+                    <Text weight="semibold" className="mb-1">{name}</Text>
+                    <Text size="xs" muted className="mb-3">{desc}</Text>
+                    <div className="flex h-16 overflow-hidden border border-border-decorative">
+                      {shades.map(({ name: shadeName, color }) => (
+                        <div
+                          key={shadeName}
+                          className="flex-1 flex items-end justify-center pb-1"
+                          style={{ backgroundColor: color }}
+                        >
+                          <Text
+                            size="xs"
+                            style={{
+                              color:
+                                name === "Green" || shadeName === "10" || shadeName === "30"
+                                  ? "#000E38"
+                                  : "#FFFFFF",
+                            }}
+                          >
+                            {shadeName}
+                          </Text>
+                        </div>
+                      ))}
+                    </div>
+                  </Box>
+                ))}
 
                 {/* Background Colors */}
                 <Box>
@@ -244,22 +300,69 @@ export default function FoundationsPage() {
                   </div>
                 </Box>
 
-                {/* Accent Colors */}
+                {/* Accent Colors - Surface aware */}
                 <Box>
-                  <Text weight="semibold" className="mb-1">Accent Colors (Dusk)</Text>
-                  <Text size="xs" muted className="mb-3">Primary brand accent colors</Text>
+                  <Text weight="semibold" className="mb-1">Accent (surface-aware)</Text>
+                  <Text size="xs" muted className="mb-3">
+                    Flips per surface: Midnight + white text on light pages,
+                    Green + Midnight text on dark pages. Wrap a section in
+                    <code className="font-mono mx-1 px-1 py-0.5 bg-bg-tertiary text-text-primary">.surface-inverse</code>
+                    to flip it locally.
+                  </Text>
                   <div className="flex flex-wrap gap-3">
                     {[
-                      { name: "Primary", class: "bg-accent" },
-                      { name: "Light", class: "bg-accent-light" },
-                      { name: "Dark", class: "bg-accent-dark" },
+                      { name: "Accent", class: "bg-accent" },
                       { name: "Hover", class: "bg-accent-hover" },
+                      { name: "Dark", class: "bg-accent-dark" },
+                      { name: "Light", class: "bg-accent-light" },
+                      { name: "Decorative", class: "bg-decorative-accent" },
                     ].map(({ name, class: className }) => (
                       <VStack key={name} space="xs" className="items-center">
-                        <div className={`w-16 h-16 rounded-md ${className}`} />
+                        <div className={`w-16 h-16 ${className} border border-border-decorative`} />
                         <Text size="xs" weight="medium">{name}</Text>
                       </VStack>
                     ))}
+                  </div>
+                </Box>
+
+                {/* Surface Inverse Demo */}
+                <Box>
+                  <Text weight="semibold" className="mb-1">Surface inverse</Text>
+                  <Text size="xs" muted className="mb-3">
+                    Same components, opposite surface. Wrap any band, hero, or
+                    header in <code className="font-mono px-1 py-0.5 bg-bg-tertiary text-text-primary">surface-inverse</code>
+                    {" "}and every nested CTA, badge, border, and focus ring
+                    flips to pair correctly with the inverted background.
+                  </Text>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div className="p-6 border border-border-decorative">
+                      <Text size="xs" muted className="mb-3 uppercase tracking-loose-md">Default surface</Text>
+                      <Text className="mb-4">Page background, brand text and CTA.</Text>
+                      <Button>Primary action</Button>
+                    </div>
+                    <div className="surface-inverse p-6 border border-border-decorative">
+                      <Text size="xs" muted className="mb-3 uppercase tracking-loose-md">Surface inverse</Text>
+                      <Text className="mb-4">Hero/nav band, accent flips to pair with the new background.</Text>
+                      <Button>Primary action</Button>
+                    </div>
+                  </div>
+                </Box>
+
+                {/* Bitter Callout Sample */}
+                <Box>
+                  <Text weight="semibold" className="mb-1">Typography pairing</Text>
+                  <Text size="xs" muted className="mb-3">
+                    Inter for everything; Bitter reserved for pull-out quotes
+                    and empathetic callouts.
+                  </Text>
+                  <div className="border-l-4 border-decorative-accent bg-bg-secondary p-6">
+                    <p className="font-bitter text-2xl text-text-primary leading-snug">
+                      Engineered differently &mdash; teams that move with the
+                      precision of a single mind.
+                    </p>
+                    <Text size="xs" muted className="mt-3 font-sans">
+                      Bitter, 24px, Midnight. Use sparingly for emphasis only.
+                    </Text>
                   </div>
                 </Box>
 
@@ -1136,8 +1239,8 @@ export default function FoundationsPage() {
                       <HStack key={name} space="md" className="items-center w-full">
                         <Text size="sm" muted className="w-16 shrink-0">space-{name}</Text>
                         <Text size="sm" className="w-12 shrink-0 text-text-secondary">{value}</Text>
-                        <div 
-                          className="bg-accent h-5 rounded-full" 
+                        <div
+                          className="bg-accent h-5"
                           style={{ width: `${width}px` }}
                         />
                       </HStack>
@@ -1145,29 +1248,27 @@ export default function FoundationsPage() {
                   </VStack>
                 </VStack>
 
-                {/* Border Radius */}
+                {/* Border Radius — Nearform brand: square by default */}
                 <VStack space="md" className="items-start">
                   <Text weight="semibold" size="lg">Border Radius</Text>
-                  <Text size="sm" muted className="mb-2">Consistent corner rounding</Text>
+                  <Text size="sm" muted className="mb-2">
+                    Nearform brand: every named radius alias resolves to{" "}
+                    <code className="font-mono px-1 py-0.5 bg-bg-tertiary text-text-primary">0px</code>.
+                    Only <code className="font-mono px-1 py-0.5 bg-bg-tertiary text-text-primary">rounded-full</code>
+                    {" "}keeps a value, so circular controls (avatars, switch
+                    tracks, slider thumbs, progress bars, FAB) still render
+                    correctly.
+                  </Text>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 w-full">
                     {[
-                      { name: "none", value: "0px", radius: "rounded-none" },
-                      { name: "2xs", value: "2px", radius: "rounded-2xs" },
-                      { name: "xs", value: "4px", radius: "rounded-xs" },
-                      { name: "sm", value: "6px", radius: "rounded-sm" },
-                      { name: "md", value: "8px", radius: "rounded-md" },
-                      { name: "lg", value: "10px", radius: "rounded-lg" },
-                      { name: "xl", value: "12px", radius: "rounded-xl" },
-                      { name: "2xl", value: "16px", radius: "rounded-2xl" },
-                      { name: "3xl", value: "20px", radius: "rounded-3xl" },
-                      { name: "4xl", value: "24px", radius: "rounded-4xl" },
+                      { name: "none / xs / sm / md / lg / xl / 2xl / 3xl / 4xl", value: "0px", radius: "rounded-none" },
                       { name: "full", value: "9999px", radius: "rounded-full" },
                     ].map(({ name, value, radius }) => (
                       <VStack key={name} space="xs" className="items-center">
-                        <div 
+                        <div
                           className={`w-16 h-16 bg-accent ${radius}`}
                         />
-                        <Text size="xs" weight="medium">{name}</Text>
+                        <Text size="xs" weight="medium" className="text-center">{name}</Text>
                         <Text size="xs" muted>{value}</Text>
                       </VStack>
                     ))}

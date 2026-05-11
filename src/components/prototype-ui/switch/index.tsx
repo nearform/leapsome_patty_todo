@@ -27,7 +27,7 @@ import { cn } from "@/lib/utils";
  */
 
 const switchTrackVariants = cva(
-  "relative inline-flex shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg-base data-[disabled=true]:cursor-not-allowed data-[disabled=true]:opacity-40",
+  "relative inline-flex shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-bg-base data-[disabled=true]:cursor-not-allowed data-[disabled=true]:opacity-40",
   {
     variants: {
       size: {
@@ -206,7 +206,7 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
           className={cn(
             trackColor 
               ? cn(
-                  "relative inline-flex shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg-base data-[disabled=true]:cursor-not-allowed data-[disabled=true]:opacity-40",
+                  "relative inline-flex shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-bg-base data-[disabled=true]:cursor-not-allowed data-[disabled=true]:opacity-40",
                   size === "sm" && "h-5 w-9",
                   size === "md" && "h-6 w-11",
                   size === "lg" && "h-7 w-14",

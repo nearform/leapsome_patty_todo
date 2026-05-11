@@ -174,7 +174,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
           {onClose && (
             <button
               onClick={onClose}
-              className="shrink-0 rounded-sm p-0.5 opacity-70 hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2"
+              className="shrink-0 rounded-sm p-0.5 opacity-70 hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-4"
               aria-label="Close alert"
             >
               <Icon as={X} size="sm" />

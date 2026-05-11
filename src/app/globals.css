@@ -3,59 +3,79 @@
 @tailwind utilities;
 
 /* ============================================
-   LIGHT THEME (Default)
+   NEARFORM BRAND — SURFACE-AWARE TOKENS
+   ============================================
+   The accent color flips per theme so the primary CTA always pairs
+   accessibly with the surface it sits on:
+     - Light page (white)    -> Midnight CTA + white text
+     - Dark page  (Midnight) -> Green CTA    + Midnight text
+   Inside .surface-inverse the same tokens flip to the opposite pairing,
+   so a dark hero in light mode hosts a Green CTA, and a light header in
+   dark mode hosts a Midnight CTA. White-on-Green and Green-on-white
+   text combinations never occur (they fail WCAG per Nearform brand).
+   ============================================ */
+
+/* ============================================
+   LIGHT THEME (Default) — white page, Midnight predominant
    ============================================ */
 :root {
   /* Background Colors */
-  --background-base: #FAFAFA;
+  --background-base: #FFFFFF;        /* Brand default page background */
   --background-elevated: #FFFFFF;
-  --background-secondary: #F5F5F5;
-  --background-tertiary: #EEEEEE;
+  --background-secondary: #F4F8FA;   /* Midnight 10 */
+  --background-tertiary: #EAEBED;    /* Grey 10 */
 
   /* Border Colors */
-  --border-standard: #6B7280;  /* WCAG 3:1 for form inputs */
-  --border-subtle: #9CA3AF;
-  --border-decorative: #E0E0E0;  /* Non-essential container borders */
+  --border-standard: #526288;        /* Midnight 50 — 4.5:1 on white */
+  --border-subtle: #97A1B8;          /* Midnight 30 — 3:1 on white, WCAG non-text */
+  --border-decorative: #D9D9D9;      /* Grey 30 */
 
-  /* Text Colors */
-  --text-primary: #111827;
-  --text-body: #374151;
-  --text-secondary: #4B5563;
-  --text-tertiary: #9CA3AF;
-  --text-disabled: #E0E0E0;
+  /* Text Colors — Midnight on white per brand */
+  --text-primary: #000E38;
+  --text-body: #000E38;
+  --text-secondary: #526288;         /* Midnight 50 */
+  --text-tertiary: #97A1B8;          /* Midnight 30 */
+  --text-disabled: #97A1B8;
 
-  /* Accent Colors (Dusk) */
-  --accent-primary: #3833B4;
-  --accent-light: #5041E1;
-  --accent-dark: #2A2687;
-  --accent-hover: #2A2687;
+  /* Accent (CTA) — Midnight in light mode */
+  --accent-primary: #000E38;
+  --accent-light: #526288;
+  --accent-dark: #000E38;
+  --accent-hover: #0C3D60;            /* Midnight 80 */
 
-  /* Success Colors */
-  --success-primary: #059669;
-  --success-light: #34D399;
-  --success-dark: #047857;
-  --success-background: #ECFDF5;
+  /* Text color paired with bg-accent — white on Midnight here */
+  --text-on-accent: #FFFFFF;
 
-  /* Info Colors */
-  --info-primary: #3B82F6;
-  --info-light: #60A5FA;
-  --info-dark: #2563EB;
-  --info-background: #EFF6FF;
-  --info-background-40: rgba(239, 246, 255, 0.4);
+  /* Always-Green decorative token. Use for accent bars, icon highlights,
+     dividers, and hero glints — never as text on white. */
+  --decorative-accent: #00E5A4;
 
-  /* Warning Colors */
-  --warning-primary: #F59E0B;
-  --warning-light: #FBBF24;
-  --warning-dark: #D97706;
-  --warning-background: #FFFBEB;
+  /* Success Colors — darker green so success text is readable on white */
+  --success-primary: #00B383;
+  --success-light: #33EAAE;
+  --success-dark: #007F5C;
+  --success-background: #E5FCF5;     /* Green 10 */
 
-  /* Error Colors */
-  --error-primary: #EF4444;
-  --error-light: #F87171;
-  --error-dark: #DC2626;
-  --error-background: #FEF2F2;
+  /* Info Colors — brand Blue */
+  --info-primary: #166BFF;
+  --info-light: #4589FF;
+  --info-dark: #0A4ECC;
+  --info-background: #E8F0FF;        /* Blue 10 */
+  --info-background-40: rgba(232, 240, 255, 0.4);
 
-  /* Neutral Scale (for reference - these are static) */
+  /* Warning Colors — accessible amber */
+  --warning-primary: #B45309;
+  --warning-light: #F59E0B;
+  --warning-dark: #92400E;
+  --warning-background: #FEF3C7;
+
+  /* Error Colors — accessible red */
+  --error-primary: #B91C1C;
+  --error-light: #DC2626;
+  --error-dark: #991B1B;
+  --error-background: #FEE2E2;
+
+  /* Neutral Scale (legacy — prefer nf.* or semantic tokens) */
   --neutral-0: #FFFFFF;
   --neutral-50: #FAFAFA;
   --neutral-100: #F5F5F5;
@@ -74,7 +94,8 @@
      ======================================== */
 
   /* Font Family */
-  --font-family-primary: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-family-primary: var(--font-inter), 'Inter', system-ui, -apple-system, sans-serif;
+  --font-family-secondary: var(--font-bitter), 'Bitter', Georgia, serif;
 
   /* Font Sizes */
   --font-size-0: 6px;
@@ -155,65 +176,143 @@
   --space-20: 80px;
   --space-24: 96px;
 
-  /* Ring/Focus */
-  --ring-color: #3833B4;
+  /* Ring/Focus — brand Blue, high-contrast on white and on Midnight */
+  --ring-color: #166BFF;
 }
 
 /* ============================================
-   DARK THEME
+   DARK THEME — Midnight page, Green predominant CTA
    ============================================ */
 .dark {
   /* Background Colors */
-  --background-base: #0B0F19;
-  --background-elevated: #111827;
-  --background-secondary: #1F2937;
-  --background-tertiary: #374151;
+  --background-base: #000E38;        /* Midnight */
+  --background-elevated: #0C3D60;    /* Midnight 80 */
+  --background-secondary: #0C3D60;
+  --background-tertiary: #526288;    /* Midnight 50 */
 
   /* Border Colors */
-  --border-standard: #6B7280;  /* WCAG 3:1 for form inputs */
-  --border-subtle: #4B5563;
-  --border-decorative: #374151;  /* Non-essential container borders */
+  --border-standard: #97A1B8;        /* Midnight 30 — readable on Midnight */
+  --border-subtle: #526288;
+  --border-decorative: #0C3D60;
 
-  /* Text Colors */
-  --text-primary: #FAFAFA;
-  --text-body: #EEEEEE;
-  --text-secondary: #E0E0E0;
-  --text-tertiary: #6B7280;
-  --text-disabled: #4B5563;
+  /* Text Colors — white on Midnight per brand */
+  --text-primary: #FFFFFF;
+  --text-body: #FFFFFF;
+  --text-secondary: #97A1B8;
+  --text-tertiary: #526288;
+  --text-disabled: #526288;
 
-  /* Accent Colors (Dusk) */
-  --accent-primary: #7367E7;
-  --accent-light: #968DED;
-  --accent-dark: #5041E1;
-  --accent-hover: #968DED;
+  /* Accent (CTA) — Green in dark mode */
+  --accent-primary: #00E5A4;
+  --accent-light: #78EEC5;
+  --accent-dark: #00B383;
+  --accent-hover: #33EAAE;            /* Green 80 */
+
+  /* Text color paired with bg-accent — Midnight on Green
+     (the only pairing that passes WCAG with brand Green) */
+  --text-on-accent: #000E38;
+
+  /* Always-Green decorative token */
+  --decorative-accent: #00E5A4;
 
   /* Success Colors */
-  --success-primary: #34D399;
-  --success-light: #6EE7B7;
-  --success-dark: #10B981;
-  --success-background: #064E3B;
+  --success-primary: #33EAAE;
+  --success-light: #78EEC5;
+  --success-dark: #00B383;
+  --success-background: #0C3D60;
 
   /* Info Colors */
-  --info-primary: #60A5FA;
-  --info-light: #93C5FD;
-  --info-dark: #3B82F6;
-  --info-background: #1E3A8A;
-  --info-background-40: rgba(30, 58, 138, 0.4);
+  --info-primary: #4589FF;
+  --info-light: #8AB5FF;
+  --info-dark: #166BFF;
+  --info-background: #0C3D60;
+  --info-background-40: rgba(12, 61, 96, 0.4);
 
   /* Warning Colors */
-  --warning-primary: #FBBF24;
-  --warning-light: #FCD34D;
-  --warning-dark: #F59E0B;
-  --warning-background: #78350F;
+  --warning-primary: #F59E0B;
+  --warning-light: #FBBF24;
+  --warning-dark: #B45309;
+  --warning-background: #0C3D60;
 
   /* Error Colors */
   --error-primary: #F87171;
   --error-light: #FCA5A5;
-  --error-dark: #EF4444;
-  --error-background: #7F1D1D;
+  --error-dark: #DC2626;
+  --error-background: #0C3D60;
 
-  /* Ring/Focus */
-  --ring-color: #7367E7;
+  /* Ring/Focus — brand Green is high-contrast on Midnight */
+  --ring-color: #00E5A4;
+}
+
+/* ============================================
+   SURFACE-INVERSE — flips the surface inside a section
+   ============================================
+   Wrap any header, hero, navbar, or banner in
+   <div className="surface-inverse"> to invert the local surface
+   without changing the page theme:
+     - Light theme + .surface-inverse -> Midnight bg, white text, Green CTA
+     - Dark  theme + .surface-inverse -> white bg,    Midnight text, Midnight CTA
+   Every nested component reads these CSS variables, so buttons, badges,
+   inputs, borders, and focus rings flip automatically.
+   ============================================ */
+
+/* Light theme + inverse section -> Midnight bg, Green CTA */
+:root .surface-inverse {
+  --background-base: #000E38;
+  --background-elevated: #0C3D60;
+  --background-secondary: #0C3D60;
+  --background-tertiary: #526288;
+
+  --border-standard: #97A1B8;
+  --border-subtle: #526288;
+  --border-decorative: #0C3D60;
+
+  --text-primary: #FFFFFF;
+  --text-body: #FFFFFF;
+  --text-secondary: #97A1B8;
+  --text-tertiary: #526288;
+  --text-disabled: #526288;
+
+  --accent-primary: #00E5A4;
+  --accent-light: #78EEC5;
+  --accent-dark: #00B383;
+  --accent-hover: #33EAAE;
+  --text-on-accent: #000E38;
+
+  --ring-color: #00E5A4;
+}
+
+/* Dark theme + inverse section -> white bg, Midnight CTA */
+:root.dark .surface-inverse {
+  --background-base: #FFFFFF;
+  --background-elevated: #FFFFFF;
+  --background-secondary: #F4F8FA;
+  --background-tertiary: #EAEBED;
+
+  --border-standard: #526288;
+  --border-subtle: #97A1B8;
+  --border-decorative: #D9D9D9;
+
+  --text-primary: #000E38;
+  --text-body: #000E38;
+  --text-secondary: #526288;
+  --text-tertiary: #97A1B8;
+  --text-disabled: #97A1B8;
+
+  --accent-primary: #000E38;
+  --accent-light: #526288;
+  --accent-dark: #000E38;
+  --accent-hover: #0C3D60;
+  --text-on-accent: #FFFFFF;
+
+  --ring-color: #166BFF;
+}
+
+/* The .surface-inverse wrapper itself paints the new background and
+   text colors so it works as a section/banner on its own. */
+.surface-inverse {
+  background-color: var(--background-base);
+  color: var(--text-body);
 }
 
 /* ============================================
@@ -234,9 +333,15 @@ html.dark {
 body {
   background-color: var(--background-base);
   color: var(--text-body);
-  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  font-family: var(--font-inter), 'Inter', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Selection — Midnight on Green is brand-correct, even in light mode */
+::selection {
+  background-color: var(--decorative-accent);
+  color: #000E38;
 }
 
 /* ============================================
@@ -288,14 +393,6 @@ body {
 
 .scrollbar-hide::-webkit-scrollbar {
   display: none; /* Chrome, Safari and Opera */
-}
-
-/* ============================================
-   SELECTION
-   ============================================ */
-::selection {
-  background-color: var(--accent-primary);
-  color: white;
 }
 
 /* ============================================

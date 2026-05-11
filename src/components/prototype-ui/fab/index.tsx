@@ -17,20 +17,20 @@ const fabVariants = cva(
   [
     "inline-flex items-center justify-center gap-2 rounded-full",
     "shadow-lg",
-    "bg-accent text-white",
+    "bg-accent text-text-on-accent",
     "hover:bg-accent-hover",
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-bg-base",
   ],
   {
     variants: {
       size: {
-        sm: "w-10 h-10 text-sm",
-        md: "w-12 h-12 text-base",
-        lg: "w-14 h-14 text-lg",
+        sm: "w-12 h-12 text-sm",
+        md: "w-14 h-14 text-base",
+        lg: "w-16 h-16 text-lg",
       },
       colorScheme: {
-        primary: "bg-accent hover:bg-accent-hover text-white",
-        secondary: "bg-bg-elevated text-text-primary hover:bg-bg-secondary",
+        primary: "bg-accent hover:bg-accent-hover text-text-on-accent",
+        secondary: "bg-bg-elevated text-text-primary hover:bg-bg-secondary border border-border-subtle",
       },
     },
     defaultVariants: {

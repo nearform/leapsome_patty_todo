@@ -14,7 +14,50 @@ const config: Config = {
     extend: {
       colors: {
         // ========================================
+        // Nearform Brand Palette (Raw Brand Values)
+        // Per Nearform_Brand.md - use directly when a fixed
+        // brand color is required regardless of theme.
+        // ========================================
+        nf: {
+          midnight: {
+            DEFAULT: "#000E38",
+            80: "#0C3D60",
+            50: "#526288",
+            30: "#97A1B8",
+            10: "#F4F8FA",
+          },
+          green: {
+            DEFAULT: "#00E5A4",
+            80: "#33EAAE",
+            50: "#78EEC5",
+            30: "#B2F7E1",
+            10: "#E5FCF5",
+          },
+          purple: {
+            DEFAULT: "#8950FF",
+            80: "#A173FF",
+            50: "#C4A7FF",
+            30: "#DCCAFF",
+            10: "#F3EDFF",
+          },
+          blue: {
+            DEFAULT: "#166BFF",
+            80: "#4589FF",
+            50: "#8AB5FF",
+            30: "#B9D3FF",
+            10: "#E8F0FF",
+          },
+          grey: {
+            10: "#EAEBED",
+            30: "#D9D9D9",
+            80: "#454551",
+          },
+        },
+
+        // ========================================
         // Primitive Neutral Scale (Raw Grey Tones)
+        // Retained for legacy references; prefer nf.* or
+        // semantic tokens for new code.
         // ========================================
         neutral: {
           0: "#FFFFFF",
@@ -53,7 +96,10 @@ const config: Config = {
         "text-tertiary": "var(--text-tertiary)",
         "text-disabled": "var(--text-disabled)",
 
-        // Accent colors (Dusk)
+        // Accent colors (surface-aware)
+        // Light mode: Midnight CTA + white text
+        // Dark mode:  Green CTA + Midnight text
+        // Inside .surface-inverse the accent flips to the opposite pairing.
         accent: {
           DEFAULT: "var(--accent-primary)",
           primary: "var(--accent-primary)",
@@ -61,6 +107,14 @@ const config: Config = {
           dark: "var(--accent-dark)",
           hover: "var(--accent-hover)",
         },
+
+        // Text color that always pairs accessibly with bg-accent.
+        // White on Midnight (light), Midnight on Green (dark).
+        "text-on-accent": "var(--text-on-accent)",
+
+        // Always-Green decorative token. Use for accent bars, icon
+        // highlights, dividers, hero glints — never for text on white.
+        "decorative-accent": "var(--decorative-accent)",
 
         // Success colors
         success: {
@@ -106,6 +160,11 @@ const config: Config = {
         sans: ["var(--font-inter)", "system-ui", "-apple-system", "sans-serif"],
         heading: ["var(--font-inter)", "system-ui", "-apple-system", "sans-serif"],
         body: ["var(--font-inter)", "system-ui", "-apple-system", "sans-serif"],
+        // Bitter — reserved for pull-out quotes and empathetic callouts only.
+        // Do not use for body, navigation, or headings (Nearform brand rule).
+        serif: ["var(--font-bitter)", "Georgia", "serif"],
+        display: ["var(--font-bitter)", "Georgia", "serif"],
+        bitter: ["var(--font-bitter)", "Georgia", "serif"],
         mono: ["ui-monospace", "SFMono-Regular", "monospace"],
       },
       // Font Sizes from Figma Typography Tokens
@@ -186,18 +245,22 @@ const config: Config = {
         "loose-lg": "0.5px",
         "loose-xl": "1px",
       },
-      // Border Radius from Figma Tokens
+      // Border Radius — Nearform brand: square corners across the system.
+      // Every named alias resolves to 0px so existing rounded-{xs,sm,md,lg,...}
+      // utilities in components automatically square off. Only `full` keeps a
+      // value, so circular controls (avatars, switch tracks/thumbs, slider
+      // thumbs, progress bars, FAB) continue to render correctly.
       borderRadius: {
         none: "0px",
-        "2xs": "2px",
-        xs: "4px",
-        sm: "6px",
-        md: "8px",
-        lg: "10px",
-        xl: "12px",
-        "2xl": "16px",
-        "3xl": "20px",
-        "4xl": "24px",
+        "2xs": "0px",
+        xs: "0px",
+        sm: "0px",
+        md: "0px",
+        lg: "0px",
+        xl: "0px",
+        "2xl": "0px",
+        "3xl": "0px",
+        "4xl": "0px",
         full: "9999px",
       },
       boxShadow: {

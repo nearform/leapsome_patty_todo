@@ -154,7 +154,7 @@ const Pressable = React.forwardRef<HTMLDivElement, PressableProps>(
         tabIndex={isDisabled ? -1 : 0}
         className={cn(
           "cursor-pointer select-none outline-none",
-          "focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2",
+          "focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-4",
           isDisabled && "cursor-not-allowed opacity-40",
           actualIsPressed && "opacity-70",
           className

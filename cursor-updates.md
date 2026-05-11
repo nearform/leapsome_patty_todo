@@ -4,6 +4,29 @@ Changelog of changes made during development sessions.
 
 ---
 
+## 2026-05-11
+
+### Nearform brand redesign of the design system
+- Rewired the Tailwind tokens around the Nearform brand: added a full `nf.*` palette (Midnight, Green, Purple, Blue, Grey with shades) in `tailwind.config.ts`, plus `text-on-accent` and `decorative-accent` semantic colors.
+- Squared the radius scale: every named alias (`xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, `4xl`) now resolves to `0px`. Only `rounded-full` keeps a value, so circular controls (avatars, switch tracks/thumbs, slider thumbs, progress bars, FAB) still render correctly.
+- Added Bitter as a second `localFont` in `src/app/layout.tsx` and exposed it via `--font-bitter`. Tailwind now exposes `font-serif`, `font-display`, and `font-bitter` for callouts; Inter remains the default sans.
+- Rewrote `src/app/globals.css` with a surface-aware token model:
+  - Light theme: white page, Midnight text, Midnight CTAs with white text, brand Blue focus ring.
+  - Dark theme: Midnight page, white text, Green CTAs with Midnight text, Green focus ring.
+  - Added `.surface-inverse` helper class that re-scopes the same CSS variables inside its subtree so a hero band (or header) flips to the opposite surface without changing the page theme.
+- Fixed every WCAG-failing white-on-Green pairing by switching components from hardcoded `text-white` to `text-on-accent`: `button` (solid primary + positive), `badge` (solid info + success), `fab`, `tabs` (active state), `checkbox` (check icon).
+- Bumped accessibility sizing: button heights now hit 44px at default (`md`); inputs, cards, checkboxes, and radio indicators got the same treatment. Focus-ring offset bumped from 2 to 4 across button, switch, select, alert, link, pressable, and tabs.
+- Updated `src/app/design-system/foundations/page.tsx` with the new Nearform palette swatches (Midnight, Green, Purple, Blue, Grey shade scales), an accent surface-aware demo, a side-by-side `surface-inverse` demo, and a Bitter callout sample.
+- Added a brand hero band to `src/app/design-system/page.tsx` that uses `.surface-inverse` to demonstrate the pattern in both themes.
+- Refreshed `README.md` features list and root-layout metadata to reflect the Nearform brand.
+
+### Brand follow-ups
+- Squared off the "Horizontal ScrollView" filter chip wrapper on `src/app/design-system/page.tsx` (was `rounded-full`, now `border border-border-decorative`) and replaced the pill bars in the foundations spacing-scale demo with rectangular ones.
+- Updated the foundations Border Radius documentation to reflect that every named alias resolves to `0px` and only `rounded-full` keeps a value.
+- Browser-verified the redesign across `/design-system`, `/design-system/foundations`, and `/prototype/journeys/banking/login` in both light and dark modes.
+
+---
+
 ## 2026-04-07
 
 ### Prototype Screenshot System

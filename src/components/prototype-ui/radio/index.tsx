@@ -42,13 +42,13 @@ const radioVariants = cva(
 );
 
 const radioIndicatorVariants = cva(
-  "inline-flex items-center justify-center rounded-full border-2 border-border-standard bg-bg-elevated transition-all duration-200 data-[checked=true]:border-accent data-[disabled=true]:opacity-40",
+  "inline-flex items-center justify-center rounded-full border-2 border-border-standard bg-bg-elevated transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 data-[checked=true]:border-accent data-[disabled=true]:opacity-40",
   {
     variants: {
       size: {
-        sm: "w-4 h-4",
-        md: "w-5 h-5",
-        lg: "w-6 h-6",
+        sm: "w-5 h-5",
+        md: "w-6 h-6",
+        lg: "w-7 h-7",
       },
     },
     defaultVariants: {
@@ -62,9 +62,9 @@ const radioIndicatorDotVariants = cva(
   {
     variants: {
       size: {
-        sm: "w-2 h-2",
-        md: "w-2.5 h-2.5",
-        lg: "w-3 h-3",
+        sm: "w-2.5 h-2.5",
+        md: "w-3 h-3",
+        lg: "w-3.5 h-3.5",
       },
     },
     defaultVariants: {

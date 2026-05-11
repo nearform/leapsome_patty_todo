@@ -26,7 +26,7 @@ import type { LucideIcon } from "lucide-react";
  */
 
 const badgeVariants = cva(
-  "inline-flex items-center rounded-full font-medium transition-colors",
+  "inline-flex items-center font-medium transition-colors",
   {
     variants: {
       variant: {
@@ -47,16 +47,19 @@ const badgeVariants = cva(
       },
     },
     compoundVariants: [
-      // Solid variants - use dark accent colors for better contrast
+      // Solid variants - use dark accent colors for better contrast.
+      // The "info" badge uses the surface-aware accent token, so its text
+      // pairs correctly with bg-accent in both themes (white-on-Midnight in
+      // light mode, Midnight-on-Green in dark mode).
       {
         variant: "solid",
         action: "info",
-        className: "bg-accent text-white",
+        className: "bg-accent text-text-on-accent",
       },
       {
         variant: "solid",
         action: "success",
-        className: "bg-success-dark text-white",
+        className: "bg-success-dark text-text-on-accent",
       },
       {
         variant: "solid",

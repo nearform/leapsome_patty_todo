@@ -10,9 +10,16 @@ const inter = localFont({
   display: "swap",
 });
 
+const bitter = localFont({
+  src: "../../public/fonts/Bitter-VariableFont_wght.ttf",
+  variable: "--font-bitter",
+  weight: "100 900",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "Design System",
-  description: "A comprehensive design system scaffold built with gluestack-ui",
+  title: "Nearform design system",
+  description: "Nearform-branded design system and prototyping workspace",
 };
 
 export default function RootLayout({
@@ -22,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} antialiased`}>
+      <body className={`${inter.variable} ${bitter.variable} antialiased`}>
         <ThemeProvider>
           {children}
         </ThemeProvider>

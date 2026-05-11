@@ -37,7 +37,7 @@ import type { LucideIcon } from "lucide-react";
  */
 
 const selectVariants = cva(
-  "flex w-full rounded-sm border bg-bg-elevated px-3 py-2 text-base text-text-body ring-offset-bg-base appearance-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-[disabled=true]:cursor-not-allowed data-[disabled=true]:bg-bg-secondary data-[disabled=true]:text-text-disabled data-[disabled=true]:border-border-subtle transition-colors",
+  "flex w-full rounded-sm border bg-bg-elevated px-3 py-2 text-base text-text-body ring-offset-bg-base appearance-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 data-[disabled=true]:cursor-not-allowed data-[disabled=true]:bg-bg-secondary data-[disabled=true]:text-text-disabled data-[disabled=true]:border-border-subtle transition-colors",
   {
     variants: {
       variant: {

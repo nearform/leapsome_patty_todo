@@ -30,13 +30,13 @@ const checkboxVariants = cva(
 );
 
 const checkboxIndicatorVariants = cva(
-  "inline-flex items-center justify-center rounded border-2 border-border-standard bg-bg-elevated transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-[checked=true]:bg-accent data-[checked=true]:border-accent data-[hover=true]:border-border-subtle data-[hover=true]:data-[checked=true]:bg-accent-hover data-[disabled=true]:opacity-40",
+  "inline-flex items-center justify-center border-2 border-border-standard bg-bg-elevated transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 data-[checked=true]:bg-accent data-[checked=true]:border-accent data-[hover=true]:border-border-subtle data-[hover=true]:data-[checked=true]:bg-accent-hover data-[disabled=true]:opacity-40",
   {
     variants: {
       size: {
-        sm: "w-4 h-4",
-        md: "w-5 h-5",
-        lg: "w-6 h-6",
+        sm: "w-5 h-5",
+        md: "w-6 h-6",
+        lg: "w-7 h-7",
       },
     },
     defaultVariants: {
@@ -298,7 +298,7 @@ const CheckboxIcon: React.FC<CheckboxIconProps> = ({ as: IconComponent = Check, 
   const { size } = useCheckboxContext();
   const iconSize = checkboxIconSizeMap[size || "md"];
 
-  return <Icon as={IconComponent} size={iconSize} className={cn("text-white", className)} />;
+  return <Icon as={IconComponent} size={iconSize} className={cn("text-text-on-accent", className)} />;
 };
 
 CheckboxIcon.displayName = "CheckboxIcon";

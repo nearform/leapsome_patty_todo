@@ -24,7 +24,7 @@ import { cn } from "@/lib/utils";
  */
 
 const linkVariants = cva(
-  "inline-flex items-center gap-1 cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2",
+  "inline-flex items-center gap-1 cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-4",
   {
     variants: {
       size: {
