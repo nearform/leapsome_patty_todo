@@ -4,6 +4,11 @@ Changelog of changes made during development sessions.
 
 ---
 
+## 2026-08-25
+
+### README describes TripTogether
+- Rewrote `README.md` around the trip planner prototype: screens, demo data, brand, clone URL for `nearform/leapsome_patty_todo`, and how localStorage persistence works.
+
 ## 2026-08-21
 
 ### Avatar group ring hugs the circle
