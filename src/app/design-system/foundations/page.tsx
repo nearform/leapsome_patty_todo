@@ -151,96 +151,39 @@ export default function FoundationsPage() {
             <div className="absolute inset-px bg-bg-elevated" />
             <Card variant="ghost" size="lg" className="relative h-full overflow-hidden">
             <CardHeader>
-              <CardTitle>Nearform brand palette</CardTitle>
+              <CardTitle>TripTogether palette</CardTitle>
               <CardDescription>
-                Midnight + Green is the predominant pairing; Purple and Blue
-                are accents reserved for diagrams and inline links.
+                Ivory, Paper, and Stone neutrals with Charcoal CTAs. Terracotta
+                is decorative; Sage, Moss, Sand, and Dusty Blue colour people and chips.
               </CardDescription>
             </CardHeader>
             <CardContent>
               <VStack space="xl">
-                {/* Brand Shade Scales */}
-                {[
-                  {
-                    name: "Midnight",
-                    desc: "Primary text, dark hero backgrounds, light-mode CTAs",
-                    shades: [
-                      { name: "10", color: "#F4F8FA" },
-                      { name: "30", color: "#97A1B8" },
-                      { name: "50", color: "#526288" },
-                      { name: "80", color: "#0C3D60" },
-                      { name: "Base", color: "#000E38" },
-                    ],
-                  },
-                  {
-                    name: "Green",
-                    desc: "Decorative accents, table headers, dark-mode CTAs (always paired with Midnight text)",
-                    shades: [
-                      { name: "10", color: "#E5FCF5" },
-                      { name: "30", color: "#B2F7E1" },
-                      { name: "50", color: "#78EEC5" },
-                      { name: "80", color: "#33EAAE" },
-                      { name: "Base", color: "#00E5A4" },
-                    ],
-                  },
-                  {
-                    name: "Purple",
-                    desc: "Diagram and infographic accent only",
-                    shades: [
-                      { name: "10", color: "#F3EDFF" },
-                      { name: "30", color: "#DCCAFF" },
-                      { name: "50", color: "#C4A7FF" },
-                      { name: "80", color: "#A173FF" },
-                      { name: "Base", color: "#8950FF" },
-                    ],
-                  },
-                  {
-                    name: "Blue",
-                    desc: "Inline links, focus rings, supporting diagrams",
-                    shades: [
-                      { name: "10", color: "#E8F0FF" },
-                      { name: "30", color: "#B9D3FF" },
-                      { name: "50", color: "#8AB5FF" },
-                      { name: "80", color: "#4589FF" },
-                      { name: "Base", color: "#166BFF" },
-                    ],
-                  },
-                  {
-                    name: "Grey",
-                    desc: "Borders, table dividers, neutral surfaces",
-                    shades: [
-                      { name: "10", color: "#EAEBED" },
-                      { name: "30", color: "#D9D9D9" },
-                      { name: "80", color: "#454551" },
-                    ],
-                  },
-                ].map(({ name, desc, shades }) => (
-                  <Box key={name}>
-                    <Text weight="semibold" className="mb-1">{name}</Text>
-                    <Text size="xs" muted className="mb-3">{desc}</Text>
-                    <div className="flex h-16 overflow-hidden border border-border-decorative">
-                      {shades.map(({ name: shadeName, color }) => (
-                        <div
-                          key={shadeName}
-                          className="flex-1 flex items-end justify-center pb-1"
-                          style={{ backgroundColor: color }}
-                        >
-                          <Text
-                            size="xs"
-                            style={{
-                              color:
-                                name === "Green" || shadeName === "10" || shadeName === "30"
-                                  ? "#000E38"
-                                  : "#FFFFFF",
-                            }}
-                          >
-                            {shadeName}
-                          </Text>
-                        </div>
-                      ))}
-                    </div>
-                  </Box>
-                ))}
+                {/* Brand colours */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+                  {[
+                    { name: "Ivory", hex: "#F7F4EF", ink: "#111111" },
+                    { name: "Paper", hex: "#ECE6DE", ink: "#111111" },
+                    { name: "Stone", hex: "#D8D3C7", ink: "#111111" },
+                    { name: "Charcoal", hex: "#111111", ink: "#F7F4EF" },
+                    { name: "Slate", hex: "#495057", ink: "#F7F4EF" },
+                    { name: "Terracotta", hex: "#E4572E", ink: "#F7F4EF" },
+                    { name: "Sage", hex: "#8A927D", ink: "#111111" },
+                    { name: "Moss", hex: "#BDB6A2", ink: "#111111" },
+                    { name: "Sand", hex: "#E6DCC6", ink: "#111111" },
+                    { name: "Dusty Blue", hex: "#5B7DA6", ink: "#F7F4EF" },
+                  ].map(({ name, hex, ink }) => (
+                    <VStack key={name} space="xs">
+                      <div
+                        className="h-20 rounded-xl border border-border-decorative flex items-end p-2"
+                        style={{ backgroundColor: hex }}
+                      >
+                        <Text size="xs" style={{ color: ink }}>{hex}</Text>
+                      </div>
+                      <Text size="xs" weight="medium">{name}</Text>
+                    </VStack>
+                  ))}
+                </div>
 
                 {/* Background Colors */}
                 <Box>
@@ -302,12 +245,12 @@ export default function FoundationsPage() {
 
                 {/* Accent Colors - Surface aware */}
                 <Box>
-                  <Text weight="semibold" className="mb-1">Accent (surface-aware)</Text>
+                  <Text weight="semibold" className="mb-1">Accent (CTA)</Text>
                   <Text size="xs" muted className="mb-3">
-                    Flips per surface: Midnight + white text on light pages,
-                    Green + Midnight text on dark pages. Wrap a section in
-                    <code className="font-mono mx-1 px-1 py-0.5 bg-bg-tertiary text-text-primary">.surface-inverse</code>
-                    to flip it locally.
+                    Charcoal with Ivory type on the light page; Ivory with Charcoal
+                    type in dark mode. Terracotta lives on
+                    <code className="font-mono mx-1 px-1 py-0.5 bg-bg-tertiary text-text-primary">decorative-accent</code>
+                    and is never the primary button.
                   </Text>
                   <div className="flex flex-wrap gap-3">
                     {[
@@ -342,26 +285,24 @@ export default function FoundationsPage() {
                     </div>
                     <div className="surface-inverse p-6 border border-border-decorative">
                       <Text size="xs" muted className="mb-3 uppercase tracking-loose-md">Surface inverse</Text>
-                      <Text className="mb-4">Hero/nav band, accent flips to pair with the new background.</Text>
+                      <Text className="mb-4">Charcoal masthead with ivory type — plans are better together.</Text>
                       <Button>Primary action</Button>
                     </div>
                   </div>
                 </Box>
 
-                {/* Bitter Callout Sample */}
                 <Box>
                   <Text weight="semibold" className="mb-1">Typography pairing</Text>
                   <Text size="xs" muted className="mb-3">
-                    Inter for everything; Bitter reserved for pull-out quotes
-                    and empathetic callouts.
+                    Fraunces for display headlines; Geist for UI, body, and
+                    uppercase section labels.
                   </Text>
-                  <div className="border-l-4 border-decorative-accent bg-bg-secondary p-6">
-                    <p className="font-bitter text-2xl text-text-primary leading-snug">
-                      Engineered differently &mdash; teams that move with the
-                      precision of a single mind.
+                  <div className="border-l-4 border-decorative-accent bg-bg-secondary p-6 rounded-xl">
+                    <p className="font-display text-2xl text-text-primary leading-snug">
+                      Plans are better together.
                     </p>
-                    <Text size="xs" muted className="mt-3 font-sans">
-                      Bitter, 24px, Midnight. Use sparingly for emphasis only.
+                    <Text size="xs" muted className="mt-3 font-sans uppercase tracking-widest">
+                      Fraunces display · Geist labels
                     </Text>
                   </div>
                 </Box>
@@ -1248,20 +1189,16 @@ export default function FoundationsPage() {
                   </VStack>
                 </VStack>
 
-                {/* Border Radius — Nearform brand: square by default */}
                 <VStack space="md" className="items-start">
                   <Text weight="semibold" size="lg">Border Radius</Text>
                   <Text size="sm" muted className="mb-2">
-                    Nearform brand: every named radius alias resolves to{" "}
-                    <code className="font-mono px-1 py-0.5 bg-bg-tertiary text-text-primary">0px</code>.
-                    Only <code className="font-mono px-1 py-0.5 bg-bg-tertiary text-text-primary">rounded-full</code>
-                    {" "}keeps a value, so circular controls (avatars, switch
-                    tracks, slider thumbs, progress bars, FAB) still render
-                    correctly.
+                    Controls 8px, cards 12px, heroes 20px. Avatars and switches stay fully round.
                   </Text>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 w-full">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full">
                     {[
-                      { name: "none / xs / sm / md / lg / xl / 2xl / 3xl / 4xl", value: "0px", radius: "rounded-none" },
+                      { name: "sm / md", value: "8px", radius: "rounded-md" },
+                      { name: "lg / xl", value: "12px", radius: "rounded-xl" },
+                      { name: "2xl / 3xl", value: "20px", radius: "rounded-2xl" },
                       { name: "full", value: "9999px", radius: "rounded-full" },
                     ].map(({ name, value, radius }) => (
                       <VStack key={name} space="xs" className="items-center">

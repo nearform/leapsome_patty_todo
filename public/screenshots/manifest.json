@@ -1,29 +1,109 @@
 {
-  "generated": "2026-05-11T14:13:49.416Z",
+  "generated": "2026-08-21T21:08:30.163Z",
   "mode": "mobile",
   "viewport": {
     "width": 375,
     "height": 812
   },
   "screens": {
-    "banking/login": {
-      "journeyId": "banking",
-      "pageId": "login",
-      "name": "Login",
-      "path": "/prototype/journeys/banking/login",
+    "trip-planner/profile-switcher": {
+      "journeyId": "trip-planner",
+      "pageId": "profile-switcher",
+      "name": "Profile switcher",
+      "path": "/prototype/journeys/trip-planner/profile-switcher",
       "latest": "latest.png",
       "history": [
-        "2026-05-11T14-13-49.png"
+        "2026-08-21T21-08-30.png"
       ]
     },
-    "banking/dashboard": {
-      "journeyId": "banking",
-      "pageId": "dashboard",
-      "name": "Dashboard",
-      "path": "/prototype/journeys/banking/dashboard",
+    "trip-planner/trips-home": {
+      "journeyId": "trip-planner",
+      "pageId": "trips-home",
+      "name": "Trips home",
+      "path": "/prototype/journeys/trip-planner/trips-home",
       "latest": "latest.png",
       "history": [
-        "2026-05-11T14-13-49.png"
+        "2026-08-21T21-08-30.png"
+      ]
+    },
+    "trip-planner/create-trip": {
+      "journeyId": "trip-planner",
+      "pageId": "create-trip",
+      "name": "Create trip",
+      "path": "/prototype/journeys/trip-planner/create-trip",
+      "latest": "latest.png",
+      "history": [
+        "2026-08-21T21-08-30.png"
+      ]
+    },
+    "trip-planner/trip-overview": {
+      "journeyId": "trip-planner",
+      "pageId": "trip-overview",
+      "name": "Trip overview",
+      "path": "/prototype/journeys/trip-planner/trip-overview",
+      "latest": "latest.png",
+      "history": [
+        "2026-08-21T21-08-30.png"
+      ]
+    },
+    "trip-planner/itinerary": {
+      "journeyId": "trip-planner",
+      "pageId": "itinerary",
+      "name": "Itinerary",
+      "path": "/prototype/journeys/trip-planner/itinerary",
+      "latest": "latest.png",
+      "history": [
+        "2026-08-21T21-08-30.png"
+      ]
+    },
+    "trip-planner/todos": {
+      "journeyId": "trip-planner",
+      "pageId": "todos",
+      "name": "To-dos & packing",
+      "path": "/prototype/journeys/trip-planner/todos",
+      "latest": "latest.png",
+      "history": [
+        "2026-08-21T21-08-30.png"
+      ]
+    },
+    "trip-planner/polls": {
+      "journeyId": "trip-planner",
+      "pageId": "polls",
+      "name": "Decisions",
+      "path": "/prototype/journeys/trip-planner/polls",
+      "latest": "latest.png",
+      "history": [
+        "2026-08-21T21-08-30.png"
+      ]
+    },
+    "trip-planner/budget": {
+      "journeyId": "trip-planner",
+      "pageId": "budget",
+      "name": "Budget",
+      "path": "/prototype/journeys/trip-planner/budget",
+      "latest": "latest.png",
+      "history": [
+        "2026-08-21T21-08-30.png"
+      ]
+    },
+    "trip-planner/my-profile": {
+      "journeyId": "trip-planner",
+      "pageId": "my-profile",
+      "name": "My profile",
+      "path": "/prototype/journeys/trip-planner/my-profile",
+      "latest": "latest.png",
+      "history": [
+        "2026-08-21T21-08-30.png"
+      ]
+    },
+    "trip-planner/settings": {
+      "journeyId": "trip-planner",
+      "pageId": "settings",
+      "name": "App settings",
+      "path": "/prototype/journeys/trip-planner/settings",
+      "latest": "latest.png",
+      "history": [
+        "2026-08-21T21-08-30.png"
       ]
     }
   }

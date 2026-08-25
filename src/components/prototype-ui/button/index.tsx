@@ -15,15 +15,13 @@ import type { LucideIcon } from "lucide-react";
  * - size: xs | sm | md | lg | xl
  */
 const buttonVariants = cva(
-  // Square corners (no rounded class), generous padding, brand-blue focus ring
-  // with a 4px offset for clear visibility on every surface.
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-bg-base disabled:pointer-events-none disabled:opacity-40",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap font-semibold rounded-md transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-bg-base disabled:pointer-events-none disabled:opacity-40",
   {
     variants: {
       variant: {
-        solid: "",
-        outline: "border-2 bg-transparent",
-        link: "underline-offset-4 hover:underline bg-transparent px-0",
+        solid: "uppercase tracking-widest text-sm",
+        outline: "border bg-transparent uppercase tracking-widest text-sm",
+        link: "underline-offset-4 hover:underline bg-transparent px-0 uppercase tracking-widest text-sm",
       },
       action: {
         primary: "",
@@ -34,11 +32,11 @@ const buttonVariants = cva(
       },
       // Sizes meet 44x44 minimum tap-target at md+. xs/sm remain for dense UI.
       size: {
-        xs: "h-10 px-4 text-xs",
-        sm: "h-11 px-5 text-sm",
-        md: "h-12 px-6 text-base",
-        lg: "h-14 px-7 text-lg",
-        xl: "h-16 px-8 text-xl",
+        xs: "h-10 px-4",
+        sm: "h-11 px-5",
+        md: "h-12 px-6",
+        lg: "h-14 px-7",
+        xl: "h-16 px-8",
       },
       isFullWidth: {
         true: "w-full",
@@ -75,7 +73,7 @@ const buttonVariants = cva(
       {
         variant: "outline",
         action: "primary",
-        className: "border-accent text-accent hover:bg-bg-secondary active:bg-bg-tertiary",
+        className: "border-accent text-text-primary hover:bg-bg-secondary active:bg-bg-tertiary",
       },
       {
         variant: "outline",
@@ -92,11 +90,11 @@ const buttonVariants = cva(
         action: "negative",
         className: "border-error text-error hover:bg-error-bg active:bg-error-bg",
       },
-      // Link variants — use brand Blue for inline links per Nearform brand
+      // Link variants — charcoal, not a colorful SaaS link
       {
         variant: "link",
         action: "primary",
-        className: "text-info hover:text-info-dark",
+        className: "text-text-primary hover:text-text-secondary",
       },
       {
         variant: "link",

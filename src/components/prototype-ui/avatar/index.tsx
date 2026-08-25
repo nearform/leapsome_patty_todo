@@ -27,7 +27,7 @@ import { cn } from "@/lib/utils";
  */
 
 const avatarVariants = cva(
-  "relative inline-flex shrink-0 items-center justify-center rounded-full bg-bg-tertiary",
+  "relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-bg-tertiary leading-none",
   {
     variants: {
       size: {
@@ -119,7 +119,7 @@ const AvatarFallbackText = React.forwardRef<HTMLSpanElement, AvatarFallbackTextP
       <span
         ref={ref}
         className={cn(
-          "absolute inset-0 flex h-full w-full items-center justify-center rounded-full font-medium text-text-secondary uppercase",
+          "absolute inset-0 flex h-full w-full items-center justify-center rounded-full font-medium leading-none text-text-secondary uppercase",
           className
         )}
         {...props}
@@ -141,7 +141,7 @@ const AvatarFallback = React.forwardRef<HTMLSpanElement, AvatarFallbackProps>(
       <span
         ref={ref}
         className={cn(
-          "absolute inset-0 flex h-full w-full items-center justify-center rounded-full font-medium text-text-secondary",
+          "absolute inset-0 flex h-full w-full items-center justify-center rounded-full font-medium leading-none text-text-secondary",
           className
         )}
         {...props}
@@ -169,7 +169,7 @@ const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
     return (
       <div
         ref={ref}
-        className={cn("flex -space-x-3", className)}
+        className={cn("flex items-center -space-x-3", className)}
         role="group"
         aria-label="Avatar group"
         {...props}
@@ -177,13 +177,13 @@ const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
         {visibleChildren.map((child, index) => (
           <div
             key={index}
-            className="ring-2 ring-bg-elevated rounded-full"
+            className="inline-flex size-fit shrink-0 leading-none rounded-full ring-2 ring-bg-elevated"
           >
             {child}
           </div>
         ))}
         {remaining > 0 && (
-          <div className="ring-2 ring-bg-elevated rounded-full">
+          <div className="inline-flex size-fit shrink-0 leading-none rounded-full ring-2 ring-bg-elevated">
             <Avatar>
               <AvatarFallback>+{remaining}</AvatarFallback>
             </Avatar>

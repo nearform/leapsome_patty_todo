@@ -31,7 +31,7 @@ import type { LucideIcon } from "lucide-react";
  */
 
 const alertVariants = cva(
-  "relative w-full rounded-none p-4 flex items-start gap-3 transition-colors",
+  "relative w-full rounded-md p-4 flex items-start gap-3 transition-colors",
   {
     variants: {
       action: {
@@ -78,27 +78,27 @@ const alertVariants = cva(
       {
         variant: "accent",
         action: "info",
-        className: "border-l-4 border-l-info rounded-none",
+        className: "border-l-4 border-l-info rounded-md",
       },
       {
         variant: "accent",
         action: "success",
-        className: "border-l-4 border-l-success rounded-none",
+        className: "border-l-4 border-l-success rounded-md",
       },
       {
         variant: "accent",
         action: "warning",
-        className: "border-l-4 border-l-warning rounded-none",
+        className: "border-l-4 border-l-warning rounded-md",
       },
       {
         variant: "accent",
         action: "error",
-        className: "border-l-4 border-l-error rounded-none",
+        className: "border-l-4 border-l-error rounded-md",
       },
       {
         variant: "accent",
         action: "muted",
-        className: "border-l-4 border-l-border-standard rounded-none",
+        className: "border-l-4 border-l-border-standard rounded-md",
       },
     ],
     defaultVariants: {

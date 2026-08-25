@@ -4,6 +4,39 @@ Changelog of changes made during development sessions.
 
 ---
 
+## 2026-08-21
+
+### Avatar group ring hugs the circle
+- Restored the missing comma in `avatarVariants` so the app compiles again.
+- Avatar stacks were drawing the overlap ring on a block wrapper, so line-height left a gap under the fill and the white outline sagged. Wrappers now shrink to the avatar, and the group aligns on the centre axis.
+
+### Visual trips home + avatar fill
+- Restyled trips home to match the editorial mockup: TripTogether wordmark + centred TT monogram in the header, Lisbon photo hero for Portugal 2026, Donegal thumbnail row, circular + and “Create a new trip”.
+- Fixed person avatars missing a colour fill — Tailwind was not scanning `src/lib`, so `bg-tt-*` classes never generated. Avatars now use explicit fill classes and `overflow-hidden`.
+- Settings moved onto Your profile so the home header can stay logo + avatar.
+
+### Merge HTML prototype structure onto TripTogether
+- Recomposed the journey to match the downloaded click-through: overlay iOS status bar, in-content titles, trip tabs labelled Trip / Plan / Lists / Votes / Money, and collapsed add-forms. Kept Fraunces, Geist, and ivory/charcoal tokens.
+- Expanded the seed (Alex / Jamie / Priya, Lisbon + Donegal), added currency and auto-icon settings, always-visible poll bars, and a budget spend card.
+
+### Select stays inside the device frame
+- Replaced the native `<select>` popup with an in-layout listbox so option menus clip and flip inside the iOS phone frame instead of painting over the bezel.
+
+### TripTogether brand retheme
+- Rewired design tokens to the TripTogether style guide: Ivory / Paper / Stone surfaces, Charcoal CTAs, Terracotta as decorative accent, and a `tt.*` palette (Sage, Moss, Sand, Dusty Blue). Dark theme is a warm charcoal inversion. Copied the guide to `docs/triptogether-brand-style-guide.md`.
+- Loaded Fraunces (display) and Geist (UI/body) via `next/font/google`. Restored radii to 8 / 12 / 20. Buttons, cards, inputs, badges, and overlays now round and use uppercase tracked labels on CTAs.
+- Restyled the trip-planner journey as an editorial travel magazine: “Plans are better together.”, Lisbon hero card with cover still, person colours, and iOS staging on Ivory/Paper.
+
+### TripTogether MVP journey
+- Added the first prototype journey, TripTogether (`src/app/prototype/journeys/trip-planner/`), with 10 interactive screens: profile switcher, trips home, create trip, trip overview, itinerary, to-dos, polls, budget, my profile, and settings.
+- Seeded Portugal 2026 demo data (3 profiles, itinerary, packing list, poll, expense) with localStorage persistence and a settings reset.
+- Registered the journey in `src/lib/data/journeys-registry.ts`. Screens compose existing design-system components; `InputField` now also accepts `date` and `time` types.
+
+### iOS device frame for TripTogether
+- Wrapped the trip-planner journey in an iPhone-style frame (Dynamic Island, status bar, home indicator, hardware buttons). On desktop the app sits in a bezelled phone; on small viewports it goes full-bleed with the same iOS chrome. App headers/footers are pinned inside the screen instead of the browser viewport.
+
+---
+
 ## 2026-05-11
 
 ### Prototype hydration fix + screenshot refresh

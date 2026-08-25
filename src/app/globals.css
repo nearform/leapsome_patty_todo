@@ -3,99 +3,92 @@
 @tailwind utilities;
 
 /* ============================================
-   NEARFORM BRAND — SURFACE-AWARE TOKENS
+   TRIPTOGETHER BRAND — WARM EDITORIAL TOKENS
    ============================================
-   The accent color flips per theme so the primary CTA always pairs
-   accessibly with the surface it sits on:
-     - Light page (white)    -> Midnight CTA + white text
-     - Dark page  (Midnight) -> Green CTA    + Midnight text
-   Inside .surface-inverse the same tokens flip to the opposite pairing,
-   so a dark hero in light mode hosts a Green CTA, and a light header in
-   dark mode hosts a Midnight CTA. White-on-Green and Green-on-white
-   text combinations never occur (they fail WCAG per Nearform brand).
+   Ivory page, charcoal CTAs, terracotta used sparingly for status.
+   .surface-inverse paints a charcoal masthead with ivory type.
    ============================================ */
 
 /* ============================================
-   LIGHT THEME (Default) — white page, Midnight predominant
+   LIGHT THEME (Default) — Ivory page, Charcoal CTAs
    ============================================ */
 :root {
   /* Background Colors */
-  --background-base: #FFFFFF;        /* Brand default page background */
-  --background-elevated: #FFFFFF;
-  --background-secondary: #F4F8FA;   /* Midnight 10 */
-  --background-tertiary: #EAEBED;    /* Grey 10 */
+  --background-base: #F7F4EF;        /* Ivory */
+  --background-elevated: #ECE6DE;    /* Paper */
+  --background-secondary: #ECE6DE;   /* Paper */
+  --background-tertiary: #E6DCC6;    /* Sand */
 
   /* Border Colors */
-  --border-standard: #526288;        /* Midnight 50 — 4.5:1 on white */
-  --border-subtle: #97A1B8;          /* Midnight 30 — 3:1 on white, WCAG non-text */
-  --border-decorative: #D9D9D9;      /* Grey 30 */
+  --border-standard: #D8D3C7;        /* Stone */
+  --border-subtle: #D8D3C7;
+  --border-decorative: #D8D3C7;
 
-  /* Text Colors — Midnight on white per brand */
-  --text-primary: #000E38;
-  --text-body: #000E38;
-  --text-secondary: #526288;         /* Midnight 50 */
-  --text-tertiary: #97A1B8;          /* Midnight 30 */
-  --text-disabled: #97A1B8;
+  /* Text Colors */
+  --text-primary: #111111;           /* Charcoal */
+  --text-body: #111111;
+  --text-secondary: #495057;         /* Slate */
+  --text-tertiary: #7A756C;
+  --text-disabled: #7A756C;
 
-  /* Accent (CTA) — Midnight in light mode */
-  --accent-primary: #000E38;
-  --accent-light: #526288;
-  --accent-dark: #000E38;
-  --accent-hover: #0C3D60;            /* Midnight 80 */
+  /* Accent (CTA) — Charcoal with Ivory type */
+  --accent-primary: #111111;
+  --accent-light: #495057;
+  --accent-dark: #111111;
+  --accent-hover: #2A2A2A;
 
-  /* Text color paired with bg-accent — white on Midnight here */
-  --text-on-accent: #FFFFFF;
+  /* Text color paired with bg-accent */
+  --text-on-accent: #F7F4EF;
 
-  /* Always-Green decorative token. Use for accent bars, icon highlights,
-     dividers, and hero glints — never as text on white. */
-  --decorative-accent: #00E5A4;
+  /* Terracotta — status dots, emphasis, never the primary CTA */
+  --decorative-accent: #E4572E;
 
-  /* Success Colors — darker green so success text is readable on white */
-  --success-primary: #00B383;
-  --success-light: #33EAAE;
-  --success-dark: #007F5C;
-  --success-background: #E5FCF5;     /* Green 10 */
+  /* Success — Sage */
+  --success-primary: #6B735F;
+  --success-light: #8A927D;
+  --success-dark: #545A4A;
+  --success-background: #E6DCC6;
 
-  /* Info Colors — brand Blue */
-  --info-primary: #166BFF;
-  --info-light: #4589FF;
-  --info-dark: #0A4ECC;
-  --info-background: #E8F0FF;        /* Blue 10 */
-  --info-background-40: rgba(232, 240, 255, 0.4);
+  /* Info — Dusty Blue */
+  --info-primary: #5B7DA6;
+  --info-light: #8AA3C2;
+  --info-dark: #3D5A7A;
+  --info-background: #E8EEF4;
+  --info-background-40: rgba(232, 238, 244, 0.4);
 
-  /* Warning Colors — accessible amber */
-  --warning-primary: #B45309;
-  --warning-light: #F59E0B;
-  --warning-dark: #92400E;
-  --warning-background: #FEF3C7;
+  /* Warning — Terracotta */
+  --warning-primary: #C24720;
+  --warning-light: #E4572E;
+  --warning-dark: #9A3412;
+  --warning-background: #F4E4DC;
 
-  /* Error Colors — accessible red */
-  --error-primary: #B91C1C;
-  --error-light: #DC2626;
-  --error-dark: #991B1B;
-  --error-background: #FEE2E2;
+  /* Error — warm red-brown */
+  --error-primary: #A33B24;
+  --error-light: #C24720;
+  --error-dark: #7F2D1A;
+  --error-background: #F4E4DC;
 
-  /* Neutral Scale (legacy — prefer nf.* or semantic tokens) */
-  --neutral-0: #FFFFFF;
-  --neutral-50: #FAFAFA;
-  --neutral-100: #F5F5F5;
-  --neutral-200: #EEEEEE;
-  --neutral-300: #E0E0E0;
-  --neutral-400: #9CA3AF;
-  --neutral-500: #6B7280;
-  --neutral-600: #4B5563;
-  --neutral-700: #374151;
-  --neutral-800: #1F2937;
-  --neutral-900: #111827;
-  --neutral-950: #0B0F19;
+  /* Neutral Scale (warm, aligned to brand) */
+  --neutral-0: #F7F4EF;
+  --neutral-50: #F7F4EF;
+  --neutral-100: #ECE6DE;
+  --neutral-200: #E6DCC6;
+  --neutral-300: #D8D3C7;
+  --neutral-400: #BDB6A2;
+  --neutral-500: #8A927D;
+  --neutral-600: #495057;
+  --neutral-700: #3A3A3A;
+  --neutral-800: #1C1C1C;
+  --neutral-900: #111111;
+  --neutral-950: #111111;
 
   /* ========================================
      Typography Tokens
      ======================================== */
 
-  /* Font Family */
-  --font-family-primary: var(--font-inter), 'Inter', system-ui, -apple-system, sans-serif;
-  --font-family-secondary: var(--font-bitter), 'Bitter', Georgia, serif;
+  /* Font Family — Geist (UI/body), Fraunces (display) */
+  --font-family-primary: var(--font-geist), system-ui, -apple-system, sans-serif;
+  --font-family-secondary: var(--font-fraunces), Georgia, serif;
 
   /* Font Sizes */
   --font-size-0: 6px;
@@ -176,136 +169,120 @@
   --space-20: 80px;
   --space-24: 96px;
 
-  /* Ring/Focus — brand Blue, high-contrast on white and on Midnight */
-  --ring-color: #166BFF;
+  /* Ring/Focus — charcoal on ivory */
+  --ring-color: #111111;
 }
 
 /* ============================================
-   DARK THEME — Midnight page, Green predominant CTA
+   DARK THEME — Charcoal page, Ivory CTAs
    ============================================ */
 .dark {
   /* Background Colors */
-  --background-base: #000E38;        /* Midnight */
-  --background-elevated: #0C3D60;    /* Midnight 80 */
-  --background-secondary: #0C3D60;
-  --background-tertiary: #526288;    /* Midnight 50 */
+  --background-base: #111111;
+  --background-elevated: #1C1C1C;
+  --background-secondary: #1C1C1C;
+  --background-tertiary: #2E2E2E;
 
   /* Border Colors */
-  --border-standard: #97A1B8;        /* Midnight 30 — readable on Midnight */
-  --border-subtle: #526288;
-  --border-decorative: #0C3D60;
+  --border-standard: #3A3A3A;
+  --border-subtle: #3A3A3A;
+  --border-decorative: #2E2E2E;
 
-  /* Text Colors — white on Midnight per brand */
-  --text-primary: #FFFFFF;
-  --text-body: #FFFFFF;
-  --text-secondary: #97A1B8;
-  --text-tertiary: #526288;
-  --text-disabled: #526288;
+  /* Text Colors */
+  --text-primary: #F7F4EF;
+  --text-body: #F7F4EF;
+  --text-secondary: #D8D3C7;
+  --text-tertiary: #8A8680;
+  --text-disabled: #8A8680;
 
-  /* Accent (CTA) — Green in dark mode */
-  --accent-primary: #00E5A4;
-  --accent-light: #78EEC5;
-  --accent-dark: #00B383;
-  --accent-hover: #33EAAE;            /* Green 80 */
+  /* Accent (CTA) — Ivory with Charcoal type */
+  --accent-primary: #F7F4EF;
+  --accent-light: #ECE6DE;
+  --accent-dark: #E6DCC6;
+  --accent-hover: #ECE6DE;
+  --text-on-accent: #111111;
 
-  /* Text color paired with bg-accent — Midnight on Green
-     (the only pairing that passes WCAG with brand Green) */
-  --text-on-accent: #000E38;
+  --decorative-accent: #E4572E;
 
-  /* Always-Green decorative token */
-  --decorative-accent: #00E5A4;
+  --success-primary: #8A927D;
+  --success-light: #BDB6A2;
+  --success-dark: #6B735F;
+  --success-background: #1C1C1C;
 
-  /* Success Colors */
-  --success-primary: #33EAAE;
-  --success-light: #78EEC5;
-  --success-dark: #00B383;
-  --success-background: #0C3D60;
+  --info-primary: #8AA3C2;
+  --info-light: #5B7DA6;
+  --info-dark: #3D5A7A;
+  --info-background: #1C1C1C;
+  --info-background-40: rgba(91, 125, 166, 0.25);
 
-  /* Info Colors */
-  --info-primary: #4589FF;
-  --info-light: #8AB5FF;
-  --info-dark: #166BFF;
-  --info-background: #0C3D60;
-  --info-background-40: rgba(12, 61, 96, 0.4);
+  --warning-primary: #E4572E;
+  --warning-light: #E4572E;
+  --warning-dark: #C24720;
+  --warning-background: #1C1C1C;
 
-  /* Warning Colors */
-  --warning-primary: #F59E0B;
-  --warning-light: #FBBF24;
-  --warning-dark: #B45309;
-  --warning-background: #0C3D60;
+  --error-primary: #E4572E;
+  --error-light: #C24720;
+  --error-dark: #A33B24;
+  --error-background: #1C1C1C;
 
-  /* Error Colors */
-  --error-primary: #F87171;
-  --error-light: #FCA5A5;
-  --error-dark: #DC2626;
-  --error-background: #0C3D60;
-
-  /* Ring/Focus — brand Green is high-contrast on Midnight */
-  --ring-color: #00E5A4;
+  --ring-color: #F7F4EF;
 }
 
 /* ============================================
-   SURFACE-INVERSE — flips the surface inside a section
+   SURFACE-INVERSE — charcoal masthead
    ============================================
-   Wrap any header, hero, navbar, or banner in
-   <div className="surface-inverse"> to invert the local surface
-   without changing the page theme:
-     - Light theme + .surface-inverse -> Midnight bg, white text, Green CTA
-     - Dark  theme + .surface-inverse -> white bg,    Midnight text, Midnight CTA
-   Every nested component reads these CSS variables, so buttons, badges,
-   inputs, borders, and focus rings flip automatically.
+   Wrap a hero or banner in .surface-inverse for charcoal + ivory type.
+   In dark mode it inverts to Ivory + charcoal type.
    ============================================ */
 
-/* Light theme + inverse section -> Midnight bg, Green CTA */
 :root .surface-inverse {
-  --background-base: #000E38;
-  --background-elevated: #0C3D60;
-  --background-secondary: #0C3D60;
-  --background-tertiary: #526288;
+  --background-base: #111111;
+  --background-elevated: #1C1C1C;
+  --background-secondary: #1C1C1C;
+  --background-tertiary: #2E2E2E;
 
-  --border-standard: #97A1B8;
-  --border-subtle: #526288;
-  --border-decorative: #0C3D60;
+  --border-standard: #3A3A3A;
+  --border-subtle: #3A3A3A;
+  --border-decorative: #2E2E2E;
 
-  --text-primary: #FFFFFF;
-  --text-body: #FFFFFF;
-  --text-secondary: #97A1B8;
-  --text-tertiary: #526288;
-  --text-disabled: #526288;
+  --text-primary: #F7F4EF;
+  --text-body: #F7F4EF;
+  --text-secondary: #D8D3C7;
+  --text-tertiary: #8A8680;
+  --text-disabled: #8A8680;
 
-  --accent-primary: #00E5A4;
-  --accent-light: #78EEC5;
-  --accent-dark: #00B383;
-  --accent-hover: #33EAAE;
-  --text-on-accent: #000E38;
+  --accent-primary: #F7F4EF;
+  --accent-light: #ECE6DE;
+  --accent-dark: #E6DCC6;
+  --accent-hover: #ECE6DE;
+  --text-on-accent: #111111;
 
-  --ring-color: #00E5A4;
+  --ring-color: #F7F4EF;
 }
 
-/* Dark theme + inverse section -> white bg, Midnight CTA */
 :root.dark .surface-inverse {
-  --background-base: #FFFFFF;
-  --background-elevated: #FFFFFF;
-  --background-secondary: #F4F8FA;
-  --background-tertiary: #EAEBED;
+  --background-base: #F7F4EF;
+  --background-elevated: #ECE6DE;
+  --background-secondary: #ECE6DE;
+  --background-tertiary: #E6DCC6;
 
-  --border-standard: #526288;
-  --border-subtle: #97A1B8;
-  --border-decorative: #D9D9D9;
+  --border-standard: #D8D3C7;
+  --border-subtle: #D8D3C7;
+  --border-decorative: #D8D3C7;
 
-  --text-primary: #000E38;
-  --text-body: #000E38;
-  --text-secondary: #526288;
-  --text-tertiary: #97A1B8;
-  --text-disabled: #97A1B8;
+  --text-primary: #111111;
+  --text-body: #111111;
+  --text-secondary: #495057;
+  --text-tertiary: #7A756C;
+  --text-disabled: #7A756C;
 
-  --accent-primary: #000E38;
-  --accent-light: #526288;
-  --accent-dark: #000E38;
-  --accent-hover: #0C3D60;
-  --text-on-accent: #FFFFFF;
+  --accent-primary: #111111;
+  --accent-light: #495057;
+  --accent-dark: #111111;
+  --accent-hover: #2A2A2A;
+  --text-on-accent: #F7F4EF;
 
-  --ring-color: #166BFF;
+  --ring-color: #111111;
 }
 
 /* The .surface-inverse wrapper itself paints the new background and
@@ -333,15 +310,14 @@ html.dark {
 body {
   background-color: var(--background-base);
   color: var(--text-body);
-  font-family: var(--font-inter), 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-geist), system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Selection — Midnight on Green is brand-correct, even in light mode */
 ::selection {
   background-color: var(--decorative-accent);
-  color: #000E38;
+  color: #F7F4EF;
 }
 
 /* ============================================

@@ -28,7 +28,7 @@ const formControlVariants = cva("flex flex-col", {
 const formControlLabelVariants = cva("flex flex-row justify-start items-center mb-1");
 
 const formControlLabelTextVariants = cva(
-  "font-medium text-text-primary",
+  "font-semibold text-text-primary uppercase tracking-widest",
   {
     variants: {
       size: {
@@ -38,7 +38,7 @@ const formControlLabelTextVariants = cva(
       },
     },
     defaultVariants: {
-      size: "md",
+      size: "sm",
     },
   }
 );

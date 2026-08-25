@@ -15,12 +15,12 @@ Built with Next.js 16 and React 19, this scaffold provides everything needed to 
 ## Features
 
 ### Design System
-- **Nearform brand-wired** - Midnight + Green primary palette, Inter for everything, Bitter reserved for callouts; full `nf.*` palette available in Tailwind
-- **Surface-aware accents** - Default CTAs are Midnight-on-white (light) or Green-on-Midnight (dark); wrap any band in `<div className="surface-inverse">` to flip the local surface and watch every nested CTA, badge, border, and focus ring re-pair correctly
-- **Square by default** - Buttons, cards, inputs, modals, tabs, badges and the rest render with 0 radius; only inherently circular controls (avatars, switch tracks, slider thumbs, progress bars, FAB) stay round
-- **Accessibility-first sizing** - 44×44 minimum tap targets at default size, 4px focus-ring offset across components, brand Blue focus rings on light surfaces and Green on dark
-- **WCAG-safe pairings** - White-on-Green and Green-on-white text combinations are impossible to produce by accident; the `text-on-accent` token always resolves to the contrast-passing color for the active surface
-- **Dark & Light Mode** - Light theme is white-with-Midnight, dark theme is Midnight-with-white; Green stays the same in both as the brand glint
+- **TripTogether brand-wired** - Ivory / Paper / Stone neutrals, Charcoal CTAs, Terracotta as decorative accent; full `tt.*` palette in Tailwind
+- **Typography** - Fraunces for display headlines, Geist for UI and body; uppercase tracked labels for metadata
+- **Radii** - 8px controls, 12px cards, 20px heroes; avatars and switches stay fully round
+- **Surface inverse** - Charcoal masthead with ivory type; wrap any band in `<div className="surface-inverse">`
+- **Dark & Light Mode** - Light is ivory-with-charcoal; dark is charcoal-with-ivory. Terracotta stays the decorative glint
+- **Accessibility-first sizing** - 44×44 minimum tap targets at default size, 4px charcoal focus-ring offset
 - **TypeScript** - Full type safety and excellent developer experience
 
 ### Prototyping
@@ -72,7 +72,6 @@ src/
 │   │   └── foundations/     # Colors, typography, icons
 │   ├── prototype/
 │   │   └── journeys/        # User journey prototypes
-│   │       └── banking/     # Sample banking journey
 │   ├── canvas/              # Canvas view of all journeys
 │   ├── globals.css          # Global styles and CSS variables
 │   └── layout.tsx           # Root layout with theme provider
@@ -88,8 +87,7 @@ src/
 │
 └── lib/
     ├── data/
-    │   ├── journeys-registry.ts  # Journey registration
-    │   └── banking.json          # Sample data
+    │   └── journeys-registry.ts  # Journey registration
     ├── types/
     │   └── journey.ts       # Journey type definitions
     └── utils.ts             # Utility functions

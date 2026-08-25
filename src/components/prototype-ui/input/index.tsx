@@ -10,7 +10,7 @@ import type { LucideIcon } from "lucide-react";
  * Input container variants - Gluestack-compatible input wrapper
  */
 const inputContainerVariants = cva(
-  "flex w-full rounded-sm border bg-bg-elevated items-center overflow-hidden transition-colors data-[focus=true]:border-accent data-[focus=true]:ring-1 data-[focus=true]:ring-accent data-[disabled=true]:opacity-40 data-[disabled=true]:cursor-not-allowed",
+  "flex w-full rounded-md border bg-bg-elevated items-center overflow-hidden transition-colors data-[focus=true]:border-accent data-[focus=true]:ring-1 data-[focus=true]:ring-accent data-[disabled=true]:opacity-40 data-[disabled=true]:cursor-not-allowed",
   {
     variants: {
       variant: {
@@ -141,7 +141,7 @@ Input.displayName = "Input";
  */
 export interface InputFieldProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> {
-  type?: "text" | "password" | "email" | "number" | "tel" | "url" | "search";
+  type?: "text" | "password" | "email" | "number" | "tel" | "url" | "search" | "date" | "time";
 }
 
 const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>(

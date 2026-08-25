@@ -100,22 +100,20 @@ export default function ComponentsPage() {
       {/* Header */}
       <Header />
 
-      {/* Brand hero band - demonstrates the surface-inverse pattern.
-          In light mode this band renders as a Midnight hero with a Green
-          primary CTA; in dark mode it renders as a white hero with a
-          Midnight primary CTA. The components inside don't change. */}
       <div className="surface-inverse w-full">
         <Box className="w-full mx-auto px-4 lg:px-8 py-16 max-w-6xl">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
             <div className="max-w-2xl">
               <span className="inline-block w-12 h-1 bg-decorative-accent mb-6" />
-              <h1 className="font-bitter text-4xl md:text-5xl text-text-primary leading-tight mb-4">
-                Engineered <span className="text-decorative-accent">differently_</span>
+              <p className="font-heading text-xs uppercase tracking-widest text-text-secondary mb-3">
+                TripTogether
+              </p>
+              <h1 className="font-display text-4xl md:text-5xl text-text-primary leading-tight mb-4">
+                Plans are better together.
               </h1>
               <p className="text-text-body text-lg max-w-xl">
-                A Nearform-branded design system. Square corners, generous tap
-                targets, and surface-aware accents that always pair accessibly
-                with whatever they sit on.
+                An editorial travel design system: ivory pages, charcoal CTAs,
+                Fraunces headlines, and 8 / 12 / 20 radii.
               </p>
             </div>
             <div className="flex gap-3">

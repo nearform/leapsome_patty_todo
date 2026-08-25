@@ -4,8 +4,6 @@
 
 This guide is designed for **designers** working with Cursor AI. You don't need to write code - you'll use natural language prompts to build pages and journeys, and the AI agent will handle all the implementation.
 
-**Note:** This scaffold comes with a sample banking journey to demonstrate the workflow. You can delete it and create your own journeys for your project.
-
 ---
 
 ## What This Project Is

@@ -26,7 +26,7 @@ import type { LucideIcon } from "lucide-react";
  */
 
 const badgeVariants = cva(
-  "inline-flex items-center font-medium transition-colors",
+  "inline-flex items-center font-semibold uppercase tracking-widest rounded-full transition-colors",
   {
     variants: {
       variant: {
@@ -54,27 +54,27 @@ const badgeVariants = cva(
       {
         variant: "solid",
         action: "info",
-        className: "bg-accent text-text-on-accent",
+        className: "bg-info-bg text-info-dark",
       },
       {
         variant: "solid",
         action: "success",
-        className: "bg-success-dark text-text-on-accent",
+        className: "bg-success-bg text-success-dark",
       },
       {
         variant: "solid",
         action: "warning",
-        className: "bg-warning-dark text-white",
+        className: "bg-warning-bg text-warning-dark",
       },
       {
         variant: "solid",
         action: "error",
-        className: "bg-error-dark text-white",
+        className: "bg-error-bg text-error-dark",
       },
       {
         variant: "solid",
         action: "muted",
-        className: "bg-neutral-600 text-white",
+        className: "bg-bg-tertiary text-text-secondary",
       },
       // Outline variants
       {

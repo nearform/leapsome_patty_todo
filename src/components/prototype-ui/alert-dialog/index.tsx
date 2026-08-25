@@ -33,7 +33,7 @@ import { Icon, X } from "@/components/prototype-ui/icon";
  */
 
 const alertDialogContentVariants = cva(
-  "relative bg-bg-elevated rounded-lg shadow-lg overflow-hidden max-h-[90vh] flex flex-col",
+  "relative bg-bg-elevated rounded-xl border border-border-decorative shadow-none overflow-hidden max-h-[90vh] flex flex-col",
   {
     variants: {
       size: {

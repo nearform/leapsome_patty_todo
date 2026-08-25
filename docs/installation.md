@@ -274,7 +274,6 @@ src/
 
 - **Use the Design System page** as a reference for available components
 - **Browse Foundations** for colors, typography, and icons
-- **Start with the sample banking journey** as a template for your own flows
 - **Use Cursor AI** to help build pages - describe what you want in natural language
 
 ---

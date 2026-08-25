@@ -15,18 +15,18 @@ import { cn } from "@/lib/utils";
  * - md → h5
  * - sm, xs → h6
  */
-const headingVariants = cva("font-heading tracking-tight text-text-primary", {
+const headingVariants = cva("tracking-tight text-text-primary", {
   variants: {
     size: {
-      xs: "text-sm font-bold",
-      sm: "text-base font-bold",
-      md: "text-lg font-bold",
-      lg: "text-xl font-bold",
-      xl: "text-2xl font-bold",
-      "2xl": "text-3xl font-bold",
-      "3xl": "text-4xl font-bold",
-      "4xl": "text-5xl font-bold",
-      "5xl": "text-6xl font-bold",
+      xs: "font-heading text-sm font-semibold uppercase tracking-widest",
+      sm: "font-heading text-base font-semibold uppercase tracking-widest",
+      md: "font-heading text-lg font-semibold",
+      lg: "font-display text-xl font-normal",
+      xl: "font-display text-2xl font-normal",
+      "2xl": "font-display text-3xl font-normal",
+      "3xl": "font-display text-4xl font-normal",
+      "4xl": "font-display text-5xl font-normal",
+      "5xl": "font-display text-6xl font-normal",
     },
     isTruncated: {
       true: "truncate",

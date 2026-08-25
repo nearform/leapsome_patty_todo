@@ -25,7 +25,7 @@ import { cn } from "@/lib/utils";
  */
 
 const textareaContainerVariants = cva(
-  "flex w-full rounded-sm border bg-bg-elevated overflow-hidden transition-colors data-[focus=true]:border-accent data-[focus=true]:ring-1 data-[focus=true]:ring-accent data-[disabled=true]:opacity-40 data-[disabled=true]:cursor-not-allowed",
+  "flex w-full rounded-md border bg-bg-elevated overflow-hidden transition-colors data-[focus=true]:border-accent data-[focus=true]:ring-1 data-[focus=true]:ring-accent data-[disabled=true]:opacity-40 data-[disabled=true]:cursor-not-allowed",
   {
     variants: {
       variant: {

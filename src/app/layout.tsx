@@ -1,25 +1,23 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Fraunces, Geist } from "next/font/google";
 import { ThemeProvider } from "@/providers/theme-provider";
 import "./globals.css";
 
-const inter = localFont({
-  src: "../../public/fonts/Inter-VariableFont_opsz,wght.ttf",
-  variable: "--font-inter",
-  weight: "300 700",
+const geist = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist",
   display: "swap",
 });
 
-const bitter = localFont({
-  src: "../../public/fonts/Bitter-VariableFont_wght.ttf",
-  variable: "--font-bitter",
-  weight: "100 900",
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Nearform design system",
-  description: "Nearform-branded design system and prototyping workspace",
+  title: "TripTogether",
+  description: "Plans are better together — editorial trip planning prototype",
 };
 
 export default function RootLayout({
@@ -29,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${bitter.variable} antialiased`}>
+      <body className={`${geist.variable} ${fraunces.variable} antialiased`}>
         <ThemeProvider>
           {children}
         </ThemeProvider>
