@@ -4,6 +4,11 @@ Changelog of changes made during development sessions.
 
 ---
 
+## 2026-08-26
+
+### README is the trip planner product
+- Rewrote `README.md` as TripTogether the app: screenshot, how to run, screens, demo seed, and brand. Scaffold routes sit in a short “Also in this repo” section.
+
 ## 2026-08-25
 
 ### README describes TripTogether

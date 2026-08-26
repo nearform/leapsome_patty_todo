@@ -1,156 +1,105 @@
 # TripTogether
 
-> Plans are better together.
+**Plans are better together.**
 
-TripTogether is an editorial trip-planning prototype. Friends share a trip, an itinerary, packing lists, group decisions, and a split budget — presented like a travel magazine, not a generic productivity app.
+TripTogether is a collaborative trip planner. A group shares one trip: where you’re going, what happens each day, what to pack, decisions to vote on, and who paid for what.
 
-This is a **frontend-only** click-through. There is no backend, auth, or live sync. Demo profiles and trip data persist in the browser via `localStorage`.
+This repo is a **clickable frontend prototype** of that app. No backend, no real accounts, no live sync. Pick a demo person, plan together in the browser, and data stays in `localStorage` until you reset it.
 
-## What you can do
+![Trips home — Portugal 2026 hero card](public/screenshots/trip-planner/trips-home/2026-08-21T21-08-30.png)
 
-- Switch between demo people (Alex, Jamie, Priya) or add a profile
-- Browse trips on a photo-led home screen (Portugal 2026 hero, Donegal in the list)
-- Create a trip with name, destination, dates, and a cover colour
-- Plan days on a timeline, check packing and to-dos, vote on decisions, and split expenses
-- Edit your profile colour and name; reset the demo from Settings
+## The app
 
-Collaboration in the demo means switching profiles in one session. Everyone on a trip can see the same local data.
+1. **Choose who you are** — Alex, Jamie, or Priya (or add someone). This stands in for login.
+2. **See your trips** — photo hero for Portugal 2026, Donegal in the list, plus create a new trip.
+3. **Plan the trip**
+   - **Trip** — overview, members, cover
+   - **Plan** — itinerary by day
+   - **Lists** — packing and to-dos with icons and assignees
+   - **Votes** — group decisions with live vote bars
+   - **Money** — shared expenses, even split, paid-by
+4. **You** — name, colour, theme, currency (€ £ $), and reset demo
 
-## Screens
+On a laptop the UI sits in an iPhone frame. On a phone it fills the screen.
 
-| Screen | Path | What it is |
-|--------|------|------------|
-| Profile switcher | `/prototype/journeys/trip-planner/profile-switcher` | Pick or create who you are |
-| Trips home | `/prototype/journeys/trip-planner/trips-home` | Logo header, Lisbon hero card, upcoming trips |
-| Create trip | `/prototype/journeys/trip-planner/create-trip` | Name, place, dates, cover colour |
-| Trip overview | `/prototype/journeys/trip-planner/trip-overview` | Members and tiles into the trip |
-| Itinerary | `/prototype/journeys/trip-planner/itinerary` | Stops by day |
-| To-dos & packing | `/prototype/journeys/trip-planner/todos` | Icons, assignees, Packing / Before we go |
-| Decisions | `/prototype/journeys/trip-planner/polls` | Vote bars; open or close a poll |
-| Budget | `/prototype/journeys/trip-planner/budget` | Shared spend, paid-by, even split |
-| My profile | `/prototype/journeys/trip-planner/my-profile` | Name, colour, settings, switch profile |
-| App settings | `/prototype/journeys/trip-planner/settings` | Theme, currency (€ £ $), auto-icons, reset demo |
-
-On desktop the journey sits in an iPhone frame. On a small viewport it goes full-bleed with the same status bar and home indicator.
-
-Trip tabs inside a trip: **Trip / Plan / Lists / Votes / Money**.
-
-## Quick start
-
-### Prerequisites
-
-- Node.js 18+
-- npm
-
-### Installation
+## Run it
 
 ```bash
 git clone https://github.com/nearform/leapsome_patty_todo.git
 cd leapsome_patty_todo
-
 npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000), then go to **Prototype → TripTogether**, or open the profile switcher directly:
+Then open:
 
-[http://localhost:3000/prototype/journeys/trip-planner/profile-switcher](http://localhost:3000/prototype/journeys/trip-planner/profile-switcher)
+**[http://localhost:3000/prototype/journeys/trip-planner/profile-switcher](http://localhost:3000/prototype/journeys/trip-planner/profile-switcher)**
 
-## Navigation
+Needs Node.js 18+ and npm.
 
-| Route | Description |
-|-------|-------------|
-| `/` | Homepage |
-| `/prototype` | Prototype workspace |
-| `/prototype/journeys` | Registered journeys |
-| `/prototype/journeys/trip-planner/profile-switcher` | Start the TripTogether demo |
-| `/design-system` | Component showcase |
-| `/design-system/foundations` | Colour, type, icons, form controls |
-| `/canvas` | All journey screens on one canvas |
+## Screens
 
-## Brand
+| Screen | Route |
+|--------|--------|
+| Profile switcher | `/prototype/journeys/trip-planner/profile-switcher` |
+| Trips home | `/prototype/journeys/trip-planner/trips-home` |
+| Create trip | `/prototype/journeys/trip-planner/create-trip` |
+| Trip overview | `/prototype/journeys/trip-planner/trip-overview` |
+| Itinerary | `/prototype/journeys/trip-planner/itinerary` |
+| To-dos & packing | `/prototype/journeys/trip-planner/todos` |
+| Decisions | `/prototype/journeys/trip-planner/polls` |
+| Budget | `/prototype/journeys/trip-planner/budget` |
+| My profile | `/prototype/journeys/trip-planner/my-profile` |
+| Settings | `/prototype/journeys/trip-planner/settings` |
 
-Ivory page (`#F7F4EF`), Paper elevated surfaces, Stone borders, Charcoal text and CTAs. Terracotta is decorative (status dots, glints), not the primary button colour. Person colours use Sage, Sand, Dusty Blue, Moss, and Terracotta.
+## Demo data
 
-- **Display:** Fraunces
-- **UI / body:** Geist
-- **Radii:** 8px controls, 12px cards, 20px photo heroes; avatars stay fully round
-- **Mark:** serif **TT** in a thin circle, plus tracked **TRIPTOGETHER** wordmark
+Seeded in `src/lib/data/trip-planner-seed.ts`:
 
-Full tokens and usage: [docs/triptogether-brand-style-guide.md](./docs/triptogether-brand-style-guide.md)
+- **People:** Alex, Jamie, Priya
+- **Portugal 2026** — Lisbon, Sep 10–13, with itinerary, packing, a poll, and expenses
+- **Donegal weekend** — Dunfanaghy, Oct 23–25
 
-## How data works
+**Reset demo** in Settings restores this seed. Cover photos live in `public/images/trip-planner/`.
 
-Seeded state lives in `src/lib/data/trip-planner-seed.ts` (Portugal 2026 + Donegal weekend). The app clones that into React context and writes it to `localStorage` (`trip-planner-demo-v4`). **Reset demo** in Settings restores the seed.
+## Look and feel
 
-Cover stills:
+Editorial travel brand: ivory page, charcoal type and buttons, terracotta only as a decorative accent. **Fraunces** for titles, **Geist** for UI. Logo is a serif **TT** in a circle plus a tracked **TRIPTOGETHER** wordmark.
 
-- `public/images/trip-planner/lisbon-cover.jpg`
-- `public/images/trip-planner/donegal-cover.jpg`
+Details: [docs/triptogether-brand-style-guide.md](./docs/triptogether-brand-style-guide.md)
 
-## Project structure
+## Code map
 
 ```
-src/
-├── app/
-│   ├── design-system/                 # Component + token showcase
-│   ├── prototype/journeys/trip-planner/
-│   │   ├── _journey.ts                # Journey metadata
-│   │   ├── _components/               # Logo, avatars, iOS frame, trip chrome
-│   │   ├── _store/                    # Context, helpers, persistence
-│   │   ├── profile-switcher/
-│   │   ├── trips-home/
-│   │   ├── create-trip/
-│   │   ├── trip-overview/
-│   │   ├── itinerary/
-│   │   ├── todos/
-│   │   ├── polls/
-│   │   ├── budget/
-│   │   ├── my-profile/
-│   │   └── settings/
-│   ├── canvas/
-│   └── layout.tsx
-├── components/prototype-ui/           # Shared UI (Button, Card, Avatar, …)
-└── lib/
-    ├── data/
-    │   ├── journeys-registry.ts
-    │   ├── trip-planner-seed.ts
-    │   ├── trip-planner-colors.ts
-    │   └── trip-planner-icons.ts
-    └── types/trip-planner.ts
+src/app/prototype/journeys/trip-planner/   # Every app screen (static folders, not [tripId] routes)
+src/app/prototype/journeys/trip-planner/_store/  # React context + localStorage
+src/components/prototype-ui/               # Shared buttons, cards, avatars, …
+src/lib/data/trip-planner-seed.ts          # Starting demo state
+src/lib/types/trip-planner.ts              # Types
 ```
 
-Screens are static folders, not dynamic `[tripId]` routes. The active trip is stored in context.
+The active trip is stored in context, not in the URL.
 
-## Design system
+## Also in this repo
 
-The prototype is built from Gluestack-style compound components in `src/components/prototype-ui/`: Box, Stack, Card, Button, Input, Select, Checkbox, Switch, Badge, Avatar, Heading, Text, Modal, Alert, and related primitives. Showcase pages live under `/design-system`.
+The app is built on a Next.js 16 / React 19 / Tailwind design-system workspace. Extra routes:
 
-To add another journey, see [docs/start-here.md](./docs/start-here.md).
-
-## Tech stack
-
-- **Framework:** [Next.js 16](https://nextjs.org/) (App Router)
-- **UI:** [React 19](https://react.dev/)
-- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
-- **Language:** [TypeScript](https://www.typescriptlang.org/)
-- **Icons:** [Lucide React](https://lucide.dev/)
-- **Utilities:** class-variance-authority, tailwind-merge, clsx
-
-## Scripts
+| Route | What |
+|-------|------|
+| `/` | Workspace home |
+| `/prototype` | Journey list |
+| `/design-system` | Component gallery |
+| `/canvas` | All screens on one board |
 
 ```bash
-npm run dev                 # Development server
-npm run build               # Production build
-npm run start               # Production server
-npm run lint                # ESLint
-npm run screenshots         # Recapture journey screenshots
+npm run build         # Production build
+npm run lint          # ESLint
+npm run screenshots   # Recapture journey stills
 ```
 
-## Documentation
+## Docs
 
-- **Brand style guide:** [docs/triptogether-brand-style-guide.md](./docs/triptogether-brand-style-guide.md)
-- **MVP scope:** [docs/trip-planner-mvp-scope.md](./docs/trip-planner-mvp-scope.md)
-- **App plan:** [docs/trip-planner-app-plan.md](./docs/trip-planner-app-plan.md)
-- **Designer guide:** [docs/start-here.md](./docs/start-here.md)
-- **Session log:** [cursor-updates.md](./cursor-updates.md)
+- [MVP scope](./docs/trip-planner-mvp-scope.md)
+- [App plan](./docs/trip-planner-app-plan.md)
+- [Designer guide](./docs/start-here.md)
+- [Session log](./cursor-updates.md)
